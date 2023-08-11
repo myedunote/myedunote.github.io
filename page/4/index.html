@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/4/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-利用Fly.io免费服务部署Alist网盘程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%88%A9%E7%94%A8Fly.io%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2Alist%E7%BD%91%E7%9B%98%E7%A8%8B%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:32.358Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Fly.io 是一个应用部署平台，和 Netlify、Vercel 不同之处在于 Fly.io 提供了数据库，这就使得在线托管一个小型动态网站成为了可能。<br>Fly.io 根据其官网的简介可以看到其也是借助了 Docker，用户编写代码，并用其提供的工具打包成 Docker 镜像，然后部署到 Fly.io 的平台上，之后就是 Fly.io 平台处理的事情了。<br>本质上来说 Fly.io 就是提供了一个平台化的容器运行时环境。</p>
+</blockquote>
+<h2 id="关于收费"><a href="#关于收费" class="headerlink" title="关于收费"></a>关于收费</h2><p>现在注册需要<strong>绑定信用卡，银联的就行</strong>等支付方式，为了防治费用超出，建议锁卡或者买那种只有1刀的卡</p>
+<p><strong>Fly.io 是提供一定限额的免费使用额度的，他们的目标就是让小型的应用可以免费运行，而在需要扩展的时候支付一定的费用，而这笔费用也不会太昂贵。Fly.io 的应用会根据使用情况单独计费。</strong><br><strong>Fly.io 会根据单个用户或者组织计费，官方也说了，如果想要更多免费的应用，那么你可以创建多个组织。</strong></p>
+<h3 id="免费限额"><a href="#免费限额" class="headerlink" title="免费限额"></a>免费限额</h3><table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">限额</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">VM: shared-cpu</td>
+<td align="center">每个月 2340 小时</td>
+<td align="center">可以全天候运行 3 个 256 MB 内存的共享 CPU 的 VM</td>
+</tr>
+<tr>
+<td align="center">Volumes</td>
+<td align="center">3GB</td>
+<td align="center">提供 3GB 永久存储</td>
+</tr>
+<tr>
+<td align="center">Bandwidth</td>
+<td align="center">160 GB&#x2F;每月</td>
+<td align="center">根据各个地方不同分别计算 outbound 流量</td>
+</tr>
+<tr>
+<td align="center">Anycast IPs</td>
+<td align="center">无限的 IPv6, 每个应用一个 IPv4</td>
+<td align="center">每一个额外的 IPv4 地址需要额外每个月 $2</td>
+</tr>
+<tr>
+<td align="center">Certificates</td>
+<td align="center">10 个活跃的证书</td>
+<td align="center">最多 10 个证书</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Regions</th>
+<th>Free Tier</th>
+<th>Monthly Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>North America、Europe</td>
+<td>100GB per month free</td>
+<td>$0.02 per GB</td>
+</tr>
+<tr>
+<td>Africa、Asia Pacific、Oceania、South America</td>
+<td>30GB per month free</td>
+<td>$0.04 per GB</td>
+</tr>
+<tr>
+<td>India</td>
+<td>30 GB per month free</td>
+<td>$0.12 per GB</td>
+</tr>
+</tbody></table>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><blockquote>
+<p>本次部署是采用数据持久层来存档 alist 的 sqlite3 数据库，虽然 Fly.io 原生提供了 PostgreSQL 但是那得多用一个 VM 指标，并且免费用户一旦创建了 PostgreSQL 就消耗掉了免费的 1G 空间.</p>
+</blockquote>
+<h3 id="安装-flyctl"><a href="#安装-flyctl" class="headerlink" title="安装 flyctl"></a>安装 flyctl</h3><p>Fly.io 的大多数操作需要使用命令行，所以先要安装命令行工具 flyctl。安装方式可以参考官方文档：<a target="_blank" rel="noopener" href="https://fly.io/docs/hands-on/install-flyctl/">安装文档</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac（Brew安装）</span></span><br><span class="line">brew install flyctl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac （直接安装）</span></span><br><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Linux</span></span><br><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows （Run the Powershell install script）</span></span><br><span class="line">iwr https://fly.io/install.ps1 -useb | iex</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册登陆"><a href="#注册登陆" class="headerlink" title="注册登陆"></a>注册登陆</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注册</span></span><br><span class="line">flyctl auth signup</span><br></pre></td></tr></table></figure>
+
+<p><strong>它会打开浏览器进入注册流程，注册完毕后会自己跳回到命令行通过验证。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登陆</span></span><br><span class="line">flyctl auth login</span><br></pre></td></tr></table></figure>
+
+<p><strong>注册完成后，我们就可以正式开始部署应用啦.</strong></p>
+<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建应用</span></span><br><span class="line">git clone https://github.com/alist-org/alist-render</span><br><span class="line">cd alist-render</span><br><span class="line">flyctl launch</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>App Name 只允许 数字、字幕、破折号（-），然后记住App Name下面会用到.其中 <code>App Name</code> 需要是全局唯一的，而且之后不能更改，同时会作为 <code>app</code> 的子域名<br>地区博主选的香港（hkg (Hong Kong)），访问速度会快点.<br>其他一律默认回车.选择<code>NO</code></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个 1G 的持久存储空间(最小单位 1)</span></span><br><span class="line">flyctl volumes create data --size 1 --app APP_NAME</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置（fly-toml）"><a href="#修改配置（fly-toml）" class="headerlink" title="修改配置（fly.toml）"></a>修改配置（fly.toml）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">端口修改为 5244</span></span><br><span class="line">[[services]]</span><br><span class="line">http_checks = []</span><br><span class="line">internal_port = 5244</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加Alist数据目录</span></span><br><span class="line">[mounts]</span><br><span class="line">destination = &quot;/opt/alist/data&quot;</span><br><span class="line">source = &quot;data&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h3><p>准备工作已经完成，现在可以部署 alist 应用，输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy --remote-only</span><br></pre></td></tr></table></figure>
+
+<p>如果部署顺利（看到 deploved successfully），之后就可以用以下命令打开应用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl open</span><br></pre></td></tr></table></figure>
+
+<p>你也可以直接在浏览器打开 <code>https://APP_NAME.fly.dev</code></p>
+<p>部署的时候，日志会显示密码，如果没有保存，可以在后台日志里面看</p>
+<p><code>https://fly.io/apps/APP_NAME/monitoring</code></p>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p><code>Certificates =&gt; Add certificate =&gt; 填入域名 =&gt; 添加解析</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%88%A9%E7%94%A8Fly.io%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2Alist%E7%BD%91%E7%9B%98%E7%A8%8B%E5%BA%8F/" data-id="cll6artwz000pgnro178hbg0t" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-联通沃视频_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E8%81%94%E9%80%9A%E6%B2%83%E8%A7%86%E9%A2%91_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:29.586Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>开源地址：<br><a target="_blank" rel="noopener" href="https://github.com/Yuzuki999/Mianliu-809">算法开源：https://github.com/Yuzuki999/Mianliu-809</a><br><a target="_blank" rel="noopener" href="https://github.com/simo8102/809/releases/tag/809">后端开源：https://github.com/simo8102/809/releases/tag/809</a></p>
+<h1 id="一、Linux搭建"><a href="#一、Linux搭建" class="headerlink" title="一、Linux搭建"></a>一、Linux搭建</h1><p>我的环境及工具：CentOS7系统，amd架构，FinalShell<br><a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-cLArh">123盘：https://www.123pan.com/s/r0iA-cLArh</a></p>
+<h2 id="1、安装宝塔面板，进入宝塔并安装nginx，php"><a href="#1、安装宝塔面板，进入宝塔并安装nginx，php" class="headerlink" title="1、安装宝塔面板，进入宝塔并安装nginx，php"></a>1、安装宝塔面板，进入宝塔并安装nginx，php</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<h2 id="2、安装X-UI"><a href="#2、安装X-UI" class="headerlink" title="2、安装X-UI"></a>2、安装X-UI</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)</span><br></pre></td></tr></table></figure>
+<h2 id="3、替换后端文件"><a href="#3、替换后端文件" class="headerlink" title="3、替换后端文件"></a>3、替换后端文件</h2><p>然后把对应的服务器版本替换到<code>/usr/local/x-ui/bin/ </code><br>重命名文件名<code>xray-linux-amd64</code>，权限755，所有者root，<strong>替换并改好权限后进入ssh重启x-ui</strong><br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123106131669043453.png" alt="enter description here"></p>
+<h2 id="4、添加节点信息"><a href="#4、添加节点信息" class="headerlink" title="4、添加节点信息"></a>4、添加节点信息</h2><p>进入x-ui管理面板，http:&#x2F;&#x2F;你的ip:65432，添加节点信息，记住必须是ws<br>还有节点不要暴露，不然别人直接用你给的ip和端口还有你提供的uuid就能用，<strong>创建好后测试是否能连通</strong><br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123106151669043455.png" alt="enter description here"></p>
+<h2 id="5、创建自动订阅"><a href="#5、创建自动订阅" class="headerlink" title="5、创建自动订阅"></a>5、创建自动订阅</h2><p>已安装好nginx，已知宝塔 nginx常见根目录<code>/www/server/nginx/html</code></p>
+<p>创建文件夹及配置文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir lt809ml  #创建文件夹</span><br><span class="line">cd lt809ml    #进入文件夹</span><br><span class="line">vi sub.conf   #新建配置文件</span><br></pre></td></tr></table></figure>
+<p>在<code>sub.conf</code>文件中填入以下代码，端口要与之前创建的节点中的端口一致</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">端口@nginx根目录</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123106161669043456.png" alt="enter description here"></p>
+<p>创建文件夹，后将123盘中的<code>sub文件</code>放入创建好的文件夹中，修改权限755，所有者root</p>
+<p>在lt809ml文件夹执行<code>./sub</code>命令，成功后在nginx根目录中出现809文件就成功了<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123106171669043458.png" alt="enter description here"></p>
+<p>#设置定时任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crontab -l &gt; crontablist</span><br><span class="line">echo &quot;0 0-23/3 * * * /root/lt809ml/sub&quot; &gt;&gt; crontablist</span><br><span class="line">crontab crontablist</span><br><span class="line">rm -rf crontablist</span><br></pre></td></tr></table></figure>
+<p>将订阅链接<code>http://你的ip/809</code>放入用户端中更新订阅即成功</p>
+<h1 id="二、Windows搭建"><a href="#二、Windows搭建" class="headerlink" title="二、Windows搭建"></a>二、Windows搭建</h1><p>我的环境及工具：WindowsServe2012，amd架构，FinalShell<br><a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-cLArh">123盘：https://www.123pan.com/s/r0iA-cLArh</a></p>
+<p>1、利用远程桌面进入WindowsServe2012，下载123盘中的<code>Xray-windows-64.zip</code>和<code>config.json</code>，放入同一个文件夹，修改<code>config.json</code>中的ip，端口，uid</p>
+<p>2、执行<code>Wxray.exe</code>文件，运行Xray，再测试是否可以连通</p>
+<p>3、安装宝塔<a target="_blank" rel="noopener" href="https://download.bt.cn/win/panel/BtSoft.zip%EF%BC%8C%E5%B9%B6%E5%AE%89%E8%A3%85nginx%EF%BC%8Cphp">https://download.bt.cn/win/panel/BtSoft.zip，并安装nginx，php</a></p>
+<p>4、提前做好域名解析，进入http:&#x2F;&#x2F;你的ip:8888，登录并进入面板，创建网站，删除网站目录中的文件，上传123盘中的<code>809.php</code>文件</p>
+<p>5、将<code>809.php</code>中的配置换成<code>config.json</code>中的信息</p>
+<p>6、将订阅链接<code>http://你的域名/809.php</code>放入用户端中更新订阅即成功</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E8%81%94%E9%80%9A%E6%B2%83%E8%A7%86%E9%A2%91_new/" data-id="cll6artxi0015gnroa8365mhy" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-哪吒监控面板搭建教程_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%93%AA%E5%90%92%E7%9B%91%E6%8E%A7%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:28.054Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="一、域名解析需要的操作"><a href="#一、域名解析需要的操作" class="headerlink" title="一、域名解析需要的操作"></a>一、域名解析需要的操作</h1><p>开始之前，请先确定你搭建探针的域名</p>
+<p>强烈建议用两个(子)域名做解析<br>第一个是面板的域名，套CDN比较方便<br>第二个仅仅解析到面板服务器的域名，用于客户端连接服务端试用(这个可以没有，但是不建议，如果直接用IP的话，迁移面板后会非常麻烦！)</p>
+<p>比如我的tz.haoduck.com作为面板的域名，还有一个tzzzz.haoduck.com是用来记录面板服务器的IP</p>
+<p>暂且将两个域名都解析到部署面板服务器的IP</p>
+<hr>
+<h1 id="二、GitHub上需要的操作"><a href="#二、GitHub上需要的操作" class="headerlink" title="二、GitHub上需要的操作"></a>二、GitHub上需要的操作</h1><h2 id="2-1-得到GitHub账号ID"><a href="#2-1-得到GitHub账号ID" class="headerlink" title="2.1 得到GitHub账号ID"></a>2.1 得到GitHub账号ID</h2><p>如果没有Github账号，先注册</p>
+<p>浏览器中打开<code>https://api.github.com/users/你的GitHub用户名</code></p>
+<p>返回的是Json的信息，第二行id对应的值就是你的ID，纯数字的。如图<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d6a7854d.png" alt="01.png"></p>
+<h2 id="2-2-创建一个OAuth-Apps"><a href="#2-2-创建一个OAuth-Apps" class="headerlink" title="2.2 创建一个OAuth Apps"></a>2.2 创建一个OAuth Apps</h2><p>（1）先打开：<code>https://github.com/settings/developers</code>，然后点击New OAuth App按钮<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d6c57186.png" alt="02.png"><br>（2）填入域名信息，将域名更换为自己的，如图所示：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://你的域名:8008</span><br><span class="line">http://你的域名:8008/oauth2/callback</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d6d449c7.png" alt="QQ图片20210121152047.png"></p>
+<h2 id="2-3-OAuth-Apps的Client-ID和Client-secrets"><a href="#2-3-OAuth-Apps的Client-ID和Client-secrets" class="headerlink" title="2.3 OAuth Apps的Client ID和Client secrets"></a>2.3 OAuth Apps的Client ID和Client secrets</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d70b27f2.jpg" alt="OAuth_Apps3.jpg"></p>
+<p>获得Client secrets，记住Client secrets，只有一次机会<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d71edd85.png" alt="9194e-Client-secrets.png"></p>
+<h1 id="三、面板服务器上需要的操作"><a href="#三、面板服务器上需要的操作" class="headerlink" title="三、面板服务器上需要的操作"></a>三、面板服务器上需要的操作</h1><h2 id="3-1-防火墙放行端口"><a href="#3-1-防火墙放行端口" class="headerlink" title="3.1 防火墙放行端口"></a>3.1 防火墙放行端口</h2><p>服务端需要放行8008、5555两个端口，这是默认的，如果你程序中改为其他的，防火墙放行相应的端口</p>
+<h2 id="3-2-服务端部署面板服务"><a href="#3-2-服务端部署面板服务" class="headerlink" title="3.2 服务端部署面板服务"></a>3.2 服务端部署面板服务</h2><p>海外：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -o nezha.sh &amp;&amp; chmod +x nezha.sh </span><br><span class="line">sudo ./nezha.sh</span><br></pre></td></tr></table></figure>
+<p>国内加速：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://raw.sevencdn.com/naiba/nezha/master/script/install.sh -o nezha.sh &amp;&amp; chmod +x nezha.sh</span><br><span class="line">sudo ./nezha.sh</span><br></pre></td></tr></table></figure>
+<p>输入命令后如图<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d73aa6c2.png" alt="03.png"></p>
+<p>按1进行安装面板，</p>
+<p>接着就要输入前面记录下来的<code>GITHUB账号ID</code>、OAUTHAPP的<code>CLIENT ID</code>、OAUTHAPP的<code>CLIENT SECRETS</code> 按照提示输入<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d76a011a.png" alt="04.png"></p>
+<p>到这里面板服务算是完成了大部分了</p>
+<p>可以访问http:&#x2F;&#x2F;域名:8008查看，用你的GitHub账号验证登录</p>
+<p>##3.3 反代、SSL、CDN<br>反代配置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">location /</span><br><span class="line">&#123;</span><br><span class="line">proxy_pass http://127.0.0.1:8008;</span><br><span class="line">proxy_set_header Host $host;</span><br><span class="line">&#125;</span><br><span class="line">location /ws</span><br><span class="line">&#123;</span><br><span class="line">proxy_pass http://127.0.0.1:8008;</span><br><span class="line">proxy_http_version 1.1;</span><br><span class="line">proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">proxy_set_header Connection &quot;Upgrade&quot;;</span><br><span class="line">proxy_set_header Host $host;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>图为宝塔面板操作反向代理</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d79ef561.jpg" alt="nginx.jpg"></p>
+<p>配置SSL就不用说了，常规建站的配置。</p>
+<p>配置完SSL，就可以通过HTTPS:&#x2F;&#x2F;域名&#x2F;来访问了。</p>
+<p>返回：<a target="_blank" rel="noopener" href="https://github.com/settings/developers">https://github.com/settings/developers</a></p>
+<p>修改如图</p>
+<p>更改为https访问，并取消8008端口，因为已经被反代了。</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d7c0c6ce.jpg" alt="OAuth_Apps5.jpg"></p>
+<p>#四、关于客户端(被监控机器)需要的操作</p>
+<p>访问 https:&#x2F;&#x2F;你的域名 到页面并登陆后台。</p>
+<p>到服务器页面添加服务器</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d7cc7b51.png" alt="06.png"></p>
+<p>会生成一个节点服务器的专属id与密钥<br><img src="https://tc.edunote.cn/i/2022/11/21/637b6d7d7ae9f.png" alt="07.png"></p>
+<p>到需要被监控的机器执行脚本</p>
+<p>海外：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://raw.githubusercontent.com/naiba/nezha/master/script/install.sh -o nezha.sh &amp;&amp; chmod +x nezha.sh </span><br><span class="line">sudo ./nezha.sh</span><br></pre></td></tr></table></figure>
+<p>国内：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -L https://raw.sevencdn.com/naiba/nezha/master/script/install.sh -o nezha.sh &amp;&amp; chmod +x nezha.sh </span><br><span class="line">sudo ./nezha.sh</span><br></pre></td></tr></table></figure>
+
+<p>按8进行安装监控Agent，</p>
+<p>按照提示输入</p>
+<p>解析到面板IP的域名地址、面板RPC端口(默认5555)、服务器AGENT ID、服务器AGENT 密钥</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b6d7fc5ff8.png" alt="08.png"></p>
+<p>没有出错，到此就是完成了。<br>有多台被监控机器时，按照此步骤在控制面板添加服务器，在被监控机执行脚本填写ID和密钥。</p>
+<p>#五、搭建遇到的坑<br>1、homepage URL：不要用https，直接用http+端口号   http:&#x2F;&#x2F;域名:8008</p>
+<p>2、回调地址：同样不要用https，直接http+端口号      http:&#x2F;&#x2F;域名:8008&#x2F;oauth2&#x2F;callback</p>
+<p>客户端：</p>
+<p>1、中途如果改了客户端服务器的任何参数，名称，序号等，都需要重新配置AGENT</p>
+<p>2、防火墙要放行5555</p>
+<p>3、每个客户端都要来一遍脚本的，添加服务器的内容别填错！（有MJJ问了我这个问题的，我不是故意说这句话啊）</p>
+<p>反正我是纯小白，遇到的坑都说了，应该不会再有坑了！</p>
+<p>补充：式样切换：http:&#x2F;&#x2F;域名:8008&#x2F;setting</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%93%AA%E5%90%92%E7%9B%91%E6%8E%A7%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B_new/" data-id="cll6artx1000rgnro1vni632p" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-漂亮的php中文目录程序+上传系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E6%BC%82%E4%BA%AE%E7%9A%84php%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F+%E4%B8%8A%E4%BC%A0%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:24.766Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><ol>
+<li>前台目录程序采用 files.photo.gallery</li>
+<li>后台上传为Joe开源上传，支持粘贴上传、点击上传、拖拽上传、上传成功失败进度条等</li>
+<li>默认上传密码（在文件里可以看到，以及限制上传的文件格式）</li>
+</ol>
+<h1 id="界面"><a href="#界面" class="headerlink" title="界面"></a>界面</h1><p>前台页面预览地址：</p>
+<div align=center><img src="https://tc.edunote.cn/i/2022/11/21/1640657481994637b907e1c9a5.png"></div>
+<div align=center><img src="https://tc.edunote.cn/i/2022/11/21/1640657527962637b90a9bfc0a.png"></div>
+
+<p>后台上传预览地址：</p>
+<div align=center><img src="https://tc.edunote.cn/i/2022/11/21/1640657563719637b90bf668cd.png"></div>
+
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p><a target="_blank" rel="noopener" href="http://f.8454806.xyz/haha/pt/2021/12/278495856_fd6bc9e2.zip">278495856.zip</a></p>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><ol>
+<li>PHP扩展安装：GD、mbstring、fileinfo、exif（不开启部分图片读取不到！！！！）(宝塔默认已安装GD、mbstring扩展)</li>
+<li>请务必保证根目录有 _uploads 文件夹，否则可能会报错！</li>
+<li>如何修改上传密码、允许上传的类型？打开 admin&#x2F;index.php 文件，开头就可以看见</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E6%BC%82%E4%BA%AE%E7%9A%84php%E4%B8%AD%E6%96%87%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F+%E4%B8%8A%E4%BC%A0%E7%B3%BB%E7%BB%9F/" data-id="cll6artx90011gnrohu5jh0dw" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-青龙面板必装依赖及青龙各种问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E5%BF%85%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8F%8A%E9%9D%92%E9%BE%99%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:23.262Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>支持Python3、JavaScript、Shell、Typescript的定时任务管理平台</p>
+<p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/whyour/qinglong">https://github.com/whyour/qinglong</a></p>
+</blockquote>
+<p><img src="https://pic.edunote.cn/i/2023/07/15/64b1e928a73fc.png" alt="img"></p>
+<h3 id="一、功能"><a href="#一、功能" class="headerlink" title="一、功能"></a>一、功能</h3><ul>
+<li>支持多种脚本语言（python3、javaScript、shell、typescript）</li>
+<li>支持在线管理脚本、环境参数、配置文件</li>
+<li>支持在线查看任务日志</li>
+<li>秒级支持任务设置</li>
+<li>支持系统级通知</li>
+<li>支持暗黑模式</li>
+<li>支持手机端操作</li>
+</ul>
+<h3 id="二、青龙面板安装"><a href="#二、青龙面板安装" class="headerlink" title="二、青龙面板安装"></a>二、青龙面板安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">curl -sSL get.docker.com | sh</span></span><br><span class="line">docker run -dit \</span><br><span class="line">  -v $PWD/ql/data:/ql/data \</span><br><span class="line">  -p 5700:5700 \</span><br><span class="line">  -e QlBaseUrl=&quot;/&quot; \      # 部署路径非必须，以斜杠开头和结尾，比如 /test/</span><br><span class="line">  --name qinglong \</span><br><span class="line">  --hostname qinglong \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  whyour/qinglong:latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、手动安装-在面板里安装的依赖-个人推荐"><a href="#三、手动安装-在面板里安装的依赖-个人推荐" class="headerlink" title="三、手动安装(在面板里安装的依赖-个人推荐)"></a>三、手动安装(在面板里安装的依赖-个人推荐)</h3><h4 id="1、NodeJs下"><a href="#1、NodeJs下" class="headerlink" title="1、NodeJs下"></a>1、NodeJs下</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">crypto-js</span><br><span class="line">prettytable</span><br><span class="line">dotenv</span><br><span class="line">jsdom</span><br><span class="line">date-fns</span><br><span class="line">tough-cookie</span><br><span class="line">tslib</span><br><span class="line">ws@7.4.3</span><br><span class="line">ts-md5</span><br><span class="line">jsdom -g</span><br><span class="line">jieba</span><br><span class="line">fs</span><br><span class="line">ds</span><br><span class="line">form-data</span><br><span class="line">json5</span><br><span class="line">global-agent</span><br><span class="line">png-js</span><br><span class="line">@types/node</span><br><span class="line">require</span><br><span class="line">typescript</span><br><span class="line">js-base64</span><br><span class="line">axios</span><br><span class="line">moment</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、Python3下"><a href="#2、Python3下" class="headerlink" title="2、Python3下"></a>2、Python3下</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">requests</span><br><span class="line">canvas</span><br><span class="line">ping3</span><br><span class="line">jieba</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、Linux下"><a href="#3、Linux下" class="headerlink" title="3、Linux下"></a>3、Linux下</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bizCode</span><br><span class="line">bizMsg</span><br><span class="line">lxml</span><br><span class="line">libc-dev</span><br><span class="line">python3-dev</span><br><span class="line">gcc</span><br></pre></td></tr></table></figure>
+
+<h3 id="四、部分依赖问题解决方法"><a href="#四、部分依赖问题解决方法" class="headerlink" title="四、部分依赖问题解决方法"></a>四、部分依赖问题解决方法</h3><h4 id="1-一般出现这种错误：-缺依赖"><a href="#1-一般出现这种错误：-缺依赖" class="headerlink" title="1.一般出现这种错误：(缺依赖)"></a>1.一般出现这种错误：(缺依赖)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Cannot find module ‘xx’</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-一般出现这种错误：-缺文件"><a href="#2-一般出现这种错误：-缺文件" class="headerlink" title="2.一般出现这种错误：(缺文件)"></a>2.一般出现这种错误：(缺文件)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: Cannot find module ‘./xx’</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：一般是拉库命令不完整，请检查或复制完整的拉库命令重新拉库。</p>
+<h4 id="3-一般出现这种错误：-缺py依赖"><a href="#3-一般出现这种错误：-缺py依赖" class="headerlink" title="3.一般出现这种错误：(缺py依赖)"></a>3.一般出现这种错误：(缺py依赖)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ModuleNotFoundError: No module named ‘xxx’.py</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：docker exec -it 容器名 pip3 install xxx</p>
+<h4 id="4-遇到这种问题：-脚本问题"><a href="#4-遇到这种问题：-脚本问题" class="headerlink" title="4.遇到这种问题：(脚本问题)"></a>4.遇到这种问题：(脚本问题)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TypeError: Cannot read property ‘xxxx’ of undefined</span><br></pre></td></tr></table></figure>
+
+<p>这种脚本问题、IP问题、服务器网络、京东接口修改或者账号活动被限制等！导致的脚本无法正常运行。<br>解决方法:此类问题较为复杂根据实际情况解决吧。最好搞动态IP。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E5%BF%85%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8F%8A%E9%9D%92%E9%BE%99%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="cll6artxr0018gnro0tmvh4u8" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-使用Docker运行qBittorrent，并通过WEB界面管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8CqBittorrent%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87WEB%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:20.918Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="为什么要使用qBittorrent"><a href="#为什么要使用qBittorrent" class="headerlink" title="为什么要使用qBittorrent"></a>为什么要使用qBittorrent</h1><blockquote>
+<p>玩过BT&#x2F;PT的人应该对Transmission和qBittorrent都不陌生，两者各具特点，qBittorrent在抢占上传方面比Transmission更具优势。而Transmission在资源方面占用更低。因此一般玩PT建议Transmission + qBittorrent共用，qBittorrent用来刷上传，Transmission用来做种赚魔力。</p>
+</blockquote>
+<ul>
+<li>qBittorrent镜像说明</li>
+<li>基于Debian 10 x64镜像制作</li>
+<li>qBittorrent版本为v4.1.5</li>
+<li>已内置GeoIP数据库</li>
+<li>默认设置为简体中文界面</li>
+</ul>
+<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Docker</span>安装</span><br><span class="line">yum install docker</span><br><span class="line">启动docker</span><br><span class="line">systemctl start docker</span><br><span class="line">查看当前版本</span><br><span class="line">docker -v</span><br><span class="line">实现开机启动docker</span><br><span class="line">systemctl enable docker</span><br><span class="line">停止docker</span><br><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+<h1 id="Docker运行qBittorrent"><a href="#Docker运行qBittorrent" class="headerlink" title="Docker运行qBittorrent"></a>Docker运行qBittorrent</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name=qbittorrent \</span><br><span class="line">  -p <span class="number">7881</span>:<span class="number">7881</span> \</span><br><span class="line">  -p <span class="number">7881</span>:<span class="number">7881</span>/udp \</span><br><span class="line">  -p <span class="number">18080</span>:<span class="number">18080</span> \</span><br><span class="line">  -v /data/qbittorrent/<span class="attr">config</span>:<span class="regexp">/etc/</span>qBittorrent \</span><br><span class="line">  -v /data/qbittorrent/<span class="attr">downloads</span>:/downloads \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  helloz/qbittorrent</span><br></pre></td></tr></table></figure>
+<ul>
+<li>7881：用于传入连接的端口，TCP&#x2F;UDP都需要映射，且主机端口和容器端口必须一致，否则无法下载和上传</li>
+<li>18080：qBittorrentWEBUI访问端口，主机端口和容器端口必须一致，否则无法打开WEB界面</li>
+<li><code>/data/qbittorrent/config</code>：qbittorrent配置文件存储目录，可自行修改</li>
+<li><code>/data/qbittorrent/downloads</code>：下载目录，可自行修改</li>
+</ul>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>运行成功后可通过<code>http://IP:18080</code>进行访问，用户名为<code>admin</code>，密码为<code>adminadmin</code>，默认已经设置为了中文界面。</p>
+<p>大部分设置均可通过WEB界面直接修改，若需要修改部分特殊配置，可自行修改配置文件夹&#x2F;你的挂载路径<code>/config/qBittorrent.conf</code>，修改后重启下容器<code>docker restart qbittorrent</code></p>
+<p>项目地址<br>Github：<a target="_blank" rel="noopener" href="https://github.com/helloxz/qbittorrent">Github</a><br>镜像地址：<a target="_blank" rel="noopener" href="https://hub.docker.com/repository/docker/helloz/qbittorrent">镜像地址</a></p>
+<h1 id="手机上使用"><a href="#手机上使用" class="headerlink" title="手机上使用"></a>手机上使用</h1><p>手机上访问Transmission WEB操作还是挺麻烦的，我们可以打开微信小程序搜索“TransClient”进行使用，该小程序支持添加Transmission&#x2F;BitTorrent等服务端，这样手机上添加、删除BT&#x2F;PT任务就非常方便了。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xsj/20201128230444.jpg" alt="TransClient"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8CqBittorrent%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87WEB%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/" data-id="cll6artwx000mgnroe6srhtyz" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-使用Searx搭建一个私人的搜索引擎平台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Searx%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A7%81%E4%BA%BA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%B9%B3%E5%8F%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:18.914Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p> 一个基于 Python 的完全开源免费搜索引擎平台，为你提供来自 Google、Bing、Yahoo 等 70 多种各大视频、图片、搜索、磁力等网站结果展示，并对搜索结果进行优化，同时不会存储你的任何搜索信息，搭建也很方便，有兴趣的可以搭建给需要谷歌的同事或朋友用下。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/searx/searx">官方 Github</a></p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/637b840d4fde2.png"></p>
+<h1 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h1><h3 id="1、搭建python3环境及安装pip"><a href="#1、搭建python3环境及安装pip" class="headerlink" title="1、搭建python3环境及安装pip"></a>1、搭建python3环境及安装pip</h3><p>详细教程见<a target="_blank" rel="noopener" href="https://isedu.top/index.php/archives/10/">在centos7下安装python3.7.9</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#<span class="title class_">CentOS</span> <span class="number">7.</span>x</span><br><span class="line">yum install -y epel-release</span><br><span class="line">yum install -y python-pip</span><br><span class="line">#如果<span class="title class_">CentOS</span> <span class="number">7</span>安装出现<span class="title class_">No</span> package python-pip available，可以用以下命令进行安装</span><br><span class="line">wget <span class="attr">https</span>:<span class="comment">//bootstrap.pypa.io/get-pip.py</span></span><br><span class="line">python3 get-pip.<span class="property">py</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装git"><a href="#2、安装git" class="headerlink" title="2、安装git"></a>2、安装git</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#<span class="title class_">Debian</span>/<span class="title class_">Ubuntu</span>系统</span><br><span class="line">apt-get -y install git</span><br><span class="line"></span><br><span class="line">#<span class="title class_">CentOS</span>系统</span><br><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、编辑Searx"><a href="#3、编辑Searx" class="headerlink" title="3、编辑Searx"></a>3、编辑Searx</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#拉取源码</span><br><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/searx/searx.git</span></span><br><span class="line">#安装依赖</span><br><span class="line">cd searx</span><br><span class="line">pip3 install -r requirements.<span class="property">txt</span></span><br><span class="line">#编辑配置文件</span><br><span class="line">nano searx/settings.<span class="property">yml</span></span><br></pre></td></tr></table></figure>
+
+<p>修改名称什么参数，应该都看的懂，自行设置，这里只说下4种参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">language：为搜索语言，默认en-<span class="variable constant_">US</span>，如果你的搜索以中文为主，那就改成zh-<span class="variable constant_">CN</span>，当然这个语言在搜索界面也可以设置</span><br><span class="line"></span><br><span class="line">port：为监听端口，默认<span class="number">8888</span>，可自行修改<span class="number">8008</span>。</span><br><span class="line"></span><br><span class="line">bind_address：为监控地址，默认为<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>，如果需要让ip地址能被外网访问，就修改为<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>，这里建议默认，然后再用域名反代即可。</span><br><span class="line"></span><br><span class="line">secret_key：该参数为加密密匙，可自行设置，数值可以在ssh客户端使用openssl rand -hex <span class="number">16</span>命令生成。</span><br></pre></td></tr></table></figure>
+
+<p>更多参数设置可以参考<a target="_blank" rel="noopener" href="https://github.com/asciimoo/searx/wiki/settings.yml">WIKI</a></p>
+<h3 id="4、运行Searx"><a href="#4、运行Searx" class="headerlink" title="4、运行Searx"></a>4、运行Searx</h3><p>安装<code>screen</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#<span class="title class_">CentOS</span>系统</span><br><span class="line">yum install screen -y</span><br><span class="line"></span><br><span class="line">#<span class="title class_">Debian</span>/<span class="title class_">Ubuntu</span>系统</span><br><span class="line">apt-get install screen -y</span><br></pre></td></tr></table></figure>
+
+<p>后台运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">screen -dmS searx python3 searx/webapp.<span class="property">py</span></span><br></pre></td></tr></table></figure>
+<p>然后使用<code>ip:port</code>访问，如果你的<code>bind_address</code>地址没修改，可能浏览器会访问不了，就需要反代了，方法后面会说。</p>
+<p>如果你修改了<code>bind_address</code>地址为<code>0.0.0.0</code>，还打不开媒体界面的话，还需要开启防火墙端口，</p>
+<p>如果你开了端口还不能打开，可能还需要去服务商后台开启对应的端口。</p>
+<h1 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h1><p>这里貌似用官方的Dockerfile文件构建镜像的时候会报错，所以博主自己写了个Dockerfile文件，安装也很快。</p>
+<p>Github地址：<a target="_blank" rel="noopener" href="https://github.com/myedunote/searx-docker">项目 Github</a></p>
+<h3 id="1、安装Docker"><a href="#1、安装Docker" class="headerlink" title="1、安装Docker"></a>1、安装Docker</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#<span class="title class_">CentOS</span> <span class="number">7</span>、<span class="title class_">Debian</span>、<span class="title class_">Ubuntu</span></span><br><span class="line">curl -sSL <span class="attr">https</span>:<span class="comment">//get.docker.com/ | sh</span></span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker.<span class="property">service</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、安装git-1"><a href="#2、安装git-1" class="headerlink" title="2、安装git"></a>2、安装git</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Debian</span>/<span class="title class_">Ubuntu</span>系统</span><br><span class="line">apt-get -y install git</span><br><span class="line"></span><br><span class="line">#<span class="title class_">CentOS</span>系统</span><br><span class="line">yum -y install git</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、构建镜像"><a href="#3、构建镜像" class="headerlink" title="3、构建镜像"></a>3、构建镜像</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/myedunote/searx-docker</span></span><br><span class="line">cd searx-docker</span><br><span class="line">docker build -t searx .</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、启动镜像"><a href="#4、启动镜像" class="headerlink" title="4、启动镜像"></a>4、启动镜像</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name searx -p <span class="number">8008</span>:<span class="number">8888</span> searx</span><br></pre></td></tr></table></figure>
+
+<h1 id="域名反代"><a href="#域名反代" class="headerlink" title="域名反代"></a>域名反代</h1><p>这里是建议使用域名反代的，反代可以用<code>Nginx</code>、<code>Apache</code>、<code>Caddy</code>，这里只说<code>宝塔</code>和<code>Caddy</code>。如果你网站有宝塔，就可以使用宝塔进行反代，如果没有，建议使用第2种的<code>Caddy</code>反代，配置很快。</p>
+<h3 id="1、宝塔反代"><a href="#1、宝塔反代" class="headerlink" title="1、宝塔反代"></a>1、宝塔反代</h3><p>先进入宝塔面板，然后点击左侧网站，添加站点，然后再点击添加好了的域名名称，这时候就进入了站点配置，点击反向代理，目标<code>URL</code>填入<code>http://127.0.0.1:8008</code>，再启用反向代理即可。至于启用<code>SSL</code>就不说了，直接在站点配置就可以启用。</p>
+<h3 id="2、Caddy反代"><a href="#2、Caddy反代" class="headerlink" title="2、Caddy反代"></a>2、Caddy反代</h3><p><strong>安装<code>Caddy</code>：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/ToyoDAdoubiBackup/doubi/master/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br><span class="line">#备用地址</span><br><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//www.moerats.com/usr/shell/Caddy/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>配置<code>Caddy</code>：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#以下全部内容是一个整体，请修改域名后一起复制到<span class="variable constant_">SSH</span>运行！</span><br><span class="line"></span><br><span class="line">#http访问，该配置不会自动签发<span class="variable constant_">SSL</span></span><br><span class="line">echo <span class="string">&quot;www.moerats.com &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:8888 &#123;</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br><span class="line"></span><br><span class="line">#https访问，该配置会自动签发<span class="variable constant_">SSL</span>，请提前解析域名到<span class="variable constant_">VPS</span>服务器</span><br><span class="line">echo <span class="string">&quot;www.moerats.com &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> tls admin@moerats.com</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:8888 &#123;</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br></pre></td></tr></table></figure>
+
+<p><code>tls</code>参数会自动帮你签发<code>ssl</code>证书，如果你要使用自己的<code>ssl</code>，改为<code>tls /root/xx.crt /root/xx.key</code>即可。后面为<code>ssl</code>证书路径。</p>
+<p><strong>启动<code>Caddy</code>：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.<span class="property">d</span>/caddy start</span><br></pre></td></tr></table></figure>
+<p>就可以打开域名进行访问了。</p>
+<h3 id="3、Nginx配置"><a href="#3、Nginx配置" class="headerlink" title="3、Nginx配置"></a>3、Nginx配置</h3><p>如果你使用其它的，这里就大概发个<code>Nginx</code>反代配置，直接添加到配置文件即可，不然搜出来的结果可能不会让你满意。</p>
+<p>#在配置文件里添加</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">    proxy_pass <span class="attr">http</span>:<span class="comment">//127.0.0.1:8008;</span></span><br><span class="line">    proxy_set_header        <span class="title class_">Host</span>                 $host;</span><br><span class="line">    proxy_set_header        X-<span class="title class_">Real</span>-<span class="variable constant_">IP</span>            $remote_addr;</span><br><span class="line">    proxy_set_header        X-<span class="title class_">Forwarded</span>-<span class="title class_">For</span>      $proxy_add_x_forwarded_for;</span><br><span class="line">    proxy_set_header        X-<span class="title class_">Remote</span>-<span class="title class_">Port</span>        $remote_port;</span><br><span class="line">    proxy_set_header        X-<span class="title class_">Forwarded</span>-<span class="title class_">Proto</span>    $scheme;</span><br><span class="line">    proxy_redirect          off;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后使用的时候，记得在高级设置那里将搜索语言设置成你需要的就行了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E4%BD%BF%E7%94%A8Searx%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A7%81%E4%BA%BA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%B9%B3%E5%8F%B0/" data-id="cll6artwy000ngnro76igds6o" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-私有qiandao框架Docker搭建教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E7%A7%81%E6%9C%89qiandao%E6%A1%86%E6%9E%B6Docker%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:17.342Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>基于quchaonet的蓝调主题签到增加了 源镜像：<a target="_blank" rel="noopener" href="https://hub.docker.com/r/quchaonet/qiandao">https://hub.docker.com/r/quchaonet/qiandao</a></p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://github.com/AragonSnow/qiandao">https://github.com/AragonSnow/qiandao</a></p>
+<p>运行命令开始运行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name qiandao -p <span class="number">12345</span>:<span class="number">80</span> -v $(pwd)/qiandao/<span class="attr">config</span>:<span class="regexp">/usr/</span>src/app/config   asdaragon/qiandao</span><br></pre></td></tr></table></figure>
+
+<p>数据库备份指令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp 容器名:<span class="regexp">/usr/</span>src/app/config/database.<span class="property">db</span> .</span><br></pre></td></tr></table></figure>
+
+<p>数据库恢复指令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp database.<span class="property">db</span> 容器名:<span class="regexp">/usr/</span>src/app/config/</span><br></pre></td></tr></table></figure>
+
+<p>设置管理员</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./chrole.<span class="property">py</span> your@email.<span class="property">address</span> admin</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E7%A7%81%E6%9C%89qiandao%E6%A1%86%E6%9E%B6Docker%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" data-id="cll6artxb0014gnro7naq2g4c" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-玩客云刷机教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E7%8E%A9%E5%AE%A2%E4%BA%91%E5%88%B7%E6%9C%BA%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:15.754Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>玩客云是17年的一款矿渣产品，当时入手价499可以挖矿换话费和备份手机照片、使用迅雷高速下载，阿里云盘出来后不限速，也没有下载需求了，吃灰良久。</p>
+<p>Armbian是轻量级的Debian系统和为ARM开发板专门发行并重新编译的Debian系统。</p>
+<p>最近折腾了玩客云刷机Armbian作为Linux的方案，把它最后当做一个下载器和学习Linux的工具来玩了</p>
+</blockquote>
+<h2 id="一、玩客云硬件参数"><a href="#一、玩客云硬件参数" class="headerlink" title="一、玩客云硬件参数"></a>一、玩客云硬件参数</h2><ul>
+<li>CPU是晶晨S805 ，32位，ARM 4核1.5GHz</li>
+<li>1G(DDR3)+8G(eMMC)</li>
+<li>两个USB 2.0，HDMI接口，一个千兆网口（RJ45 ）</li>
+</ul>
+<h2 id="二、刷机准备工具"><a href="#二、刷机准备工具" class="headerlink" title="二、刷机准备工具"></a>二、刷机准备工具</h2><ol>
+<li>WIN10电脑一台</li>
+<li>矿渣玩客云</li>
+<li>双公头USB线一根【用于连接电脑和玩客云，用于刷底层包】</li>
+<li>螺丝刀，一把金属镊子，用来短接用（用金属线也是可以的）</li>
+<li>闲置 U 盘一个，或者读卡器配合存储卡也行【U盘用于刷 Armbian 系统】</li>
+<li>晶晨刷机软件 USB Burning Tool，update.img 文件为安卓底包，zip 文件为 armbian 固件</li>
+</ol>
+<h2 id="三、刷机包基本常识"><a href="#三、刷机包基本常识" class="headerlink" title="三、刷机包基本常识"></a>三、刷机包基本常识</h2><p>1、<code>**直刷包**</code>：直接刷，刷完就OK可以直接使用</p>
+<p>优点：</p>
+<p>（1）方便快捷，不用U盘等工具</p>
+<p>（2）速度快，省去中间过程</p>
+<p>缺点：</p>
+<p>（1）再次刷机可能需要重新短接</p>
+<p>（2）换系统可能需要重新对<code>emmc</code>进行大量读写</p>
+<p>2、<code>**底包**</code>：用于对设备进行引导，引导设备启动USB设备上的系统（类似于PE系统），一般搭配U盘刷机包使用</p>
+<p>优点：<br>（1）可以随便换系统，一个U盘一个系统</p>
+<p>（2）在没将系统输入emmc之前可以不用拆机</p>
+<p>缺点：</p>
+<p>（1）系统性能受限于USB设备与接口，稳定性难绷（USB2.0的接口我也不好说什么了）</p>
+<p>（2）占用一个USB接口</p>
+<p><strong>注：如果你将U盘内系统写入emmc的话那基本和直刷包没区别了</strong></p>
+<p>3、**<code>镜像包</code>**：直刷包的内包含了系统镜像，直刷直用</p>
+<p>底包和系统镜像分离，底包包含引导，镜像包包含系统镜像，镜像包也就是U盘刷机包</p>
+<p>4、**<code>选择</code>**：如果你身边没有U盘等设备，那肯定只有用直刷包了</p>
+<p>当然如果你选择的固件只有U盘刷机包那种，那也只能找一个U盘了</p>
+<p>如果你的数据线或者因为成色而导致直刷用的那个USB接口不稳定，那建议用刷底包的方式<br>底包因为只包含引导或者部分驱动会刷得很快，而直刷包就需要一个漫长的过程，如果不稳定的话<br>就会导致刷机失败以至于要重新刷，那就得不偿失了</p>
+<p>同样的，如果你用来U盘引导的那个接口不稳定（用来直刷和引导系统的那个接口不一样）<br>所以没有哪个更好的说法，全部看实际情况和你选择的固件包</p>
+<h2 id="四、刷机教程"><a href="#四、刷机教程" class="headerlink" title="四、刷机教程"></a>四、刷机教程</h2><h3 id="1、拆机及注意"><a href="#1、拆机及注意" class="headerlink" title="1、拆机及注意"></a>1、拆机及注意</h3><p>玩客云的拆机十分简单，有接口那一侧，外层塑料挡板是双面胶粘上去的，使用撬棒或者一字批起子之类，从缝隙入手，慢慢转圈撬开即可，挡板弹性挺大， 并不容易搞坏。</p>
+<p>然而二层挡板就是 6 颗螺丝下掉完事，主板是卡在壳子的卡槽里的，可以捏住 SD 卡槽部分的主板空白位，用点力即可把主板拔出来。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10b9ed3929.webp" alt="img"></p>
+<h3 id="2、刷入安卓底包"><a href="#2、刷入安卓底包" class="headerlink" title="2、刷入安卓底包"></a>2、刷入安卓底包</h3><p>玩客云要刷 armbian 的话，需要先刷一个安卓固件作为过渡包</p>
+<p>使用USB线一头连接玩客云靠近hdmi接口的usb接口，一头连接至电脑，台式机请连接后面的USB口，暂时不要通电！</p>
+<p>安装并打开 USB Burning Tool，导入 update.img 镜像，勾选 “擦除flash” 和 “擦除bootloader” 并点击 “开始”</p>
+<p>【开始】按钮变成显示【停止】状态，此时晶晨刷机工具正在准备刷机，等待设备接入</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10c2bcc734.png" alt="img"></p>
+<p><u><strong>关键步骤：先短接触点，再接通玩客云主板电源</strong></u></p>
+<p>用啥都行，镊子或者找根导线剥掉两头外皮都可以，玩客云有两种版本，它们的短接位置也是不一样的：</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10d0a1db26.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10d1914c56.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10d559961c.jpg" alt="新版短接点1"></p>
+<p>短接焊点稳定以后usb插入玩客云<strong>「靠近HDMI的接口」</strong>、另一头接入电脑usb、通电</p>
+<p>如果顺利的话，刷机软件会发现设备，自动开始刷入流程。</p>
+<p>观察电脑上晶晨刷机工具提示。“叮咚”一声，界面开始出现进度条表示短接成功，短接成功还有个显著的提示，就是主板指示灯不会亮。</p>
+<p>短接失败了也不会怎么样，软件没反应而已，可以放心大胆的多次尝试，如果有错误，换一个usb接口，多试几次</p>
+<p>这个固件很小，很快就会写完，一般几秒钟，提示烧录成功后，先点”停止“，然后关闭，拔掉电源、拔掉USB。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10ef1a0bdd.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10f097cc0f.png" alt="img"></p>
+<h3 id="3、U盘先刷入armbian5-88系统"><a href="#3、U盘先刷入armbian5-88系统" class="headerlink" title="3、U盘先刷入armbian5.88系统"></a>3、U盘先刷入armbian5.88系统</h3><p>打开 balenaEtcher 工具，并选择 <code>armbian5.88.img</code> 镜像，选择写入设备为 U 盘（一定要确认以一下），点击 ”Flash“ 开始写入。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10fca722c0.jpg" alt="balenaEtcher刷入U盘界面"></p>
+<p>等待几分钟，写入速度和U盘传输速度有关，一般是几分钟，提示成功后，关闭软件，拔出U盘。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b10fee494c9.png" alt="img"></p>
+<p>把U盘插入玩客云靠近网口的USB，然后通电，指示灯会**<code>蓝色→绿色→蓝紫闪烁→蓝色</code>**，证明刷机成功，过程好几分钟，多等下。全程不插入网线，armbian5.88系统写入完成后，直接断电，然后拔u盘</p>
+<h3 id="4、U盘再刷入armbian5-9系统"><a href="#4、U盘再刷入armbian5-9系统" class="headerlink" title="4、U盘再刷入armbian5.9系统"></a>4、U盘再刷入armbian5.9系统</h3><p>打开 balenaEtcher 工具，并选择 <code>WKY-Armbian_20.12_5.9.0.img</code> 镜像，选择写入设备为 U 盘（一定要确认以一下），点击 ”Flash“ 开始写入。</p>
+<p>把U盘插入玩客云靠近网口的USB，然后通电，指示灯会**<code>蓝色→绿色→蓝紫闪烁→蓝色</code>**，证明刷机成功</p>
+<p>armbian5.9系统写入完成后，U盘不要动，用网线接入路由器LAN口，进入路由，查看新加入的设备</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b110b7ec4b9.png" alt="img"></p>
+<p>过一会打开路由器后台，找到”aml-s812“的设备IP地址，复制</p>
+<p>打开 putty （也可以使用其他工具）输入连接IP地址，默认密码是：1234，第一次登录需要修改一个密码（要包含大写字母、小写字母、数字、符号）。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b110d49542d.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b11106ceb9e.png" alt="img"></p>
+<p>从欢迎信息中可以看到 Linux 5.9.0-rc7-aml-s812 可知目前我们刷写的系统版本为 Armbian 5.9.0。</p>
+<p>现在系统时从 U 盘启动的，拔掉 U 盘就无法启动了，接下来还需把系统写入到 EMMC 中。</p>
+<p>在 SSH 命令面板中输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /boot/install</span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+
+<p>刷入系统时灯会 蓝 &#x2F; 紫 闪烁，表示正在写入 EMMC</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b1117aaa8a6.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b1115b0dcad.png" alt="img"></p>
+<p>完成后，拔电源，拔掉U盘，终于ARMBIAN系统刷机完成。</p>
+<p>启动完成即可用你刚刚设置的密码登陆进去了。</p>
+<h2 id="五、安装Docker"><a href="#五、安装Docker" class="headerlink" title="五、安装Docker"></a>五、安装Docker</h2><h3 id="1、换Debian源"><a href="#1、换Debian源" class="headerlink" title="1、换Debian源"></a>1、换Debian源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/apt/sources.list /etc/apt/sources.list.bk</span><br><span class="line">vi /etc/apt/sources.list</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、粘贴"><a href="#2、粘贴" class="headerlink" title="2、粘贴"></a>2、粘贴</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye main non-free contrib</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bullseye main non-free contrib</span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian-security/ bullseye-security main</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian-security/ bullseye-security main</span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bullseye-updates main non-free contrib</span><br><span class="line">deb https://mirrors.ustc.edu.cn/debian/ bullseye-backports main non-free contrib</span><br><span class="line">deb-src https://mirrors.ustc.edu.cn/debian/ bullseye-backports main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、保存并更新软件"><a href="#3、保存并更新软件" class="headerlink" title="3、保存并更新软件"></a>3、保存并更新软件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get upgrade</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、安装Docker面板"><a href="#4、安装Docker面板" class="headerlink" title="4、安装Docker面板"></a>4、安装Docker面板</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --restart=always --name=&quot;portainer&quot; -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data 6053537/portainer-ce</span><br></pre></td></tr></table></figure>
+
+<h2 id="六、安装FRPC客户端内网穿透"><a href="#六、安装FRPC客户端内网穿透" class="headerlink" title="六、安装FRPC客户端内网穿透"></a>六、安装FRPC客户端内网穿透</h2><h3 id="1、创建frp-ini文件并创建目录"><a href="#1、创建frp-ini文件并创建目录" class="headerlink" title="1、创建frp.ini文件并创建目录"></a>1、创建frp.ini文件并创建目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /frp</span><br><span class="line">vim /frp/frpc.ini</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、编辑frpc-ini配置文件"><a href="#2、编辑frpc-ini配置文件" class="headerlink" title="2、编辑frpc.ini配置文件"></a>2、编辑frpc.ini配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = x.x.x.x</span><br><span class="line">server_port = 7000</span><br><span class="line">token = XXXXX</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、拉取镜像"><a href="#3、拉取镜像" class="headerlink" title="3、拉取镜像"></a>3、拉取镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull snowdreamtech/frpc</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、启动docker容器"><a href="#4、启动docker容器" class="headerlink" title="4、启动docker容器"></a>4、启动docker容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --restart=always --network host -d -v /frp/frpc.ini:/etc/frp/frpc.ini --name frpc snowdreamtech/frpc</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、永久性挂载硬盘"><a href="#七、永久性挂载硬盘" class="headerlink" title="七、永久性挂载硬盘"></a>七、永久性挂载硬盘</h2><h3 id="1、查看硬盘名称"><a href="#1、查看硬盘名称" class="headerlink" title="1、查看硬盘名称"></a>1、查看硬盘名称</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br></pre></td></tr></table></figure>
+
+<p>查看刚刚接入的U盘&#x2F;硬盘并记下其设备名称</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b1682de62bc.png" alt="img"></p>
+<p><code>Device</code>：对应硬盘名称 -<code>Size</code>：对应硬盘大小- <code>Type</code>：对应硬盘格式</p>
+<h4 id="2、格式化硬盘"><a href="#2、格式化硬盘" class="headerlink" title="2、格式化硬盘"></a>2、格式化硬盘</h4><p>Linux硬盘格式需要Etx4,我这个硬盘已经格式化了，再演试一次，使用命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkfs -t ext4 /dev/sda1  #格式化硬盘选择ext4文件系统</span><br></pre></td></tr></table></figure>
+
+<p>此过程会提示<code>Proceed anyway? (y,N)</code>，问你是否继续格式化，输入y回车继续，后面提示其它回车就OK</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b168a395eaa.png" alt="img"></p>
+<h4 id="3、挂载硬盘-U盘"><a href="#3、挂载硬盘-U盘" class="headerlink" title="3、挂载硬盘&#x2F;U盘"></a>3、挂载硬盘&#x2F;U盘</h4><p>接下来开始挂载硬盘，查看硬盘的UUID，输入：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blkid 硬盘名称（例如blkid /dev/sda1）</span><br></pre></td></tr></table></figure>
+
+<p>UUID&#x3D;”这里面就是UUID”复制下来</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b168e2d4a95.png" alt="img"></p>
+<p>使用ftp工具连接玩客云找到<code>/etc/fstab</code>文件打开编辑（我使用的finalshell自带ftp工具，如果你装了宝塔直接在宝塔文件里找也可以，当然你也可以使用VI命令行直接编辑）</p>
+<p>在fstab文件后面追加：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=改为你的硬盘UUID   /mnt/随便命名后面创建对应的文件夹最好时英文/   ext4    defaults    0 0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/07/14/64b1690a1d3dd.png" alt="img"></p>
+<p>编辑后保存上传回去，在&#x2F;mnt&#x2F;文件夹下创建你刚刚设置的文件夹名称，例如我刚刚设置的是<code>/mnt/Disk</code>，就创建一个Disk文件夹</p>
+<p>回到命令行窗口输入<code>reboot</code>重启玩客云，等1-2分钟重启成功，登录宝塔，在首页就可以看到刚刚挂载的硬盘</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E7%8E%A9%E5%AE%A2%E4%BA%91%E5%88%B7%E6%9C%BA%E6%95%99%E7%A8%8B/" data-id="cll6artxa0012gnrocoaf4xvl" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-无root网络代理热点共享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E6%97%A0root%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E7%83%AD%E7%82%B9%E5%85%B1%E4%BA%AB/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:14.214Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-首先打开便携式热点。设置-便携式热点。"><a href="#1-首先打开便携式热点。设置-便携式热点。" class="headerlink" title="1.首先打开便携式热点。设置-便携式热点。"></a>1.首先打开便携式热点。设置-便携式热点。</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/10966201811669044709.png"></p>
+<h2 id="2-进入-热点分享-界面-点击分享热点-无ROOT-记住图片2的-IP-端口信息。"><a href="#2-进入-热点分享-界面-点击分享热点-无ROOT-记住图片2的-IP-端口信息。" class="headerlink" title="2.进入 热点分享 界面 点击分享热点(无ROOT)-&gt;记住图片2的 IP 端口信息。"></a>2.进入 热点分享 界面 点击分享热点(无ROOT)-&gt;记住图片2的 IP 端口信息。</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/8761137931669044718.png"></p>
+<h2 id="3-需要用到热点的手机连接该热点。然后长按这个连接上的这个热点-不同手机进入方式不同-高级选项-代理-手动-填写-第2步骤-中的的代理ip跟代理端口-最后保存"><a href="#3-需要用到热点的手机连接该热点。然后长按这个连接上的这个热点-不同手机进入方式不同-高级选项-代理-手动-填写-第2步骤-中的的代理ip跟代理端口-最后保存" class="headerlink" title="3.需要用到热点的手机连接该热点。然后长按这个连接上的这个热点(不同手机进入方式不同)-高级选项-代理-手动- 填写 第2步骤 中的的代理ip跟代理端口-最后保存"></a>3.需要用到热点的手机连接该热点。然后长按这个连接上的这个热点(不同手机进入方式不同)-高级选项-代理-手动- 填写 第2步骤 中的的代理ip跟代理端口-最后保存</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/18574113171669044725.png"></p>
+<h2 id="3-打开TinyProxy-连接VPN"><a href="#3-打开TinyProxy-连接VPN" class="headerlink" title="3.打开TinyProxy,连接VPN"></a>3.打开TinyProxy,连接VPN</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/27439469431669044764.png"></p>
+<h2 id="4-查看连接热点的手机是否正常上网。"><a href="#4-查看连接热点的手机是否正常上网。" class="headerlink" title="4.查看连接热点的手机是否正常上网。"></a>4.查看连接热点的手机是否正常上网。</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/27727115711669044769.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E6%97%A0root%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E7%83%AD%E7%82%B9%E5%85%B1%E4%BA%AB/" data-id="cll6artx8000zgnrogblg8mw0" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

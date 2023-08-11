@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="我相信经常网上冲浪的各位大佬们经常有临时分享文件的需要吧，我们平时接触到的、比较常用的一般有奶牛快传、 Firefox Send 等等， Firefox Send 服务旨在提供简单、私密的文件分享服务，不登录火狐账户可以上传分享不超过1G的文件，登录火狐之后可以上传分享不超过 2.5G 的文件。且火狐承诺该服务是端到端的，分享链接可加密，到期即焚，十分安全。   那么如何自建一个类似的服务平台呢">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="我相信经常网上冲浪的各位大佬们经常有临时分享文件的需要吧，我们平时接触到的、比较常用的一般有奶牛快传、 Firefox Send 等等， Firefox Send 服务旨在提供简单、私密的文件分享服务，不登录火狐账户可以上传分享不超过1G的文件，登录火狐之后可以上传分享不超过 2.5G 的文件。且火狐承诺该服务是端到端的，分享链接可加密，到期即焚，十分安全。   那么如何自建一个类似的服务平台呢">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b86fa51caa.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b86fbe8d22.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b86ff0fdf1.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b870086ddb.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b8701ac16e.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/637b870297f13.png">
+<meta property="article:published_time" content="2023-08-11T07:55:44.814Z">
+<meta property="article:modified_time" content="2023-08-11T07:55:44.814Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/11/21/637b86fa51caa.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-宝塔面板搭建mozilla-send ：火狐开源的临时文件分享服务平台_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:44.814Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>我相信经常网上冲浪的各位大佬们经常有临时分享文件的需要吧，我们平时接触到的、比较常用的一般有奶牛快传、 Firefox Send 等等， Firefox Send 服务旨在提供简单、私密的文件分享服务，不登录火狐账户可以上传分享不超过1G的文件，登录火狐之后可以上传分享不超过 2.5G 的文件。且火狐承诺该服务是端到端的，分享链接可加密，到期即焚，十分安全。</p>
+</blockquote>
+<blockquote>
+<p>那么如何自建一个类似的服务平台呢？这个时候你就需要mozilla-send 了，这是火狐开源的临时文件分享服务平台，优点：分享链接可加密，到期即焚，十分安全。</p>
+</blockquote>
+<h1 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h1><p> Github地址：<a target="_blank" rel="noopener" href="https://github.com/mozilla/send">https://github.com/mozilla/send</a><br> 官方演示：<a target="_blank" rel="noopener" href="https://send.firefox.com/">https://send.firefox.com</a>  &#x2F;&#x2F;需要特殊网络</p>
+<h1 id="2、准备"><a href="#2、准备" class="headerlink" title="2、准备"></a>2、准备</h1><ul>
+<li>一台vps</li>
+<li>宝塔面板</li>
+<li>PM2管理器</li>
+<li>Redis Server(软件商店搜索安装)</li>
+<li>docker管理器(如果选择docker安装就需要安装)</li>
+</ul>
+<h1 id="3、部署"><a href="#3、部署" class="headerlink" title="3、部署"></a>3、部署</h1><h2 id="（1）、手动部署安装"><a href="#（1）、手动部署安装" class="headerlink" title="（1）、手动部署安装"></a>（1）、手动部署安装</h2><p>Git 火狐的 Firefox Send 并安装运行，官方的部署方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/mozilla/send.git</span></span><br><span class="line">cd send</span><br><span class="line">#安装依赖</span><br><span class="line">npm install</span><br><span class="line">#构建生产环境</span><br><span class="line">npm run build</span><br><span class="line">#运行</span><br><span class="line">npm run prod</span><br></pre></td></tr></table></figure>
+<p>基本上官方安装方法是这样，不过貌似使用root用户构建生产环境的时候会有点小问题，普通用户倒是没问题的。</p>
+<p>一般我们玩的服务器都是直接给的root用户，所以这里就需要新建一个普通用户进行构建操作。</p>
+<p>先使用root登录SSH客户端，使用命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#新建一个moerats用户，指定该用户的主目录为/home/moerats</span><br><span class="line"></span><br><span class="line">#<span class="title class_">Debian</span>/<span class="title class_">Ubuntu</span>系统</span><br><span class="line">useradd -d /home/moerats -m moerats</span><br><span class="line"></span><br><span class="line">#<span class="title class_">CentOS</span>系统，以下命令会自动给你创建一个/home/moerats主目录</span><br><span class="line">useradd moerats</span><br></pre></td></tr></table></figure>
+<p>然后继续使用命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#进入到/home/moerats目录下载send项目</span><br><span class="line">cd /home/moerats</span><br><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/mozilla/send.git</span></span><br><span class="line">#将send目录用户权限改为新建用户moerats</span><br><span class="line">chown -R <span class="attr">moerats</span>:moerats send</span><br><span class="line">#切换moerats用户</span><br><span class="line">su - moerats</span><br><span class="line">#进入项目文件夹</span><br><span class="line">cd send</span><br><span class="line">#安装依赖</span><br><span class="line">npm install</span><br><span class="line">#构建生产环境</span><br><span class="line">npm run build</span><br><span class="line">#运行</span><br><span class="line">npm run prod</span><br></pre></td></tr></table></figure>
+<p>不出意外的话，构建和运行都没问题，不过运行的话root用户和新建的moerats用户都是可以运行的。</p>
+<p>访问地址为<code>ip:1443</code>，然后一般情况下CentOS还需要开启防火墙1443端口</p>
+<h2 id="（2）Docker安装"><a href="#（2）Docker安装" class="headerlink" title="（2）Docker安装"></a>（2）Docker安装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name send -d -p <span class="number">1443</span>:<span class="number">1443</span> moerats/send</span><br></pre></td></tr></table></figure>
+<p>执行完成后，可以在浏览器打开<a href="ip:1443">ip:1443</a>来访问程序~~</p>
+<h2 id="（3）效果"><a href="#（3）效果" class="headerlink" title="（3）效果"></a>（3）效果</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/637b86fa51caa.png" alt="123"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b86fbe8d22.png" alt="456"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b86ff0fdf1.png" alt="789"></p>
+<h1 id="4、域名反代"><a href="#4、域名反代" class="headerlink" title="4、域名反代"></a>4、域名反代</h1><p><strong>方法一：宝塔6.x以上反向代理略有不同</strong></p>
+<p>1.添加反向代理：<strong>网站-点击域名-反向代理-添加反向代理</strong>；</p>
+<p>2.修改反向代理配置：添加完反向代理之后，点击配置文件，添加内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location / </span><br><span class="line">       &#123;</span><br><span class="line">           ...</span><br><span class="line"></span><br><span class="line">           proxy_buffering off;</span><br><span class="line">           proxy_cache off;</span><br><span class="line">           proxy_set_header X-<span class="title class_">Forwarded</span>-<span class="title class_">Proto</span> $scheme;</span><br><span class="line"></span><br><span class="line">           ...</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>如图：（图中端口要改下，改为127.0.0.1:1443）<br><img src="https://tc.edunote.cn/i/2022/11/21/637b870086ddb.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b8701ac16e.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b870297f13.png"></p>
+<p>做完以上操作，应该就可以访问你的域名了！</p>
+<p><strong>方法二：安装Caddy：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/iiiiiii1/doubi/master/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br><span class="line"></span><br><span class="line">#备用地址</span><br><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//www.moerats.com/usr/shell/Caddy/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br></pre></td></tr></table></figure>
+<p>配置Caddy：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#以下全部内容是一个整体，请修改域名后一起复制到<span class="variable constant_">SSH</span>运行！</span><br><span class="line"></span><br><span class="line">#http访问，该配置不会自动签发<span class="variable constant_">SSL</span></span><br><span class="line">echo <span class="string">&quot;f.isedu.top &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:1443 &#123;</span></span><br><span class="line"><span class="string">    websocket</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br><span class="line"></span><br><span class="line">#https访问，该配置会自动签发<span class="variable constant_">SSL</span>，请提前解析域名到<span class="variable constant_">VPS</span>服务器</span><br><span class="line">echo <span class="string">&quot;f.isedu.top &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> tls admin@j8mao.com</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:1443 &#123;</span></span><br><span class="line"><span class="string">    websocket</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br></pre></td></tr></table></figure>
+<p>tls参数会自动帮你签发ssl证书，如果你要使用自己的ssl，改为<code>tls /root/xx.crt /root/xx.key</code>即可。后面为ssl证书路径。</p>
+<p>启动Caddy：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.<span class="property">d</span>/caddy start</span><br></pre></td></tr></table></figure>
+<p>就可以打开域名进行访问了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/" data-id="cll6artx5000vgnro3npj7n8u" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="提一件拉胯的事：别去参考阿里和华为云官方镜像上面的解决办法，本人试了几遍，没luan用。拉胯！！！！！！！！   1、具体报错信息123Errors during downloading metadata for repository &amp;#x27;epel&amp;#x27;:  - Status code: 404 for http:&#x2F;&#x2F;archives.fedoraproject.org&#x2F;pub&#x2F;a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="提一件拉胯的事：别去参考阿里和华为云官方镜像上面的解决办法，本人试了几遍，没luan用。拉胯！！！！！！！！   1、具体报错信息123Errors during downloading metadata for repository &amp;#x27;epel&amp;#x27;:  - Status code: 404 for http:&#x2F;&#x2F;archives.fedoraproject.org&#x2F;pub&#x2F;a">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-11T07:56:28.306Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:28.306Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CentOS 8.2更换yum源报错Errors during downloading metadata" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:28.306Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>提一件拉胯的事：别去参考阿里和华为云官方镜像上面的解决办法，本人试了几遍，没luan用。拉胯！！！！！！！！ </p>
+</blockquote>
+<h3 id="1、具体报错信息"><a href="#1、具体报错信息" class="headerlink" title="1、具体报错信息"></a>1、具体报错信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Errors during downloading metadata for repository &#x27;epel&#x27;:</span><br><span class="line">  - Status code: 404 for http://archives.fedoraproject.org/pub/archive/epel/8/Everything/x86_64/repodata/repomd.xml (IP: 38.145.60.23)</span><br><span class="line">Error: Failed to download metadata for repo &#x27;epel&#x27;: Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、原因"><a href="#2、原因" class="headerlink" title="2、原因"></a>2、原因</h3><blockquote>
+<p>第三方的镜像站中均已移除CentOS 8的源，Centos 8版本已停止更新相应依赖导致的，下载新的yum源即可搞定 </p>
+</blockquote>
+<h3 id="3、解决办法"><a href="#3、解决办法" class="headerlink" title="3、解决办法"></a>3、解决办法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/yum.repos.d /etc/yum.repos.d.bak</span><br><span class="line"></span><br><span class="line">mkdir -p /etc/yum.repos.d</span><br><span class="line"></span><br><span class="line">curl https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo &gt; /etc/yum.repos.d/Centos-vault-8.5.2111.repo</span><br><span class="line"></span><br><span class="line">curl https://mirrors.aliyun.com/repo/epel-archive-8.repo &gt; /etc/yum.repos.d/epel-archive-8.repo</span><br><span class="line"></span><br><span class="line">yum clean all</span><br><span class="line"></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/" data-id="cll6artwb0005gnro7lsd9vf9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/CF-SpeedTest%20-%20%E6%B5%8B%E8%AF%95%20CF%20CDN%20%E5%BB%B6%E8%BF%9F%E5%92%8C%E9%80%9F%E5%BA%A6%EF%BC%8CCF%E8%87%AA%E9%80%89IP/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

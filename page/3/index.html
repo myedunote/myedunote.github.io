@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/page/3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-X-UI和宝塔共存_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:51.522Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="一、安装宝塔面板"><a href="#一、安装宝塔面板" class="headerlink" title="一、安装宝塔面板"></a>一、安装宝塔面板</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+<p>宝塔安装完毕以后，根据自己的需求安装所需的环境插件</p>
+<h1 id="二、部署网站"><a href="#二、部署网站" class="headerlink" title="二、部署网站"></a>二、部署网站</h1><p>根据自己的需求，我们这边选择用WP建站。</p>
+<p>找到软件商店——一键部署——一键部署 WordPress</p>
+<p>找到 站点设置，找到 伪静态 ，在复选框中选择适合 WordPress 的伪静态样式，确保站点一切正常。<br><img src="https://tc.edunote.cn/i/2022/11/21/16445662330791669043050.png" alt="enter description here"></p>
+<p>部署完成以后，请自行的完成网站数据库、站点名、用户名和密码等相关的设置。</p>
+<p>为域名申请证书<br>找到网站设置界面，点击SSL为网站申请证书，强制开启 HTTPS。<br><img src="https://tc.edunote.cn/i/2022/11/21/1644566258183637b929334fe6.png" alt="enter description here"></p>
+<h1 id="三、安装X-UI-面板"><a href="#三、安装X-UI-面板" class="headerlink" title="三、安装X-UI 面板"></a>三、安装X-UI 面板</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -<span class="title class_">Ls</span> <span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/vaxilu/x-ui/master/install.sh)</span></span><br></pre></td></tr></table></figure>
+<p>x-ui 管理脚本使用方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">x-ui              - 显示管理菜单 (功能更多)</span><br><span class="line">x-ui start        - 启动 x-ui 面板</span><br><span class="line">x-ui stop         - 停止 x-ui 面板</span><br><span class="line">x-ui restart      - 重启 x-ui 面板</span><br><span class="line">x-ui status       - 查看 x-ui 状态</span><br><span class="line">x-ui enable       - 设置 x-ui 开机自启</span><br><span class="line">x-ui disable      - 取消 x-ui 开机自启</span><br><span class="line">x-ui log          - 查看 x-ui 日志</span><br><span class="line">x-ui v2-ui        - 迁移本机器的 v2-ui 账号数据至 x-ui</span><br><span class="line">x-ui update       - 更新 x-ui 面板</span><br><span class="line">x-ui install      - 安装 x-ui 面板</span><br><span class="line">x-ui uninstall    - 卸载 x-ui 面板</span><br></pre></td></tr></table></figure>
+<p>放行宝塔面板的相关端口<br>找到宝塔面板 —— 安全 —— 防火墙，放行面板的默认端口54321（x-ui默认）</p>
+<p>访问并设置 x-ui管理面板<br>在浏览器中输入你的 ip 加端口<br><a target="_blank" rel="noopener" href="https://yourdomain:54321/">https://yourdomain:54321</a><br>登录 ，用户名 admin ，密码 admin</p>
+<p>修改必要的面板参数 面板监听端口 和 面板 url 根路径<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123041481669043097.png" alt="enter description here"></p>
+<p>更改端口以后，一定记得去 宝塔面板 —— 安全 —— 防火墙 里面去放行相关的端口</p>
+<p>重启X-ui面板，使配置生效！</p>
+<p>在入站规则里面添加一个科学上网节点，如图配置：</p>
+<p><strong>记好端口和路径，协议选择ws ，注意不要打开tls！！！！！</strong></p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123041491669043099.png" alt="enter description here"></p>
+<h1 id="四、配置-Nginx-反向代理"><a href="#四、配置-Nginx-反向代理" class="headerlink" title="四、配置 Nginx 反向代理"></a>四、配置 Nginx 反向代理</h1><p>找到 网站设置 界面，找到 配置文件，在最后一行的 } 符号前面，新起几行，插入以下反代代码，可以对比如下。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">location ^~ <span class="regexp">/test/</span> &#123;</span><br><span class="line">    proxy_pass <span class="attr">http</span>:<span class="comment">//127.0.0.1:1234/test/;</span></span><br><span class="line">    proxy_set_header <span class="title class_">Host</span> $host;</span><br><span class="line">    proxy_set_header X-<span class="title class_">Real</span>-<span class="variable constant_">IP</span> $remote_addr;</span><br><span class="line">    proxy_set_header X-<span class="title class_">Forwarded</span>-<span class="title class_">For</span> $proxy_add_x_forwarded_for;</span><br><span class="line">&#125;</span><br><span class="line">location /abcd &#123;</span><br><span class="line">        proxy_redirect off;</span><br><span class="line">        proxy_pass <span class="attr">http</span>:<span class="comment">//127.0.0.1:6789;</span></span><br><span class="line">        proxy_http_version <span class="number">1.1</span>;</span><br><span class="line">        proxy_set_header <span class="title class_">Upgrade</span> $http_upgrade;</span><br><span class="line">        proxy_set_header <span class="title class_">Connection</span> <span class="string">&quot;upgrade&quot;</span>;</span><br><span class="line">        proxy_set_header <span class="title class_">Host</span> $http_host;</span><br><span class="line">        proxy_read_timeout 300s;</span><br><span class="line">        # <span class="title class_">Show</span> realip <span class="keyword">in</span> v2ray access.<span class="property">log</span></span><br><span class="line">        proxy_set_header X-<span class="title class_">Real</span>-<span class="variable constant_">IP</span> $remote_addr;</span><br><span class="line">        proxy_set_header X-<span class="title class_">Forwarded</span>-<span class="title class_">For</span> $proxy_add_x_forwarded_for;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123041501669043101.png" alt="enter description here"></p>
+<p>设置完毕以后，在宝塔面板里面重新启动 Nginx，使配置生效。</p>
+<p>至此，你可以使用 <a target="_blank" rel="noopener" href="https://xx.xx.xyz/test">https://xx.xx.xyz/test</a> 来访问你的 X-ui管理面板了。<br>然后，宝塔里面放行的两个端口也可以删除了，也可以提高服务器安全性！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/" data-id="cll6artwu000hgnro9cumbxrk" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Zfile搭建教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:48.990Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Z-File"><a href="#Z-File" class="headerlink" title="Z-File"></a>Z-File</h1><p><img src="https://img.shields.io/badge/license-MIT-blue.svg?longCache=true&style=flat-square" alt="https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square"><br><a target="_blank" rel="noopener" href="https://www.codacy.com/manual/zhaojun1998/zfile?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=zhaojun1998/zfile&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/70b793267f7941d58cbd93f50c9a8e0a" alt="Codacy Badge"></a><br><img src="https://img.shields.io/badge/springboot-2.0.6-yellow.svg?longCache=true&style=popout-square" alt="https://img.shields.io/badge/springboot-2.0.6-orange.svg?style=flat-square"><br><img src="https://img.shields.io/github/tag/zhaojun1998/zfile.svg?style=flat-square" alt="GitHub tag (latest SemVer)"></p>
+<p>此项目是一个在线文件目录的程序, 支持各种对象存储和本地存储, 使用定位是个人放常用工具下载, 或做公共的文件库. 不会向多账户方向开发.</p>
+<p>前端基于 <a target="_blank" rel="noopener" href="https://larsjung.de/h5ai/">h5ai</a> 的原有功能使用 Vue 重新开发了一遍. 后端采用 SpringBoot, 数据库采用内嵌数据库.</p>
+<p>预览地址: <a target="_blank" rel="noopener" href="https://zfile.jun6.net/">https://zfile.jun6.net</a></p>
+<p>文档地址: <a target="_blank" rel="noopener" href="http://docs.zhaojun.im/zfile">http://docs.zhaojun.im/zfile</a></p>
+<h2 id="系统特色"><a href="#系统特色" class="headerlink" title="系统特色"></a>系统特色</h2><ul>
+<li>内存缓存 (免安装)</li>
+<li>内存数据库 (免安装)</li>
+<li>个性化配置</li>
+<li>自定义目录的 readme 说明文件</li>
+<li>自定义 JS, CSS</li>
+<li>文件夹密码</li>
+<li>支持在线浏览文本文件, 视频, 图片, 音乐. (支持 FLV 和 HLS)</li>
+<li>文件&#x2F;目录二维码</li>
+<li>缓存动态开启, <del>缓存自动刷新 (v2.2 及以前版本支持)</del></li>
+<li><del>全局搜索 (v2.2 及以前版本支持)</del></li>
+<li>同时挂载多个存储策略</li>
+<li>支持 阿里云 OSS, FTP, 华为云 OBS, 本地存储, MINIO, OneDrive 国际&#x2F;家庭&#x2F;个人版, OneDrive 世纪互联版, 七牛云 KODO, 腾讯云 COS, 又拍云 USS.</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><p>安装依赖环境:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CentOS系统</span></span><br><span class="line">yum install -y java-1.8.0-openjdk unzip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Debian 9 / Ubuntu 14+</span></span><br><span class="line">apt update</span><br><span class="line">apt install -y openjdk-8-jre-headless unzip</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Debian 10 (Buster) 系统</span></span><br><span class="line">apt update &amp;&amp; apt install -y apt-transport-https software-properties-common ca-certificates dirmngr gnupg</span><br><span class="line">wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -</span><br><span class="line">add-apt-repository --<span class="built_in">yes</span> https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/</span><br><span class="line">apt update &amp;&amp; apt install -y adoptopenjdk-8-hotspot-jre</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<p>如为更新程序, 则请先执行 <code>~/zfile/bin/stop.sh &amp;&amp; rm -rf ~/zfile</code> 清理旧程序. 首次安装请忽略此选项.</p>
+</blockquote>
+<p>下载项目:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">wget https://c.jun6.net/ZFILE/zfile-release.war</span><br><span class="line"><span class="built_in">mkdir</span> zfile &amp;&amp; unzip zfile-release.war -d zfile &amp;&amp; <span class="built_in">rm</span> -rf zfile-release.war</span><br><span class="line"><span class="built_in">chmod</span> +x zfile/bin/*.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>下载指定版本可以将 <code>zfile-release.war</code> 改为 <code>zfile-x.x.war</code>，如 <code>zfile-2.2.war</code>。</p>
+</blockquote>
+<p>程序的目录结构为:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── zfile</span><br><span class="line">    ├── META-INF</span><br><span class="line">    ├── WEB-INF</span><br><span class="line">    └── bin</span><br><span class="line">        ├── start.sh    # 启动脚本</span><br><span class="line">        └── stop.sh     # 停止脚本</span><br><span class="line">        ├── restart.sh  # 重启脚本</span><br></pre></td></tr></table></figure>
+
+<p>启动项目:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~/zfile/bin/start.sh</span><br></pre></td></tr></table></figure>
+
+<p>篇幅有限, 更详细的安装教程及介绍请参考: <a target="_blank" rel="noopener" href="http://docs.zhaojun.im/zfile">ZFile 文档</a></p>
+<p>访问地址:</p>
+<p>用户前台: <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/#/main">http://127.0.0.1:8080/#/main</a></p>
+<p>初始安装: <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/#/install">http://127.0.0.1:8080/#/install</a></p>
+<p>管理后台: <a target="_blank" rel="noopener" href="http://127.0.0.1:8080/#/admin">http://127.0.0.1:8080/#/admin</a></p>
+<h2 id="预览"><a href="#预览" class="headerlink" title="预览"></a>预览</h2><p><img src="https://cdn.jun6.net/2020/04/19/d590d2bde13bb.png" alt="前台首页"><br><img src="https://cdn.jun6.net/2020/04/19/d58fc2debcce8.png" alt="后台设置-驱动器设置"><br><img src="https://cdn.jun6.net/2020/04/19/0f321e47fc18c.png" alt="后台设置-驱动器设置"><br><img src="https://cdn.jun6.net/2020/04/19/6d7c300b89671.png" alt="后台设置-显示设置"></p>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="默认路径"><a href="#默认路径" class="headerlink" title="默认路径"></a>默认路径</h3><p>默认 H2 数据库文件地址: <code>~/.zfile/db/</code>, <code>~</code> 表示用户目录</p>
+<p>windows 为 <code>C:/Users/用户名/</code></p>
+<p>linux 为 <code>/home/用户名/</code>, root 用户为 <code>/root/</code></p>
+<blockquote>
+<p>2.3 及以后版本路径为 <code>~/.zfile-new/db/</code></p>
+</blockquote>
+<h3 id="文档文件和加密文件"><a href="#文档文件和加密文件" class="headerlink" title="文档文件和加密文件"></a>文档文件和加密文件</h3><ul>
+<li>目录文档显示文件名为 <code>readme.md</code></li>
+<li>目录需要密码访问, 添加文件 <code>password.txt</code> (无法拦截此文件被下载, 但可以改名文件)</li>
+</ul>
+<h2 id="开发计划"><a href="#开发计划" class="headerlink" title="开发计划"></a>开发计划</h2><ul>
+<li><input checked="" disabled="" type="checkbox"> API 支持 <a target="_blank" rel="noopener" href="https://github.com/zhaojun1998/zfile/blob/master/API.md">点击查看文档</a></li>
+<li><input checked="" disabled="" type="checkbox"> 更方便的部署方式</li>
+<li><input checked="" disabled="" type="checkbox"> 布局优化 - 自定义操作按钮 (现为右键实现)</li>
+<li><input checked="" disabled="" type="checkbox"> 后台优化 - 设置按照其功能进行分离</li>
+<li><input checked="" disabled="" type="checkbox"> 体验优化 - 支持前后端分离部署</li>
+<li><input checked="" disabled="" type="checkbox"> 体验优化 - 文本预览更换 vscode 同款编辑器 monaco editor</li>
+<li><input checked="" disabled="" type="checkbox"> 新功能 - Docker 支持</li>
+<li><input checked="" disabled="" type="checkbox"> 架构调整 - 支持多存储策略</li>
+<li><input checked="" disabled="" type="checkbox"> 体验优化 - 忽略文件列表 (正则表达式)</li>
+<li><input disabled="" type="checkbox"> 新功能 - 后台支持上传、编辑、删除等操作</li>
+<li><input disabled="" type="checkbox"> 体验优化 - 自定义支持预览的文件后缀 (正则表达式)</li>
+<li><input disabled="" type="checkbox"> 体验优化 - 一键安装脚本</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" data-id="cll6artwv000ignro7vrw9e8x" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-安卓手机搭建青龙面板详细教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:46.582Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>目前手机运行青龙面板的教程大部分都是需要刷机获取root安装Magisk模块才能运行青龙面板。这对不爱搞机和刷不了机的玩家很不友好！此时<strong>termux</strong>高级终端app就可以让无root玩家轻松运行青龙面板！让没有服务器的玩家也能用上青龙面板！！！</p>
+</blockquote>
+<h2 id="一、安装termux高级终端"><a href="#一、安装termux高级终端" class="headerlink" title="一、安装termux高级终端"></a>一、安装termux高级终端</h2><p>1、首先需要安装好ZeroTermux应用，这是酷安『一只小doge』正在开发的新版魔改termux，感兴趣的玩家可以去了解了解</p>
+<p>所有工具下载地址：<a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-BK9rh">123盘提取码：W1Er</a></p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/img_62767840663ac1670566379.png" alt="安装termux高级终端"></p>
+<p>2、安装MT和Termux，打开这两个软件授权文件储存权限</p>
+<p>执行以下命令，给termux访问外部存储权限</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">termux-setup-storage</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tc.edunote.cn/i/2022/12/09/1231670567436.png"></p>
+<p>如图出现<code>storage</code>文件夹后，才可以进行恢复容器操作！</p>
+<h2 id="二、下载青龙面板容器恢复包【教程以青龙v2-10-13版为例】"><a href="#二、下载青龙面板容器恢复包【教程以青龙v2-10-13版为例】" class="headerlink" title="二、下载青龙面板容器恢复包【教程以青龙v2.10.13版为例】"></a>二、下载青龙面板容器恢复包【教程以青龙v2.10.13版为例】</h2><p>1、把你下载好的青龙面板恢复包(.tar.gz)放在手机内部存储目录中的<code>xinhao/data</code>路径下</p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/img_627678704aff21670567578.png"></p>
+<p>2.打开Termux，从左侧向右滑动，点击备份&#x2F;恢复选项，选择恢复包。</p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/20220817072715361670567539.jpg" alt="img"></p>
+<p>3.给容器命名为：ql，恢复完成后退出Termux重新打开。</p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/20220817072739101670567648.jpg" alt="img"></p>
+<p>4.再次从左侧向右滑动，点击容器切换选项，点击ql容器。</p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/20220817072855291670567671.png" alt="img"></p>
+<h2 id="三、启动青龙面板"><a href="#三、启动青龙面板" class="headerlink" title="三、启动青龙面板"></a>三、启动青龙面板</h2><p>1、先手动启动青龙面板测试一下是否能正常运行</p>
+<ul>
+<li>查看当前目录下是否存在ql.sh文件</li>
+</ul>
+<ol>
+<li><code>ls -a</code></li>
+</ol>
+<ul>
+<li>执行ql.sh文件</li>
+</ul>
+<ol>
+<li><p><code>./ql.sh</code></p>
+<p><img src="https://tc.edunote.cn/i/2022/12/09/1651931506-ql1.giftplv-bhtk4pj814-image.image_1670567803.gif"></p>
+<p>手机打开浏览器访问127.0.0.1:5700</p>
+<p>熟悉的界面出现了，接下来该干啥就不用我多说了吧！</p>
+<p>青龙面板的所有文件均在alpine系统的&#x2F;ql路径下</p>
+<p>2、设置打开ZeroTermux应用自动运行青龙面板</p>
+<ul>
+<li>编辑当前目录下的<code>.bashrc</code>文件</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tc.edunote.cn/i/2022/12/09/img_627678998a5e31670567997.png"></p>
+<p>取消最后一行前面的注释符#</p>
+<p>当你下次进入容器时就会自动运行程序，无需手动执行。</p>
+<h2 id="四、给容器与外部存储建立软连接，方便后期手动导入脚本文件"><a href="#四、给容器与外部存储建立软连接，方便后期手动导入脚本文件" class="headerlink" title="四、给容器与外部存储建立软连接，方便后期手动导入脚本文件"></a>四、给容器与外部存储建立软连接，方便后期手动导入脚本文件</h2><p>1、考虑到有玩家可能需要手动运行本地脚本，在容器中每次使用<code>cp</code>命令就比较麻烦。给容器建立软连接就不需要每次进入终端执行命令。</p>
+<p>在建立软链接前请在手机的内部存储的目录下<code>【/storage/emulated/0/】</code>创建一个目录用来存放脚本文件</p>
+<p>这里教程就以创建一个名为ql的文件夹</p>
+<ul>
+<li>即当前ql文件的路径相对于手机内部储存而言的路径为<code>/storage/emulated/0/ql</code></li>
+<li>但ql文件夹在ZeroTermux终端中的alpine系统的路径为<code>/data/data/com.termux/files/home/storage/shared/ql</code></li>
+</ul>
+<p>这说明在alpine系统中访问该路径&#x2F;data&#x2F;data&#x2F;com.termux&#x2F;files&#x2F;home&#x2F;storage&#x2F;shared&#x2F;会来到手机内部存储的&#x2F;storage&#x2F;emulated&#x2F;0&#x2F;路径下，它们之间已存在软连接。</p>
+<p>2、回到ZeroTermux终端，并且确保登陆进入了alpine系统【只要你不手动退出默认就是处于alpine系统下】</p>
+<ul>
+<li>将手机内部存储下的ql文件夹软连接到alpine系统的&#x2F;ql&#x2F;scripts&#x2F;ql下【青龙v2.11.3版以下】</li>
+<li>termux_alpine_ql_v2.10.13：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /data/data/com.termux/files/home/storage/shared/ql /ql/scripts/ql</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>将手机内部存储下的ql文件夹软连接到alpine系统的&#x2F;ql&#x2F;data&#x2F;scripts&#x2F;ql下【青龙v2.12.0版以上】</p>
+</li>
+<li><p>termux_alpine_ql_v2.12.2：</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s /data/data/com.termux/files/home/storage/shared/ql /ql/data/scripts/ql</span><br></pre></td></tr></table></figure>
+
+<p>3、软连接好了后，就可以在手机内部存储的ql文件夹中放入本地脚本</p>
+<p>回到浏览器登陆青龙控制面板，在<code>脚本管理</code>选项中就能看到ql文件夹下的本地脚本了！</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%AE%89%E5%8D%93%E6%89%8B%E6%9C%BA%E6%90%AD%E5%BB%BA%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/" data-id="cll6artx4000ugnrob0q6c1gj" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-宝塔面板搭建mozilla-send ：火狐开源的临时文件分享服务平台_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:44.814Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>我相信经常网上冲浪的各位大佬们经常有临时分享文件的需要吧，我们平时接触到的、比较常用的一般有奶牛快传、 Firefox Send 等等， Firefox Send 服务旨在提供简单、私密的文件分享服务，不登录火狐账户可以上传分享不超过1G的文件，登录火狐之后可以上传分享不超过 2.5G 的文件。且火狐承诺该服务是端到端的，分享链接可加密，到期即焚，十分安全。</p>
+</blockquote>
+<blockquote>
+<p>那么如何自建一个类似的服务平台呢？这个时候你就需要mozilla-send 了，这是火狐开源的临时文件分享服务平台，优点：分享链接可加密，到期即焚，十分安全。</p>
+</blockquote>
+<h1 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h1><p> Github地址：<a target="_blank" rel="noopener" href="https://github.com/mozilla/send">https://github.com/mozilla/send</a><br> 官方演示：<a target="_blank" rel="noopener" href="https://send.firefox.com/">https://send.firefox.com</a>  &#x2F;&#x2F;需要特殊网络</p>
+<h1 id="2、准备"><a href="#2、准备" class="headerlink" title="2、准备"></a>2、准备</h1><ul>
+<li>一台vps</li>
+<li>宝塔面板</li>
+<li>PM2管理器</li>
+<li>Redis Server(软件商店搜索安装)</li>
+<li>docker管理器(如果选择docker安装就需要安装)</li>
+</ul>
+<h1 id="3、部署"><a href="#3、部署" class="headerlink" title="3、部署"></a>3、部署</h1><h2 id="（1）、手动部署安装"><a href="#（1）、手动部署安装" class="headerlink" title="（1）、手动部署安装"></a>（1）、手动部署安装</h2><p>Git 火狐的 Firefox Send 并安装运行，官方的部署方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/mozilla/send.git</span></span><br><span class="line">cd send</span><br><span class="line">#安装依赖</span><br><span class="line">npm install</span><br><span class="line">#构建生产环境</span><br><span class="line">npm run build</span><br><span class="line">#运行</span><br><span class="line">npm run prod</span><br></pre></td></tr></table></figure>
+<p>基本上官方安装方法是这样，不过貌似使用root用户构建生产环境的时候会有点小问题，普通用户倒是没问题的。</p>
+<p>一般我们玩的服务器都是直接给的root用户，所以这里就需要新建一个普通用户进行构建操作。</p>
+<p>先使用root登录SSH客户端，使用命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#新建一个moerats用户，指定该用户的主目录为/home/moerats</span><br><span class="line"></span><br><span class="line">#<span class="title class_">Debian</span>/<span class="title class_">Ubuntu</span>系统</span><br><span class="line">useradd -d /home/moerats -m moerats</span><br><span class="line"></span><br><span class="line">#<span class="title class_">CentOS</span>系统，以下命令会自动给你创建一个/home/moerats主目录</span><br><span class="line">useradd moerats</span><br></pre></td></tr></table></figure>
+<p>然后继续使用命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#进入到/home/moerats目录下载send项目</span><br><span class="line">cd /home/moerats</span><br><span class="line">git clone <span class="attr">https</span>:<span class="comment">//github.com/mozilla/send.git</span></span><br><span class="line">#将send目录用户权限改为新建用户moerats</span><br><span class="line">chown -R <span class="attr">moerats</span>:moerats send</span><br><span class="line">#切换moerats用户</span><br><span class="line">su - moerats</span><br><span class="line">#进入项目文件夹</span><br><span class="line">cd send</span><br><span class="line">#安装依赖</span><br><span class="line">npm install</span><br><span class="line">#构建生产环境</span><br><span class="line">npm run build</span><br><span class="line">#运行</span><br><span class="line">npm run prod</span><br></pre></td></tr></table></figure>
+<p>不出意外的话，构建和运行都没问题，不过运行的话root用户和新建的moerats用户都是可以运行的。</p>
+<p>访问地址为<code>ip:1443</code>，然后一般情况下CentOS还需要开启防火墙1443端口</p>
+<h2 id="（2）Docker安装"><a href="#（2）Docker安装" class="headerlink" title="（2）Docker安装"></a>（2）Docker安装</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name send -d -p <span class="number">1443</span>:<span class="number">1443</span> moerats/send</span><br></pre></td></tr></table></figure>
+<p>执行完成后，可以在浏览器打开<a href="ip:1443">ip:1443</a>来访问程序~~</p>
+<h2 id="（3）效果"><a href="#（3）效果" class="headerlink" title="（3）效果"></a>（3）效果</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/637b86fa51caa.png" alt="123"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b86fbe8d22.png" alt="456"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b86ff0fdf1.png" alt="789"></p>
+<h1 id="4、域名反代"><a href="#4、域名反代" class="headerlink" title="4、域名反代"></a>4、域名反代</h1><p><strong>方法一：宝塔6.x以上反向代理略有不同</strong></p>
+<p>1.添加反向代理：<strong>网站-点击域名-反向代理-添加反向代理</strong>；</p>
+<p>2.修改反向代理配置：添加完反向代理之后，点击配置文件，添加内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">location / </span><br><span class="line">       &#123;</span><br><span class="line">           ...</span><br><span class="line"></span><br><span class="line">           proxy_buffering off;</span><br><span class="line">           proxy_cache off;</span><br><span class="line">           proxy_set_header X-<span class="title class_">Forwarded</span>-<span class="title class_">Proto</span> $scheme;</span><br><span class="line"></span><br><span class="line">           ...</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<p>如图：（图中端口要改下，改为127.0.0.1:1443）<br><img src="https://tc.edunote.cn/i/2022/11/21/637b870086ddb.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b8701ac16e.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/637b870297f13.png"></p>
+<p>做完以上操作，应该就可以访问你的域名了！</p>
+<p><strong>方法二：安装Caddy：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/iiiiiii1/doubi/master/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br><span class="line"></span><br><span class="line">#备用地址</span><br><span class="line">wget -N --no-check-certificate <span class="attr">https</span>:<span class="comment">//www.moerats.com/usr/shell/Caddy/caddy_install.sh &amp;&amp; chmod +x caddy_install.sh &amp;&amp; bash caddy_install.sh</span></span><br></pre></td></tr></table></figure>
+<p>配置Caddy：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#以下全部内容是一个整体，请修改域名后一起复制到<span class="variable constant_">SSH</span>运行！</span><br><span class="line"></span><br><span class="line">#http访问，该配置不会自动签发<span class="variable constant_">SSL</span></span><br><span class="line">echo <span class="string">&quot;f.isedu.top &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:1443 &#123;</span></span><br><span class="line"><span class="string">    websocket</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br><span class="line"></span><br><span class="line">#https访问，该配置会自动签发<span class="variable constant_">SSL</span>，请提前解析域名到<span class="variable constant_">VPS</span>服务器</span><br><span class="line">echo <span class="string">&quot;f.isedu.top &#123;</span></span><br><span class="line"><span class="string"> gzip</span></span><br><span class="line"><span class="string"> tls admin@j8mao.com</span></span><br><span class="line"><span class="string"> proxy / 127.0.0.1:1443 &#123;</span></span><br><span class="line"><span class="string">    websocket</span></span><br><span class="line"><span class="string">    header_upstream Host &#123;host&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Real-IP &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-For &#123;remote&#125;</span></span><br><span class="line"><span class="string">    header_upstream X-Forwarded-Proto &#123;scheme&#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;&quot;</span> &gt; <span class="regexp">/usr/</span>local/caddy/<span class="title class_">Caddyfile</span></span><br></pre></td></tr></table></figure>
+<p>tls参数会自动帮你签发ssl证书，如果你要使用自己的ssl，改为<code>tls /root/xx.crt /root/xx.key</code>即可。后面为ssl证书路径。</p>
+<p>启动Caddy：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.<span class="property">d</span>/caddy start</span><br></pre></td></tr></table></figure>
+<p>就可以打开域名进行访问了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/" data-id="cll6artx5000vgnro3npj7n8u" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-部署 MoeLink短链接系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:43.082Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>很多市面上的短链接并没有自定义后缀和好记的域名，因此使用这类短链接可能会影响用户的回访。其次大家有没有想过，短链接是可以进行来源和数据分析的。利用短链系统可以无缝衔接，引导客户往对应的网址或页面进行，也方便市场分析及导出数据。MoeLink就是这样一个多功能短链项目。</p>
+</blockquote>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16563870534021669044445.png" alt="enter description here"></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>1、VPS服务器一台</li>
+<li>2、短域名一枚</li>
+<li>3、<a target="_blank" rel="noopener" href="https://moecloud.cn/api/v3/source/_SxrICXFDxPOrCRSO67sy8Gf0CKYoT--24i5GMgZDDg=:0/628763/Premium_URL_Shortener-v6.2.1-nulled.zip">短链系统源码</a><br> <a target="_blank" rel="noopener" href="https://itxe.lanzout.com/iNHro00cx0bc">短链系统源码备用</a></li>
+<li>4、<a target="_blank" rel="noopener" href="https://itxe.lanzout.com/iIrzB00cx35e">Saas主题包</a></li>
+<li>5、<a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-xh9rh">简体中文语言包</a></li>
+</ul>
+<h1 id="部署环境"><a href="#部署环境" class="headerlink" title="部署环境"></a>部署环境</h1><p>为了能够简易部署这套系统，这边建议使用宝塔面板（BT-Panel）。用腾讯轻量云的一个好处就是，我们可以直接跳过安装宝塔面板的环节，减轻我们部署的时间。另一个优点就是，不需要太过于繁琐的配置环境，全程就只需要三步就可以完成。</p>
+<h2 id="建立Web环境"><a href="#建立Web环境" class="headerlink" title="建立Web环境"></a>建立Web环境</h2><p>这边建议LNMP（Nginx+PHP7.4+MySQL5.6），就可以满足短链系统的基本要求。当然，为了方便管理MySQL，这边建议附带一个phpMyAdmin。</p>
+<p>PHP安装扩展<br><img src="https://tc.edunote.cn/i/2022/11/21/16563879371671669044470.png" alt="enter description here"></p>
+<p>然后创建网站，记住网站对应的目录，等会有用。</p>
+<h2 id="上传程序"><a href="#上传程序" class="headerlink" title="上传程序"></a>上传程序</h2><p>例如网站目录是 &#x2F;www&#x2F;wwwroot&#x2F;moelink.org</p>
+<p>1、下载短链系统的包，然后传到 &#x2F;www&#x2F;wwwroot&#x2F;moelink.org 下<br>2、解压压缩包，记得删除压缩包（留着占空间）</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16563876644691669044478.png" alt="enter description here"></p>
+<p>3、配置环境<br>点击“网站”，选择创建的网站，将运行目录改成 &#x2F;public<br><img src="https://tc.edunote.cn/i/2022/11/21/16563876897441669044487.png" alt="enter description here"></p>
+<p>然后切换到“伪静态”，选择“laravel5”并保存<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877100731669044517.png" alt="enter description here"></p>
+<p>4、安装&amp;配置<br>访问网站，然后按照对应的数据库信息及管理员配置即可，后续在后台进行订阅和功能的调试即可。</p>
+<p>计划任务<br>登录后台，转到定时任务<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877373351669044523.png" alt="enter description here"><br>复制这串指令，然后返回宝塔面板的定时任务并添加<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877540281669044529.png" alt="enter description here"><br>如图，保存并启用即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" data-id="cll6artxr0017gnro48n7bk9f" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-搭建Veno File Manager个人私有云网盘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:40.826Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Veno File Manager那样小巧简单但又不失功能强大</p>
+<p><img src="https://pic.edunote.cn/i/2023/06/12/648702b86ba01.jpg" alt="VFM 3.jpg"></p>
+<h2 id="环境需要"><a href="#环境需要" class="headerlink" title="环境需要"></a>环境需要</h2><ol>
+<li>硬件配置不低于单核 512M 内存及 50M 磁盘空间。</li>
+<li>系统推荐使用 Centos。</li>
+<li>WEB 端使用 Nginx 与 PHP（PHP 需要高于 5.5 的版本）。</li>
+<li>VFM 源码。<a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-wdErh.html">[Veno File Manager：提取码:wvbv]</a></li>
+</ol>
+<h2 id="配置-VFM"><a href="#配置-VFM" class="headerlink" title="配置 VFM"></a>配置 VFM</h2><ol>
+<li><p>系统及环境都配置好之后将 VFM 或【vfm-admin】上传至 WEB 根目录，并确保下图红框内文件是 755 权限（如果权限不足会导致无法更改配置及创建文件夹和添加用户）。</p>
+</li>
+<li><p>打开预设的 WEB 地址并输入账户密码进入后台设置，默认账户 admin 密码 password。</p>
+</li>
+<li><p>进入后台之后可以将语言更改为中文并自定义站点名称，也可以根据需要设置伪静态（漂亮的链接）或者直链支持。</p>
+</li>
+<li><p>权限部分可以根据自己的需求进行更改，比如你有多用户需求就需要设置 admin 账户的权限，有远程上传的需求就需要开启功能并设置上传文件后缀限制。</p>
+</li>
+<li><p>这里是一些基本设置，是否开启注册（开启注册需要同时启用下方的电邮选项并填入信息）及文件分享设置</p>
+</li>
+</ol>
+<h2 id="伪静态设置"><a href="#伪静态设置" class="headerlink" title="伪静态设置"></a>伪静态设置</h2><p>Nginx规则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx VFM configuration</span></span><br><span class="line">location / &#123;</span><br><span class="line">    index index.php;</span><br><span class="line">    <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">            rewrite /download/(.*)/sh/(.*)/share/(.*) /vfm-admin/vfm-downloader.php?q=<span class="variable">$1</span>&amp;sh=<span class="variable">$2</span>&amp;share=<span class="variable">$3</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">    rewrite /download/(.*)/h/(.*) /vfm-admin/vfm-downloader.php?q=<span class="variable">$1</span>&amp;h=<span class="variable">$2</span> last;</span><br><span class="line">    rewrite /download/zip/(.*)/n/(.*) /vfm-admin/vfm-downloader.php?zip=<span class="variable">$1</span>&amp;n=<span class="variable">$2</span> last;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">location /uploads/ &#123;</span><br><span class="line">    deny    all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h2><p>如果您丢失了 主管理员（MasterAdmin） 密码（并且您没有关联的电子邮件地址），请打开&#x2F;vfm-admin&#x2F;users&#x2F;users.php文件并删除第7 行的加密密码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">   <span class="variable">$_USERS</span> = <span class="keyword">array</span> (</span><br><span class="line">   <span class="number">0</span> =&gt;</span><br><span class="line">   <span class="keyword">array</span> (</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;pass&#x27;</span> =&gt; <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;role&#x27;</span> =&gt; <span class="string">&#x27;superadmin&#x27;</span>,</span><br><span class="line">      ...</span><br></pre></td></tr></table></figure>
+
+<p>完成此操作后，您将能够以 Master Admin 身份使用默认密码“password”再次登录</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/" data-id="cll6artx6000wgnro5bqr2l01" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-搭建基于telegram的无限网盘_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8Etelegram%E7%9A%84%E6%97%A0%E9%99%90%E7%BD%91%E7%9B%98_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:39.194Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>telegram里面用户是可以无限上传文件的，但是我们在国内无法直接访问telegram，所以有大佬开发了个项目，可以通过机器人获取telegram里的文件直链，只需要一台vps即可</p>
+<p>原项目地址:<a target="_blank" rel="noopener" href="https://github.com/EverythingSuckz/TG-FileStreamBot" title="点我直达">点我直达</a></p>
+<p>环境要求:<br><code>python3</code><br>首先我们通过git拉取项目:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/EverythingSuckz/TG-FileStreamBot</span><br></pre></td></tr></table></figure>
+<p>进入项目地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd TG-FileStreamBot</span><br><span class="line">virtualenv -p /usr/bin/python3 venv</span><br></pre></td></tr></table></figure>
+<p>如果这一步报错“<code>Command &#39;virtualenv&#39; not found, but can be installed with</code>”，说明没有安装virtualenv,执行:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure>
+<p>安装好virtualenv后，再执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">virtualenv -p /usr/bin/python3 venv</span><br><span class="line">. ./venv/bin/activate</span><br><span class="line">pip3 install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>然后我们telegram里面搜索botfather并添加机器人：<br><img src="https://tc.edunote.cn/i/2022/11/21/1640008960076637b91002fbc0.png" alt="enter description here"></p>
+<p>向bot发送<code>/newbot</code>指令来新建一个bot,以下带#号为bot回复的语句</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#<span class="title class_">Alright</span>, a <span class="keyword">new</span> bot. <span class="title class_">How</span> are we going to call it? <span class="title class_">Please</span> choose a name <span class="keyword">for</span> your bot.</span><br><span class="line">输入你的bot名称</span><br><span class="line">#<span class="title class_">Good</span>. <span class="title class_">Now</span> <span class="keyword">let</span><span class="string">&#x27;s choose a username for your bot. It must end in `bot`. Like this, for example: TetrisBot or tetris_bot.</span></span><br><span class="line"><span class="string">然后输入你的bot用户名，之后你会用这个用户名搜索你的bot,bot名必须以**_bot**结尾,比如zhangsan_bot</span></span><br></pre></td></tr></table></figure>
+<p><strong>输入用户名后，botfather会回复给你一串机器人密钥，我们要保存好，图中圈出来的部分就是密钥</strong><br><img src="https://tc.edunote.cn/i/2022/11/21/1640009036337637b91017f0ef.png" alt="enter description here"></p>
+<p>接下来我们新建一个频道，公开频道或者私人频道都可以</p>
+<p>搜索添加<code>@getidsbot</code>   再将bot添加到频道中，它会回复一个负数给你，那个就是你频道的id，id格式为-100xxxxxxxxxx</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/1640009103855637b91032ad91.png" alt="enter description here"></p>
+<p>我们再到浏览器打开<a target="_blank" rel="noopener" href="https://my.telegram.org/">https://my.telegram.org/</a>，登录我们的telegram账号，注册获取一个<code>app id</code>和<code>app hash</code>，这一步就不详细写了，按流程走就行了</p>
+<p>现在我们拥有一个机器人密钥，一个app id和一个app hash和一个频道id</p>
+<p>然后在项目目录下新建一个名为.env的文件，注意不要忘记前面那个.</p>
+<p>按照以下格式编辑.env文件，注意#号后面的内容不要输入到文件中:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">API_ID</span>=     #这里写你的app id</span><br><span class="line"><span class="variable constant_">API_HASH</span>=   #这里写你的app hash</span><br><span class="line"><span class="variable constant_">BOT_TOKEN</span>=  #这里写你的机器人密钥</span><br><span class="line"><span class="variable constant_">BIN_CHANNEL</span>=  #这里写你的频道id</span><br><span class="line"><span class="variable constant_">PORT</span>=         #这里写你想要使用的端口号</span><br><span class="line"><span class="variable constant_">FQDN</span>=         #这里填你的域名</span><br><span class="line"><span class="variable constant_">HAS_SSL</span>=<span class="title class_">False</span>  #这里是ssl选项，最好填默认的<span class="title class_">False</span></span><br></pre></td></tr></table></figure>
+<p>编辑好后，保存，我们再在ssh内执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m <span class="title class_">WebStreamer</span></span><br></pre></td></tr></table></figure>
+<p>现在我们只要把tg内的文件转发给我们新建的机器人，或者上传文件给机器人，机器人就会返回一条文件直链供我们下载，下载文件会经过我们的vps中转，如图<br><img src="https://tc.edunote.cn/i/2022/11/21/1640009314396637b91045da4f.png" alt="enter description here"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8Etelegram%E7%9A%84%E6%97%A0%E9%99%90%E7%BD%91%E7%9B%98_new/" data-id="cll6artx6000xgnro0755exzq" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-关于微软Azure学生白嫖指南" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%85%B3%E4%BA%8E%E5%BE%AE%E8%BD%AFAzure%E5%AD%A6%E7%94%9F%E7%99%BD%E5%AB%96%E6%8C%87%E5%8D%97/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:37.698Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="申请Azure-for-students"><a href="#申请Azure-for-students" class="headerlink" title="申请Azure for students"></a>申请Azure for students</h2><p>申请地址：<a target="_blank" rel="noopener" href="https://azure.microsoft.com/zh-cn/free/students/">面向学生的Azure</a></p>
+<p><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666016855591.png" alt="面向学生的Azure"></p>
+<p>点击免费开始使用，登录微软账号，然后会让你验证学生邮箱，按流程走下来就可以顺利申请到，我的学生邮箱是可以顺利申请到的，不过有听说部分邮箱会申请失败。里面的地区如实填写就好。</p>
+<h2 id="查看Azure订阅信息"><a href="#查看Azure订阅信息" class="headerlink" title="查看Azure订阅信息"></a>查看Azure订阅信息</h2><p><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666016904178.png" alt="查看Azure订阅信息"></p>
+<p>点击订阅，如果申请成功会有Azure for students的订阅信息<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666016927990.png" alt="enter description here"></p>
+<p>另外你可以在<a target="_blank" rel="noopener" href="https://www.microsoftazuresponsorships.com/">余额查看</a>里查看自己100刀的余额<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666016948621.png" alt="enter description here"></p>
+<h2 id="创建Linux虚拟机"><a href="#创建Linux虚拟机" class="headerlink" title="创建Linux虚拟机"></a>创建Linux虚拟机</h2><p><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017034200.png" alt="基本"><br>首页点击虚拟机，然后创建虚拟机，来到如下界面<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017056814.png" alt="enter description here"></p>
+<p>首先需要新建一个资源组，然后选择一个区域，East Asia实际就是香港，东南亚是新加坡，但是新加坡好像没有vps可以创建了，据网上博客说香港实际延迟最低，其次新加坡日本啥的。然后在大小里面选择B1S（据网上看到的一些博客说微软学生包实际包含两台免费的B1S，所以B1S是不会扣额度的，而更便宜的B1ls会扣额度，但我没在官网看到，所以这点存疑待验证，但是B1S任然是比较好的选择，），连接可以自己选择密钥连接或者账户密码连接，然后选择入站端口，这里默认就好。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017153981.png" alt="enter description here"></p>
+<p>以下不要管，也不要创建或添加现有磁盘，创建虚拟机会默认给你分配磁盘。<br>剩下的一路默认下去，然后最后一步创建就行了。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017230285.png" alt="enter description here"></p>
+<p>微软学生包会有两个免费的64G SSD，但是前面我们创建虚拟机分配的磁盘并不是64G的，所以我们需要更改使用免费磁盘。</p>
+<p>来到我们创建的虚拟机控制台。点击停止，然后可能会弹出保存公共IP的信息，这里保存的话就是静态IP，这个服务是收费的，不保存的话每次停机启动就会重新变IP，不过在shell里面通过reboot这个命令重启是不会变的，只有在主页里面停机启动才会变，所以一般没必要开。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017312969.png"><br>停用之后点击左侧磁盘，并进入磁盘管理<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017330317.png"><br>在大小和性能中，大小选择64，性能选择P6，磁盘为高级SSD，默认就为高级，所以不去改就行。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017353702.png" alt="enter description here"><br>更改完配置后再重新启动就行</p>
+<h2 id="创建Windows虚拟机"><a href="#创建Windows虚拟机" class="headerlink" title="创建Windows虚拟机"></a>创建Windows虚拟机</h2><p>linux主机默认情况下系统盘是30G，windows是120G，我们要做的就是把这个系统盘改成免费的64G的。</p>
+<p>对于linux主机，可以直接创建，然后停止后修改磁盘大小。</p>
+<p>对于windows，因为磁盘只能向上扩，不能缩小，所以windows的只能选择smalldisk系列的镜像，创建好后停止后修改磁盘大小。</p>
+<p>正常创建虚拟机，size选b1s，镜像选择上windows的搜索smalldisk，对于b1s实例建议选择windows server 2012 r2的。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017505258.png" alt="enter description here"><br>azure上对于windows实例是要加收钱的，但他有一个选项，就是可以使用你现有的windows许可抵消，使用的方法也很简单，只要勾选一个选项就可以了。所以我们创建windows主机的时候为了省钱一般都会勾选这个选项。问题就在这里，为了能够使用到免费的b1s的windows实例，你创建虚拟机的时候不要去选这个，这样创建出来的windows虚拟机就会计算到B1s – BS Series Windows上。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017627598.png" alt="enter description here"><br>创建好虚拟机后，点虚拟机进去，顶部有几个操作按钮，点击停止。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017523147.png" alt="enter description here"><br>停止后，点击左边菜单的disks，进入磁盘页面，点击os disk下面的那个磁盘连接。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017537877.png" alt="enter description here"><br>进入后，点击configuration，将大小改为64，点击保存。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017552131.png"><br>完成后回到虚拟机页面，点击start，启动虚拟机即可完成系统盘改为免费64G磁盘的目的。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017578514.png" alt="enter description here"><br>至此，你就可以充分使用azure学生订阅提供的免费配额，一个linux跑点服务，一个windows挂机，很方便，以香港区的价格计算，光这两个完全免费的虚拟机每年的价值就两三百刀。</p>
+<h2 id="修改Azure的IP"><a href="#修改Azure的IP" class="headerlink" title="修改Azure的IP"></a>修改Azure的IP</h2><h3 id="1、解绑原IP"><a href="#1、解绑原IP" class="headerlink" title="1、解绑原IP"></a>1、解绑原IP</h3><p>进入服务器所在的【资源组】，点击原IP地址，即可跳转至概述页面，如下图：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017715021.png" alt="enter description here"><br>点击【取消关联】，按提示操作即可(上图IP已取消，不能再次点击)。</p>
+<h3 id="2、创建新的IP"><a href="#2、创建新的IP" class="headerlink" title="2、创建新的IP"></a>2、创建新的IP</h3><p>在任意页面的上方搜索【公共IP地址】，进入下图页面：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017756883.png" alt="enter description here"><br>点击【创建公共IP地址】，按页面提示操作即可，如下所示：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017771369.png" alt="enter description here"><br>等待数秒，即可看到新IP已就绪：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017786361.png" alt="enter description here"></p>
+<h3 id="3、绑定新IP"><a href="#3、绑定新IP" class="headerlink" title="3、绑定新IP"></a>3、绑定新IP</h3><p>从资源组点击新IP地址，进入概述页面，如下：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017809823.png" alt="enter description here"><br>点击【关联】，在资源类型的地方选择【网络接口】，如下：<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xiaoshujiang/1666017822245.png" alt="enter description here"><br>新IP就切换完成啦</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%85%B3%E4%BA%8E%E5%BE%AE%E8%BD%AFAzure%E5%AD%A6%E7%94%9F%E7%99%BD%E5%AB%96%E6%8C%87%E5%8D%97/" data-id="cll6artwz000ognro86gu4k2t" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-基于Whoogle自建无广告、无追踪的搜索引擎" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%9F%BA%E4%BA%8EWhoogle%E8%87%AA%E5%BB%BA%E6%97%A0%E5%B9%BF%E5%91%8A%E3%80%81%E6%97%A0%E8%BF%BD%E8%B8%AA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:35.670Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Whoogle Search 是一个自我托管的、无广告的、尊重隐私的元搜索引擎。可获取 Google 搜索结果，但没有任何广告、javascript、AMP 链接、cookie 或 IP 地址跟踪。一键即可轻松部署为 Docker 应用程序，并可使用单个配置文件进行自定义。作为台式机和移动设备上的主要搜索引擎替代品，快速而简单地实施。</p>
+</blockquote>
+<ul>
+<li>没有广告以及赞助内容</li>
+<li>不追踪个人IP</li>
+<li>Tor &amp; HTTP&#x2F;SOCKS 支持</li>
+<li>设置 No JS&amp;Cookie</li>
+<li>易部署</li>
+</ul>
+<h1 id="一、单机部署"><a href="#一、单机部署" class="headerlink" title="一、单机部署"></a>一、单机部署</h1><p>单机部署的话非常简单，推荐直接使用Docker，一行命令搞定：</p>
+<h2 id="1、通过Docker-Hub"><a href="#1、通过Docker-Hub" class="headerlink" title="1、通过Docker Hub"></a>1、通过Docker Hub</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull benbusby/whoogle-search</span><br><span class="line">docker run --publish 5000:5000 --detach --name whoogle-search benbusby/whoogle-search:latest</span><br></pre></td></tr></table></figure>
+<h2 id="2、通过docker-compose"><a href="#2、通过docker-compose" class="headerlink" title="2、通过docker-compose"></a>2、通过docker-compose</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/benbusby/whoogle-search.git</span><br><span class="line">cd whoogle-search</span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+<h2 id="3、通过自建"><a href="#3、通过自建" class="headerlink" title="3、通过自建"></a>3、通过自建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/benbusby/whoogle-search.git</span><br><span class="line">cd whoogle-search</span><br><span class="line">docker build --tag whoogle-search:1.0 .</span><br><span class="line">docker run --publish 5000:5000 --detach --name whoogle-search whoogle-search:1.0</span><br></pre></td></tr></table></figure>
+<h1 id="二、设置代理及SSL"><a href="#二、设置代理及SSL" class="headerlink" title="二、设置代理及SSL"></a>二、设置代理及SSL</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	server_name your_domain_name.com;</span><br><span class="line">	access_log /dev/null;</span><br><span class="line">	error_log /dev/null;</span><br><span class="line"></span><br><span class="line">	location / &#123;</span><br><span class="line">	    proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">	    proxy_set_header X-Forwarded-Proto $scheme;</span><br><span class="line">	    proxy_set_header Host $host;</span><br><span class="line">	    proxy_set_header X-NginX-Proxy true;</span><br><span class="line">	    proxy_pass http://localhost:5000;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%9F%BA%E4%BA%8EWhoogle%E8%87%AA%E5%BB%BA%E6%97%A0%E5%B9%BF%E5%91%8A%E3%80%81%E6%97%A0%E8%BF%BD%E8%B8%AA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" data-id="cll6artx4000tgnro0o413kfs" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-解决 Docker 启动时报错iptablesNo chain target match by the name" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E8%A7%A3%E5%86%B3%20Docker%20%E5%90%AF%E5%8A%A8%E6%97%B6%E6%8A%A5%E9%94%99iptablesNo%20chain%20target%20match%20by%20the%20name/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:34.030Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>问题背景</p>
+<p>在服务器上修改了端口的相关配置，导致jenkins的容器启动失败，报如下错误：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot start service jenkins: driver failed programming external connectivity on endpoint jenkins (289b01f799f57f40a1bca130235548bf664dcb7ca042ea74f6fa7fa578c5913c): (iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 50000 -j DNAT --to-destination 172.17.0.2:50000 ! -i docker0: iptables: No chain/target/match by that name.</span><br></pre></td></tr></table></figure>
+<p>解决方案<br>根据前半段的信息去 google 上查找问题，发现并没有相关的资料。看到里面有关键字iptables，觉得问题应该在这。直接搜索 <code>iptables: No chain/target/match by that name</code> 找到了答案。</p>
+<ol>
+<li>清空所有的 iptables chains<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo iptables -t filter -F</span><br><span class="line">sudo iptables -t filter -X</span><br></pre></td></tr></table></figure></li>
+<li>重启 docker 服务即可<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E8%A7%A3%E5%86%B3%20Docker%20%E5%90%AF%E5%8A%A8%E6%97%B6%E6%8A%A5%E9%94%99iptablesNo%20chain%20target%20match%20by%20the%20name/" data-id="cll6artxi0016gnro2iiybkb9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

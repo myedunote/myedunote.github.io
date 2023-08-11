@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Veno File Manager那样小巧简单但又不失功能强大  环境需要 硬件配置不低于单核 512M 内存及 50M 磁盘空间。 系统推荐使用 Centos。 WEB 端使用 Nginx 与 PHP（PHP 需要高于 5.5 的版本）。 VFM 源码。[Veno File Manager：提取码:wvbv]  配置 VFM 系统及环境都配置好之后将 VFM 或【vfm-admin】上传至 WE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Veno File Manager那样小巧简单但又不失功能强大  环境需要 硬件配置不低于单核 512M 内存及 50M 磁盘空间。 系统推荐使用 Centos。 WEB 端使用 Nginx 与 PHP（PHP 需要高于 5.5 的版本）。 VFM 源码。[Veno File Manager：提取码:wvbv]  配置 VFM 系统及环境都配置好之后将 VFM 或【vfm-admin】上传至 WE">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/06/12/648702b86ba01.jpg">
+<meta property="article:published_time" content="2023-08-11T07:55:40.826Z">
+<meta property="article:modified_time" content="2023-08-11T07:55:40.826Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.edunote.cn/i/2023/06/12/648702b86ba01.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-搭建Veno File Manager个人私有云网盘" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:40.826Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Veno File Manager那样小巧简单但又不失功能强大</p>
+<p><img src="https://pic.edunote.cn/i/2023/06/12/648702b86ba01.jpg" alt="VFM 3.jpg"></p>
+<h2 id="环境需要"><a href="#环境需要" class="headerlink" title="环境需要"></a>环境需要</h2><ol>
+<li>硬件配置不低于单核 512M 内存及 50M 磁盘空间。</li>
+<li>系统推荐使用 Centos。</li>
+<li>WEB 端使用 Nginx 与 PHP（PHP 需要高于 5.5 的版本）。</li>
+<li>VFM 源码。<a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-wdErh.html">[Veno File Manager：提取码:wvbv]</a></li>
+</ol>
+<h2 id="配置-VFM"><a href="#配置-VFM" class="headerlink" title="配置 VFM"></a>配置 VFM</h2><ol>
+<li><p>系统及环境都配置好之后将 VFM 或【vfm-admin】上传至 WEB 根目录，并确保下图红框内文件是 755 权限（如果权限不足会导致无法更改配置及创建文件夹和添加用户）。</p>
+</li>
+<li><p>打开预设的 WEB 地址并输入账户密码进入后台设置，默认账户 admin 密码 password。</p>
+</li>
+<li><p>进入后台之后可以将语言更改为中文并自定义站点名称，也可以根据需要设置伪静态（漂亮的链接）或者直链支持。</p>
+</li>
+<li><p>权限部分可以根据自己的需求进行更改，比如你有多用户需求就需要设置 admin 账户的权限，有远程上传的需求就需要开启功能并设置上传文件后缀限制。</p>
+</li>
+<li><p>这里是一些基本设置，是否开启注册（开启注册需要同时启用下方的电邮选项并填入信息）及文件分享设置</p>
+</li>
+</ol>
+<h2 id="伪静态设置"><a href="#伪静态设置" class="headerlink" title="伪静态设置"></a>伪静态设置</h2><p>Nginx规则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx VFM configuration</span></span><br><span class="line">location / &#123;</span><br><span class="line">    index index.php;</span><br><span class="line">    <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>) &#123;</span><br><span class="line">            rewrite /download/(.*)/sh/(.*)/share/(.*) /vfm-admin/vfm-downloader.php?q=<span class="variable">$1</span>&amp;sh=<span class="variable">$2</span>&amp;share=<span class="variable">$3</span> last;</span><br><span class="line">    &#125;</span><br><span class="line">    rewrite /download/(.*)/h/(.*) /vfm-admin/vfm-downloader.php?q=<span class="variable">$1</span>&amp;h=<span class="variable">$2</span> last;</span><br><span class="line">    rewrite /download/zip/(.*)/n/(.*) /vfm-admin/vfm-downloader.php?zip=<span class="variable">$1</span>&amp;n=<span class="variable">$2</span> last;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">location /uploads/ &#123;</span><br><span class="line">    deny    all;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="重置密码"><a href="#重置密码" class="headerlink" title="重置密码"></a>重置密码</h2><p>如果您丢失了 主管理员（MasterAdmin） 密码（并且您没有关联的电子邮件地址），请打开&#x2F;vfm-admin&#x2F;users&#x2F;users.php文件并删除第7 行的加密密码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">   <span class="variable">$_USERS</span> = <span class="keyword">array</span> (</span><br><span class="line">   <span class="number">0</span> =&gt;</span><br><span class="line">   <span class="keyword">array</span> (</span><br><span class="line">      <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;pass&#x27;</span> =&gt; <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;role&#x27;</span> =&gt; <span class="string">&#x27;superadmin&#x27;</span>,</span><br><span class="line">      ...</span><br></pre></td></tr></table></figure>
+
+<p>完成此操作后，您将能够以 Master Admin 身份使用默认密码“password”再次登录</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/" data-id="cll6artx6000wgnro5bqr2l01" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/%E6%90%AD%E5%BB%BA%E5%9F%BA%E4%BA%8Etelegram%E7%9A%84%E6%97%A0%E9%99%90%E7%BD%91%E7%9B%98_new/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

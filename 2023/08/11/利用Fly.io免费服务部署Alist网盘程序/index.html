@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Fly.io 是一个应用部署平台，和 Netlify、Vercel 不同之处在于 Fly.io 提供了数据库，这就使得在线托管一个小型动态网站成为了可能。Fly.io 根据其官网的简介可以看到其也是借助了 Docker，用户编写代码，并用其提供的工具打包成 Docker 镜像，然后部署到 Fly.io 的平台上，之后就是 Fly.io 平台处理的事情了。本质上来说 Fly.io 就是提供了一个平">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/%E5%88%A9%E7%94%A8Fly.io%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2Alist%E7%BD%91%E7%9B%98%E7%A8%8B%E5%BA%8F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Fly.io 是一个应用部署平台，和 Netlify、Vercel 不同之处在于 Fly.io 提供了数据库，这就使得在线托管一个小型动态网站成为了可能。Fly.io 根据其官网的简介可以看到其也是借助了 Docker，用户编写代码，并用其提供的工具打包成 Docker 镜像，然后部署到 Fly.io 的平台上，之后就是 Fly.io 平台处理的事情了。本质上来说 Fly.io 就是提供了一个平">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-11T07:55:32.358Z">
+<meta property="article:modified_time" content="2023-08-11T07:55:32.358Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-利用Fly.io免费服务部署Alist网盘程序" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E5%88%A9%E7%94%A8Fly.io%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2Alist%E7%BD%91%E7%9B%98%E7%A8%8B%E5%BA%8F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:32.358Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Fly.io 是一个应用部署平台，和 Netlify、Vercel 不同之处在于 Fly.io 提供了数据库，这就使得在线托管一个小型动态网站成为了可能。<br>Fly.io 根据其官网的简介可以看到其也是借助了 Docker，用户编写代码，并用其提供的工具打包成 Docker 镜像，然后部署到 Fly.io 的平台上，之后就是 Fly.io 平台处理的事情了。<br>本质上来说 Fly.io 就是提供了一个平台化的容器运行时环境。</p>
+</blockquote>
+<h2 id="关于收费"><a href="#关于收费" class="headerlink" title="关于收费"></a>关于收费</h2><p>现在注册需要<strong>绑定信用卡，银联的就行</strong>等支付方式，为了防治费用超出，建议锁卡或者买那种只有1刀的卡</p>
+<p><strong>Fly.io 是提供一定限额的免费使用额度的，他们的目标就是让小型的应用可以免费运行，而在需要扩展的时候支付一定的费用，而这笔费用也不会太昂贵。Fly.io 的应用会根据使用情况单独计费。</strong><br><strong>Fly.io 会根据单个用户或者组织计费，官方也说了，如果想要更多免费的应用，那么你可以创建多个组织。</strong></p>
+<h3 id="免费限额"><a href="#免费限额" class="headerlink" title="免费限额"></a>免费限额</h3><table>
+<thead>
+<tr>
+<th align="center">分类</th>
+<th align="center">限额</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">VM: shared-cpu</td>
+<td align="center">每个月 2340 小时</td>
+<td align="center">可以全天候运行 3 个 256 MB 内存的共享 CPU 的 VM</td>
+</tr>
+<tr>
+<td align="center">Volumes</td>
+<td align="center">3GB</td>
+<td align="center">提供 3GB 永久存储</td>
+</tr>
+<tr>
+<td align="center">Bandwidth</td>
+<td align="center">160 GB&#x2F;每月</td>
+<td align="center">根据各个地方不同分别计算 outbound 流量</td>
+</tr>
+<tr>
+<td align="center">Anycast IPs</td>
+<td align="center">无限的 IPv6, 每个应用一个 IPv4</td>
+<td align="center">每一个额外的 IPv4 地址需要额外每个月 $2</td>
+</tr>
+<tr>
+<td align="center">Certificates</td>
+<td align="center">10 个活跃的证书</td>
+<td align="center">最多 10 个证书</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>Regions</th>
+<th>Free Tier</th>
+<th>Monthly Price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>North America、Europe</td>
+<td>100GB per month free</td>
+<td>$0.02 per GB</td>
+</tr>
+<tr>
+<td>Africa、Asia Pacific、Oceania、South America</td>
+<td>30GB per month free</td>
+<td>$0.04 per GB</td>
+</tr>
+<tr>
+<td>India</td>
+<td>30 GB per month free</td>
+<td>$0.12 per GB</td>
+</tr>
+</tbody></table>
+<h2 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h2><blockquote>
+<p>本次部署是采用数据持久层来存档 alist 的 sqlite3 数据库，虽然 Fly.io 原生提供了 PostgreSQL 但是那得多用一个 VM 指标，并且免费用户一旦创建了 PostgreSQL 就消耗掉了免费的 1G 空间.</p>
+</blockquote>
+<h3 id="安装-flyctl"><a href="#安装-flyctl" class="headerlink" title="安装 flyctl"></a>安装 flyctl</h3><p>Fly.io 的大多数操作需要使用命令行，所以先要安装命令行工具 flyctl。安装方式可以参考官方文档：<a target="_blank" rel="noopener" href="https://fly.io/docs/hands-on/install-flyctl/">安装文档</a></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac（Brew安装）</span></span><br><span class="line">brew install flyctl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Mac （直接安装）</span></span><br><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Linux</span></span><br><span class="line">curl -L https://fly.io/install.sh | sh</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows （Run the Powershell install script）</span></span><br><span class="line">iwr https://fly.io/install.ps1 -useb | iex</span><br></pre></td></tr></table></figure>
+
+<h3 id="注册登陆"><a href="#注册登陆" class="headerlink" title="注册登陆"></a>注册登陆</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注册</span></span><br><span class="line">flyctl auth signup</span><br></pre></td></tr></table></figure>
+
+<p><strong>它会打开浏览器进入注册流程，注册完毕后会自己跳回到命令行通过验证。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">登陆</span></span><br><span class="line">flyctl auth login</span><br></pre></td></tr></table></figure>
+
+<p><strong>注册完成后，我们就可以正式开始部署应用啦.</strong></p>
+<h3 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建应用</span></span><br><span class="line">git clone https://github.com/alist-org/alist-render</span><br><span class="line">cd alist-render</span><br><span class="line">flyctl launch</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>App Name 只允许 数字、字幕、破折号（-），然后记住App Name下面会用到.其中 <code>App Name</code> 需要是全局唯一的，而且之后不能更改，同时会作为 <code>app</code> 的子域名<br>地区博主选的香港（hkg (Hong Kong)），访问速度会快点.<br>其他一律默认回车.选择<code>NO</code></p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建一个 1G 的持久存储空间(最小单位 1)</span></span><br><span class="line">flyctl volumes create data --size 1 --app APP_NAME</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改配置（fly-toml）"><a href="#修改配置（fly-toml）" class="headerlink" title="修改配置（fly.toml）"></a>修改配置（fly.toml）</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">端口修改为 5244</span></span><br><span class="line">[[services]]</span><br><span class="line">http_checks = []</span><br><span class="line">internal_port = 5244</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加Alist数据目录</span></span><br><span class="line">[mounts]</span><br><span class="line">destination = &quot;/opt/alist/data&quot;</span><br><span class="line">source = &quot;data&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h3><p>准备工作已经完成，现在可以部署 alist 应用，输入以下命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl deploy --remote-only</span><br></pre></td></tr></table></figure>
+
+<p>如果部署顺利（看到 deploved successfully），之后就可以用以下命令打开应用：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flyctl open</span><br></pre></td></tr></table></figure>
+
+<p>你也可以直接在浏览器打开 <code>https://APP_NAME.fly.dev</code></p>
+<p>部署的时候，日志会显示密码，如果没有保存，可以在后台日志里面看</p>
+<p><code>https://fly.io/apps/APP_NAME/monitoring</code></p>
+<h3 id="绑定域名"><a href="#绑定域名" class="headerlink" title="绑定域名"></a>绑定域名</h3><p><code>Certificates =&gt; Add certificate =&gt; 填入域名 =&gt; 添加解析</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E5%88%A9%E7%94%A8Fly.io%E5%85%8D%E8%B4%B9%E6%9C%8D%E5%8A%A1%E9%83%A8%E7%BD%B2Alist%E7%BD%91%E7%9B%98%E7%A8%8B%E5%BA%8F/" data-id="cll6artwz000pgnro178hbg0t" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/%E8%A7%A3%E5%86%B3%20Docker%20%E5%90%AF%E5%8A%A8%E6%97%B6%E6%8A%A5%E9%94%99iptablesNo%20chain%20target%20match%20by%20the%20name/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/%E8%81%94%E9%80%9A%E6%B2%83%E8%A7%86%E9%A2%91_new/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

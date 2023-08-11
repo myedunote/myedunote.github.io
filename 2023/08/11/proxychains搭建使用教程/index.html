@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="相信很多小白玩家在把玩国内小鸡时，想要连GitHub拉个脚本源码什么的，却发现，永远的timed out proxychains是一款优秀的socks和http代理软件，我们只需要有一个能用的socks或http代理即可，非常方便，并且老早就已经在Debian的官方软件仓库里，centos需要自己编译  一、Debian安装12apt updateapt install proxychains">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="相信很多小白玩家在把玩国内小鸡时，想要连GitHub拉个脚本源码什么的，却发现，永远的timed out proxychains是一款优秀的socks和http代理软件，我们只需要有一个能用的socks或http代理即可，非常方便，并且老早就已经在Debian的官方软件仓库里，centos需要自己编译  一、Debian安装12apt updateapt install proxychains">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/12/23/202212232116561671801420.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/12/23/image-202206172201310111671801520.png">
+<meta property="article:published_time" content="2023-08-11T07:56:06.898Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:06.898Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/12/23/202212232116561671801420.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-proxychains搭建使用教程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:06.898Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>相信很多小白玩家在把玩国内小鸡时，想要连GitHub拉个脚本源码什么的，却发现，永远的timed out</p>
+<p>proxychains是一款优秀的socks和http代理软件，我们只需要有一个能用的socks或http代理即可，非常方便，并且老早就已经在Debian的官方软件仓库里，centos需要自己编译</p>
+</blockquote>
+<h2 id="一、Debian安装"><a href="#一、Debian安装" class="headerlink" title="一、Debian安装"></a>一、Debian安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install proxychains -y</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、Centos安装"><a href="#二、Centos安装" class="headerlink" title="二、Centos安装"></a>二、Centos安装</h2><h3 id="1、有epel源"><a href="#1、有epel源" class="headerlink" title="1、有epel源"></a>1、有epel源</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y proxychains-ng</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、无epel源"><a href="#2、无epel源" class="headerlink" title="2、无epel源"></a>2、无epel源</h3><h4 id="1-下载源码"><a href="#1-下载源码" class="headerlink" title="(1)下载源码"></a>(1)下载源码</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://ghproxy.com/https://github.com/rofl0r/proxychains-ng.git</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-编译和安装"><a href="#2-编译和安装" class="headerlink" title="(2)编译和安装"></a>(2)编译和安装</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">yum install gcc</span><br><span class="line">cd proxychains-ng</span><br><span class="line">./configure --prefix=/usr --sysconfdir=/etc</span><br><span class="line">make </span><br><span class="line">make install</span><br><span class="line">make install-config</span><br><span class="line">cd .. &amp;&amp; rm -rf proxychains-ng</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-查看proxychains是否安装"><a href="#3-查看proxychains是否安装" class="headerlink" title="(3)查看proxychains是否安装"></a>(3)查看proxychains是否安装</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which proxychains</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、修改配置文件"><a href="#三、修改配置文件" class="headerlink" title="三、修改配置文件"></a>三、修改配置文件</h2><p>已经准备好了一个可用的socks代理</p>
+<p><img src="https://tc.edunote.cn/i/2022/12/23/202212232116561671801420.png"></p>
+<p>安装后默认配置文件在<code>/etc/proxychains.conf</code></p>
+<p><img src="https://tc.edunote.cn/i/2022/12/23/image-202206172201310111671801520.png" alt="image-20220617220131011"></p>
+<p>proxychains-ng支持多种代理模式：</p>
+<ul>
+<li>dynamic_chain ：按照代理列表顺序自动选取可用代理</li>
+<li>strict_chain ：按照代理列表顺序使用代理，所有代理必须可用</li>
+<li>round_robin_chain ：轮询模式，自动跳过不可用代理</li>
+<li>random_chain ：随机模式</li>
+</ul>
+<p>我们只需要编辑proxychains的配置文件，将scosks代理的ip，端口，用户名，密码填进去即可</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/proxychains.conf #直接划到最后</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">socks4 127.0.0.1 9050 <span class="comment">#注释或者直接删掉默认的本地代理</span></span></span><br><span class="line">socks5 104.168.13.4 19059 test passwd #填入socks代理信息</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">保存并退出</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="四、使用"><a href="#四、使用" class="headerlink" title="四、使用"></a>四、使用</h2><p>只需要使用代理的命令前加上proxychains就可以了，比如<code>proxychains4 curl cip.cc</code>，我们可以看到IP已经变成socks代理的IP。</p>
+<p>当然，我们也可以直接输入<code>proxychains bash</code>，这样就能新建一个具有代理功能的新终端，不需要在每条命令前都加proxychains了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" data-id="cll6artwv000jgnrocxmmdwu1" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/Oracle%E5%BC%80%E6%94%BE%E5%85%A8%E9%83%A8%E7%AB%AF%E5%8F%A3%E5%B9%B6%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99_new/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

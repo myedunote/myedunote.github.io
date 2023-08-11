@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="ZeroSSL 和 Buypass 在 acme 端都有提供别具特色的证书服务。ZeroSSL 与 Let‘s Encrypt 功能重合且没有签发速率限制，Sectigo 的根证书以及网站管理页面也是不错的加分项。至于 Buypass，其能够免费签发 180 天的 DV 单域名证书，与亚信等用途类似不过并不需要实名认证或者手机号之类的敏感信息。 之前不少人都是直接在 freessl.org 进行签">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="ZeroSSL 和 Buypass 在 acme 端都有提供别具特色的证书服务。ZeroSSL 与 Let‘s Encrypt 功能重合且没有签发速率限制，Sectigo 的根证书以及网站管理页面也是不错的加分项。至于 Buypass，其能够免费签发 180 天的 DV 单域名证书，与亚信等用途类似不过并不需要实名认证或者手机号之类的敏感信息。 之前不少人都是直接在 freessl.org 进行签">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/bmbk11669044827.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/bmbk21669044829.png">
+<meta property="article:published_time" content="2023-08-11T07:56:34.238Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:34.238Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/11/21/bmbk11669044827.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:34.238Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ZeroSSL 和 Buypass 在 acme 端都有提供别具特色的证书服务。ZeroSSL 与 Let‘s Encrypt 功能重合且没有签发速率限制，Sectigo 的根证书以及网站管理页面也是不错的加分项。至于 Buypass，其能够免费签发 180 天的 DV 单域名证书，与亚信等用途类似不过并不需要实名认证或者手机号之类的敏感信息。</p>
+<p>之前不少人都是直接在 freessl.org 进行签发，后来改版之后就只剩下付费的选择了。而 ACME 在设计上更倾向于证书托管自动更新的方式，而像我这种临时签发证书测试或者用在一些不能使用 ACME 的平台上时，手动签发还是有一定的意义。</p>
+<p>安装 ACME 的服务器要跟 Buypass 和 ZeroSSL 的 API 能够稳定通信，我这里就用的腾讯云香港 24 的轻量作为演示，不仅国内操作比较稳定而且国际方向速度也很快。前段时间宝塔发布了腾讯云定制版，然后赠送了很多的轻量代金卷，选择轻量的大佬应该不在少数。</p>
+<h1 id="一、安装-ACME"><a href="#一、安装-ACME" class="headerlink" title="一、安装 ACME"></a>一、安装 ACME</h1><p>只需要执行一下这条命令就可以一键安装，然后我并没有把证书托管到他自动化所以就直接在 crontab -e 将它的计划任务注释掉了。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:<span class="comment">//get.acme.sh | sh</span></span><br></pre></td></tr></table></figure>
+<h1 id="二、配置-API"><a href="#二、配置-API" class="headerlink" title="二、配置 API"></a>二、配置 API</h1><p>ZeroSSL 获取 EAB 凭证，在此注册并获取 <a target="_blank" rel="noopener" href="https://app.zerossl.com/developer">https://app.zerossl.com/developer</a> 。然后执行以下命令将账户信息导入 ACME 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --register-account --server zerossl --eab-kid [账户 eab-kid] --eab-hmac-key [账户 eab-hmac-key]</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/bmbk11669044827.png" alt="BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请"></p>
+<p>Buypass 则只需要注册一下账户即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --register-account --accountemail [你的邮箱]</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/bmbk21669044829.png" alt="BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请"></p>
+<h1 id="三、签发证书"><a href="#三、签发证书" class="headerlink" title="三、签发证书"></a>三、签发证书</h1><p>因为我是偶尔使用，所以这次写的直接用 DNS 手动模式进行签发，首先执行 issue 进行签发它会返回错误信息告诉你没有正确添加 DNS 记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --issue -d [你的域名] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span></span><br></pre></td></tr></table></figure>
+<p>然后按照他的错误信息手动去 DNS 添加完，再执行一次 renew 就可以正确签发了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --renew -d [你的域名] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span></span><br></pre></td></tr></table></figure>
+<p>对于 ZeroSSL，只需要把前面的—server 换成 zerossl，并且可以包含多个域名进行签发，例如下面这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server zerossl --issue -d [你的域名 <span class="number">1</span>] -d [你的域名 <span class="number">2</span>] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<p>手动进行 file 验证则把包括–dns 后的内容全部换为-w [验证文件目录]即可，比如下面这样。手动把验证文件复制到你网站目录下，然后和 dns 方式一样 renew 一次验证就可以了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server zerossl --issue -d [你的域名 <span class="number">1</span>] -d [你的域名 <span class="number">2</span>] -w [验证文件目录]</span><br></pre></td></tr></table></figure>
+<p>签发后的证书在你的用户文件夹下 .acme.sh 文件夹下面，fullchain.cer 是你的完整证书，.key 就是你的密钥文件。之后续签这个证书依然可以使用上面的 renew 指令，在手动添加记录后再进行 renew 即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/" data-id="cll6artw80002gnro5i7f5md9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

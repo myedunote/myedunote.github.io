@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="很多市面上的短链接并没有自定义后缀和好记的域名，因此使用这类短链接可能会影响用户的回访。其次大家有没有想过，短链接是可以进行来源和数据分析的。利用短链系统可以无缝衔接，引导客户往对应的网址或页面进行，也方便市场分析及导出数据。MoeLink就是这样一个多功能短链项目。   准备工作 1、VPS服务器一台 2、短域名一枚 3、短链系统源码 短链系统源码备用 4、Saas主题包 5、简体中文语言包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="很多市面上的短链接并没有自定义后缀和好记的域名，因此使用这类短链接可能会影响用户的回访。其次大家有没有想过，短链接是可以进行来源和数据分析的。利用短链系统可以无缝衔接，引导客户往对应的网址或页面进行，也方便市场分析及导出数据。MoeLink就是这样一个多功能短链项目。   准备工作 1、VPS服务器一台 2、短域名一枚 3、短链系统源码 短链系统源码备用 4、Saas主题包 5、简体中文语言包">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563870534021669044445.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563879371671669044470.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563876644691669044478.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563876897441669044487.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563877100731669044517.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563877373351669044523.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16563877540281669044529.png">
+<meta property="article:published_time" content="2023-08-11T07:55:43.082Z">
+<meta property="article:modified_time" content="2023-08-11T07:55:43.082Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/11/21/16563870534021669044445.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-部署 MoeLink短链接系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:43.082Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>很多市面上的短链接并没有自定义后缀和好记的域名，因此使用这类短链接可能会影响用户的回访。其次大家有没有想过，短链接是可以进行来源和数据分析的。利用短链系统可以无缝衔接，引导客户往对应的网址或页面进行，也方便市场分析及导出数据。MoeLink就是这样一个多功能短链项目。</p>
+</blockquote>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16563870534021669044445.png" alt="enter description here"></p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><ul>
+<li>1、VPS服务器一台</li>
+<li>2、短域名一枚</li>
+<li>3、<a target="_blank" rel="noopener" href="https://moecloud.cn/api/v3/source/_SxrICXFDxPOrCRSO67sy8Gf0CKYoT--24i5GMgZDDg=:0/628763/Premium_URL_Shortener-v6.2.1-nulled.zip">短链系统源码</a><br> <a target="_blank" rel="noopener" href="https://itxe.lanzout.com/iNHro00cx0bc">短链系统源码备用</a></li>
+<li>4、<a target="_blank" rel="noopener" href="https://itxe.lanzout.com/iIrzB00cx35e">Saas主题包</a></li>
+<li>5、<a target="_blank" rel="noopener" href="https://www.123pan.com/s/r0iA-xh9rh">简体中文语言包</a></li>
+</ul>
+<h1 id="部署环境"><a href="#部署环境" class="headerlink" title="部署环境"></a>部署环境</h1><p>为了能够简易部署这套系统，这边建议使用宝塔面板（BT-Panel）。用腾讯轻量云的一个好处就是，我们可以直接跳过安装宝塔面板的环节，减轻我们部署的时间。另一个优点就是，不需要太过于繁琐的配置环境，全程就只需要三步就可以完成。</p>
+<h2 id="建立Web环境"><a href="#建立Web环境" class="headerlink" title="建立Web环境"></a>建立Web环境</h2><p>这边建议LNMP（Nginx+PHP7.4+MySQL5.6），就可以满足短链系统的基本要求。当然，为了方便管理MySQL，这边建议附带一个phpMyAdmin。</p>
+<p>PHP安装扩展<br><img src="https://tc.edunote.cn/i/2022/11/21/16563879371671669044470.png" alt="enter description here"></p>
+<p>然后创建网站，记住网站对应的目录，等会有用。</p>
+<h2 id="上传程序"><a href="#上传程序" class="headerlink" title="上传程序"></a>上传程序</h2><p>例如网站目录是 &#x2F;www&#x2F;wwwroot&#x2F;moelink.org</p>
+<p>1、下载短链系统的包，然后传到 &#x2F;www&#x2F;wwwroot&#x2F;moelink.org 下<br>2、解压压缩包，记得删除压缩包（留着占空间）</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16563876644691669044478.png" alt="enter description here"></p>
+<p>3、配置环境<br>点击“网站”，选择创建的网站，将运行目录改成 &#x2F;public<br><img src="https://tc.edunote.cn/i/2022/11/21/16563876897441669044487.png" alt="enter description here"></p>
+<p>然后切换到“伪静态”，选择“laravel5”并保存<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877100731669044517.png" alt="enter description here"></p>
+<p>4、安装&amp;配置<br>访问网站，然后按照对应的数据库信息及管理员配置即可，后续在后台进行订阅和功能的调试即可。</p>
+<p>计划任务<br>登录后台，转到定时任务<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877373351669044523.png" alt="enter description here"><br>复制这串指令，然后返回宝塔面板的定时任务并添加<br><img src="https://tc.edunote.cn/i/2022/11/21/16563877540281669044529.png" alt="enter description here"><br>如图，保存并启用即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E9%83%A8%E7%BD%B2%20MoeLink%E7%9F%AD%E9%93%BE%E6%8E%A5%E7%B3%BB%E7%BB%9F/" data-id="cll6artxr0017gnro48n7bk9f" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/%E5%AE%9D%E5%A1%94%E9%9D%A2%E6%9D%BF%E6%90%AD%E5%BB%BAmozilla-send%20%EF%BC%9A%E7%81%AB%E7%8B%90%E5%BC%80%E6%BA%90%E7%9A%84%E4%B8%B4%E6%97%B6%E6%96%87%E4%BB%B6%E5%88%86%E4%BA%AB%E6%9C%8D%E5%8A%A1%E5%B9%B3%E5%8F%B0_new/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/%E6%90%AD%E5%BB%BAVeno%20File%20Manager%E4%B8%AA%E4%BA%BA%E7%A7%81%E6%9C%89%E4%BA%91%E7%BD%91%E7%9B%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

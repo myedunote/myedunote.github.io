@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="基础准备 已安装好rclone和挂载好onedrive或GoogleDrive docker安装qbittorrent  docker安装qbittorrent1、拉取镜像 1docker pull linuxserver&#x2F;qbittorrent  2、建立容器 123456789docker run -d \  --name&#x3D;qbittorrent \  -e WEBUI_PORT&#x3D;8080 \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="基础准备 已安装好rclone和挂载好onedrive或GoogleDrive docker安装qbittorrent  docker安装qbittorrent1、拉取镜像 1docker pull linuxserver&#x2F;qbittorrent  2、建立容器 123456789docker run -d \  --name&#x3D;qbittorrent \  -e WEBUI_PORT&#x3D;8080 \">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654563007341669045016.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654603451951669045017.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654606189971669045018.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654606636571669045019.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654607296151669045020.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/16654608475461669045021.png">
+<meta property="article:published_time" content="2023-08-11T07:56:04.138Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:04.138Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/11/21/16654563007341669045016.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-qBittorrent自动上传种子资源到onedrive或GoogleDrive教程_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:04.138Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="基础准备"><a href="#基础准备" class="headerlink" title="基础准备"></a>基础准备</h1><ul>
+<li>已安装好rclone和挂载好onedrive或GoogleDrive</li>
+<li>docker安装qbittorrent</li>
+</ul>
+<h2 id="docker安装qbittorrent"><a href="#docker安装qbittorrent" class="headerlink" title="docker安装qbittorrent"></a>docker安装qbittorrent</h2><p>1、拉取镜像</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull linuxserver/qbittorrent</span><br></pre></td></tr></table></figure>
+
+<p>2、建立容器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name=qbittorrent \</span><br><span class="line">  -e <span class="variable constant_">WEBUI_PORT</span>=<span class="number">8080</span> \</span><br><span class="line">  -p <span class="number">9821</span>:<span class="number">6881</span> \</span><br><span class="line">  -p <span class="number">9821</span>:<span class="number">6881</span>/udp \</span><br><span class="line">  -p <span class="number">8080</span>:<span class="number">8080</span> \</span><br><span class="line">  -v &lt;宿主机目录&gt;:/downloads \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  linuxserver/qbittorrent</span><br></pre></td></tr></table></figure>
+
+<p>3、访问WEBUI返回 Unauthorized<br>配置文件缺少参数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># qBittorrent.<span class="property">conf</span></span><br><span class="line"><span class="title class_">WebUI</span>\<span class="title class_">HostHeaderValidation</span>=<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 进入容器</span><br><span class="line">docker exec -it qbittorrent bash</span><br><span class="line"># 一行命令</span><br><span class="line">echo <span class="string">&#x27;WebUI\HostHeaderValidation=false&#x27;</span> &gt;&gt;config/qBittorrent/qBittorrent.<span class="property">conf</span></span><br></pre></td></tr></table></figure>
+<h2 id="手动安装qbittorrent4-3-9"><a href="#手动安装qbittorrent4-3-9" class="headerlink" title="手动安装qbittorrent4.3.9"></a>手动安装qbittorrent4.3.9</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd /root</span><br><span class="line">wget https://github.com/userdocs/qbittorrent-nox-static/releases/download/release-4.3.9_v1.2.15/x86_64-qbittorrent-nox</span><br><span class="line">chmod +x x86_64-qbittorrent-nox</span><br><span class="line">./x86_64-qbittorrent-nox</span><br></pre></td></tr></table></figure>
+<p>输入y 然后ctrl+c退出就行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cat &lt;&lt; &quot;EOF&quot; &gt; /etc/systemd/system/qbittorrent.service</span><br><span class="line">[Unit]</span><br><span class="line">Description=qBittorrent Daemon Service</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">LimitNOFILE=512000</span><br><span class="line">User=root</span><br><span class="line">ExecStart=/root/x86_64-qbittorrent-nox</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新配置</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启动服务</span></span><br><span class="line">systemctl start qbittorrent</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">查看状态</span></span><br><span class="line">systemctl status qbittorrent</span><br></pre></td></tr></table></figure>
+<p>如需重启&#x2F;关闭程序<br>请使用kill命令关闭程序<br>ps -aux | grep qbittorrent<br>kill 对应序号<br>如 kill 11111<br>再使用进程守护打开即可使用</p>
+<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get install -y jq</span><br><span class="line">yum install -y jq</span><br></pre></td></tr></table></figure>
+
+<h1 id="下载并配置脚本文件"><a href="#下载并配置脚本文件" class="headerlink" title="下载并配置脚本文件"></a>下载并配置脚本文件</h1><p><a target="_blank" rel="noopener" href="https://wwi.lanzoup.com/iAZBI0awbeud">qb自动上传脚本文件：密码-9i96</a></p>
+<p>下载好之后放到&#x2F;home&#x2F;你的路径&#x2F;qb_auto_rclone.sh</p>
+<p>随后打开根据注释编辑好脚本。任何方式编辑修改即可。<br>主要修改以下内容部分。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">qb_version=<span class="string">&quot;4.3.9&quot;</span> # 改：改为你的实际qb的版本号</span><br><span class="line">qb_username=<span class="string">&quot;你的用户名&quot;</span> # 改：该为你的qb登录用户名</span><br><span class="line">qb_password=<span class="string">&quot;你的密码&quot;</span> # 改：改为你qb登录的密码</span><br><span class="line">qb_web_url=<span class="string">&quot;http://127.0.0.1:8080&quot;</span> # 查：改为qb的登录地址</span><br><span class="line">log_dir=<span class="string">&quot;/home/qbauto&quot;</span> # 改：改为你日志运行的路径</span><br><span class="line">rclone_dest=<span class="string">&quot;od1:&quot;</span> # 运行rclone config查看name字段即可；格式就是<span class="string">&quot;XX:&quot;</span></span><br><span class="line">from_dc_tag=<span class="string">&quot;/vvv&quot;</span> # 改：上传后的相对根目录，可为空</span><br><span class="line">rclone_parallel=<span class="string">&quot;32&quot;</span> # rclone上传线程 默认<span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16654563007341669045016.png" alt="修改配置文件"></p>
+<p> <code>注1：放到哪不重要，直接放自己/home以下的任意文件夹即可，后面运行脚本根据自己路径运行即可。</code> </p>
+<p><code>注2：如果过程中出现了你的奇怪操作未上传完就重启电脑或者kill rclone，可能脚本会挂掉什么的，此时需要删除同目录下的一个.lock文件</code> </p>
+<h1 id="qbittorrent创建一个tag"><a href="#qbittorrent创建一个tag" class="headerlink" title="qbittorrent创建一个tag"></a>qbittorrent创建一个tag</h1><p>创建标签命名为<code>【待上传云端】</code>这一步必不可少。<br>有了这个标签，脚本自动运行起来了才会自动上传。<br>注：其他标签后面会自动生成。只需要创建<code>【待上传云端】</code>即可。</p>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/16654603451951669045017.png" alt="创建一个tag"></p>
+<h1 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h1><p>1、手动对某个种子进行特殊标记。<br><img src="https://tc.edunote.cn/i/2022/11/21/16654606189971669045018.png" alt="手动对某个种子进行特殊标记"></p>
+<p>2、标记过后不用管它<br>脚本定时执行，会在执行时将其设置为上传中。上传结束后会保持在结束的标签中<br>  <img src="https://tc.edunote.cn/i/2022/11/21/16654606636571669045019.png" alt="enter description here"></p>
+<p><strong>都准备好了运行即可，注意需正确填写你所存放的路径。</strong></p>
+<p>随后终端运行如下命令即可输出相关回应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash /home/你的路径/qb_auto_rclone.<span class="property">sh</span></span><br></pre></td></tr></table></figure>
+
+<p>3、去&#x2F;home&#x2F;qbauto文件夹下打开qbauto_copy.log文件即可查看日志上传进度等情况。<br><img src="https://tc.edunote.cn/i/2022/11/21/16654607296151669045020.png" alt="enter description here"></p>
+<p>注：假如出现未知类型，取消上传的结果，说明你的路径不对或者你的qBittorrent是安装在docker里的。<br><img src="https://tc.edunote.cn/i/2022/11/21/16654608475461669045021.png" alt="enter description here"><br>解决办法：<br>根路径目录和docker容器映射目录设置为一致即可。<br>例：根路径&#x2F;home&#x2F;movie→docker内部&#x2F;home&#x2F;movie</p>
+<h1 id="自动化运行"><a href="#自动化运行" class="headerlink" title="自动化运行"></a>自动化运行</h1><p>创建和编辑cron作业的命令是相同而且很简单。而且更酷的是，你无需在创建新文件或编辑现有文件后重新启动cron。</p>
+<p>键入<code>crontab -e</code></p>
+<p>粘贴以下命令，以下是计划任务，定时1分钟一次执行该sh文件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*<span class="regexp">/1 * * * * bash /</span>home/你的路径/qb_auto_rclone.<span class="property">sh</span></span><br></pre></td></tr></table></figure>
+
+<p>(root权限下)</p>
+<p>crontab启动：<code>/etc/init.d/cron start 或( service cron start )</code></p>
+<p>crontab重启：<code> /etc/init.d/cron restart 或(service cron restart )</code></p>
+<p>crontab关闭： <code>/etc/init.d/cron stop 或( service cron stop )</code></p>
+<p>在终端中，可以利用<code>ps -aux|grep cron</code>查询crontab状态，默认情况下，是自启动的</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/" data-id="cll6artww000kgnro00dp1qz9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/QuantumultX%E8%AF%A6%E7%BB%86%E4%BD%BF%E7%94%A8%E6%AD%A5%E9%AA%A4_new/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

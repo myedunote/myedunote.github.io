@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="一、产品简介 PasteMe 是一个无需注册的文本分享平台，针对代码提供了额外的高亮功能。  Github开源地址：https:&#x2F;&#x2F;github.com&#x2F;LucienShui&#x2F;PasteMe开发文档：https:&#x2F;&#x2F;docs.pasteme.cn  如果你要发给某人一些私密的信息，比如一段 token，但是通过 QQ 、微信等聊天工具可能会被 “查水表”，你可以将私密信息以阅后即焚形式上传至 Pa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="一、产品简介 PasteMe 是一个无需注册的文本分享平台，针对代码提供了额外的高亮功能。  Github开源地址：https:&#x2F;&#x2F;github.com&#x2F;LucienShui&#x2F;PasteMe开发文档：https:&#x2F;&#x2F;docs.pasteme.cn  如果你要发给某人一些私密的信息，比如一段 token，但是通过 QQ 、微信等聊天工具可能会被 “查水表”，你可以将私密信息以阅后即焚形式上传至 Pa">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-11T07:56:22.974Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:22.974Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Docker 部署 PasteMe,一款无需注册的文本分享平台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:22.974Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、产品简介"><a href="#一、产品简介" class="headerlink" title="一、产品简介"></a>一、产品简介</h2><blockquote>
+<p>PasteMe 是一个无需注册的文本分享平台，针对代码提供了额外的高亮功能。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/LucienShui/PasteMe">Github开源地址：https://github.com/LucienShui/PasteMe</a><br><a target="_blank" rel="noopener" href="https://docs.pasteme.cn/">开发文档：https://docs.pasteme.cn</a></p>
+<ul>
+<li><p>如果你要发给某人一些私密的信息，比如一段 token，但是通过 QQ 、微信等聊天工具可能会被 “查水表”，你可以将私密信息以阅后即焚形式上传至 PasteMe ，将一次性链接分享给别人，别人查看一次之后这个链接就会失效</p>
+</li>
+<li><p>如果你要发布一个脚本，可以把 Bash 或者 Python 等脚本上传至 PasteMe ，然后通过 curl 和管道机制来进行优雅的发布，比如：<code>curl api.pasteme.cn/8219 | python3</code></p>
+</li>
+<li><p>想要向服务器内粘贴一段代码，但是苦于字符集，复制、上传上去之后有其它的字符，此时你可以上传至 pasteme ，然后通过 <code>wget api.pasteme.cn/&lt;key&gt; -O file_name</code> 来进行优雅的拉取</p>
+</li>
+</ul>
+<h2 id="二、产品功能"><a href="#二、产品功能" class="headerlink" title="二、产品功能"></a>二、产品功能</h2><ul>
+<li>在存储内容时，设置密码和阅后即焚可以高度保证用户内容的安全性和私密性。</li>
+<li>在将自己的内容分享给别人时，提供了一键复制链接和二维码分享等多种途径。</li>
+<li>在查看别人的内容时，可以一键复制所有文本。如果查看的是阅后即焚的内容，那么在网页加载完成之前，实体数据就已经不存在了。</li>
+</ul>
+<h2 id="三、Docker搭建"><a href="#三、Docker搭建" class="headerlink" title="三、Docker搭建"></a>三、Docker搭建</h2><p>服务器安装Docker环境，步骤不再赘述</p>
+<h3 id="1、部署"><a href="#1、部署" class="headerlink" title="1、部署"></a>1、部署</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">https</span>:<span class="comment">//cdn.jsdelivr.net/gh/LucienShui/PasteMe@main/docker-compose.yml</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>命令执行完成后等待 30s（因为需要初始化数据库和等待 <code>healthy check</code>），然后运行 <code>docker ps -a</code>，当看到所有的容器的状态没有 <code>unhealthy</code> 或<code> Exited (x) xxx</code> 就代表 PasteMe 已经启动成功</p>
+<p>如果出现该错误，大概率是映射端口冲突</p>
+<h3 id="2、更新"><a href="#2、更新" class="headerlink" title="2、更新"></a>2、更新</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h3 id="3、文件夹介绍"><a href="#3、文件夹介绍" class="headerlink" title="3、文件夹介绍"></a>3、文件夹介绍</h3><p>第一次执行完 <code>docker-compose up -d</code> 之后，会出现一个名为 <code>data</code> 的文件夹，其中有四个文件夹。</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件夹名</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>backend-config</code></td>
+<td align="center">后端的配置文件</td>
+</tr>
+<tr>
+<td align="center"><code>frontend-user</code></td>
+<td align="center">前端的配置文件和用户文件</td>
+</tr>
+<tr>
+<td align="center"><code>nginx-logs</code></td>
+<td align="center">前端 Nginx 的日志文件</td>
+</tr>
+<tr>
+<td align="center"><code>mysql</code></td>
+<td align="center">MySQL 的持久化文件</td>
+</tr>
+</tbody></table>
+<h3 id="4、日志"><a href="#4、日志" class="headerlink" title="4、日志"></a>4、日志</h3><ul>
+<li>前端 Nginx 日志位于 <code>data/nginx-logs</code> 下</li>
+<li>后端日志通过 <code>docker logs pasteme-backend</code> 查看</li>
+<li>数据库日志通过 <code>docker logs pasteme-mysql</code> 查看</li>
+</ul>
+<h2 id="四、使用指南"><a href="#四、使用指南" class="headerlink" title="四、使用指南"></a>四、使用指南</h2><h3 id="1、什么是索引"><a href="#1、什么是索引" class="headerlink" title="1、什么是索引"></a>1、什么是索引</h3><p>每一个被上传的文本都有一个字符串去对其进行唯一标识，就像是门牌号一样，我称它为“索引”（Paste ID）。纯数字的索引对应永久空间的文本，包含字母的索引对应阅后即焚的文本。</p>
+<p>索引的长度至少为三个字符，至多为八个字符。</p>
+<h3 id="2、对于别人分享的内容"><a href="#2、对于别人分享的内容" class="headerlink" title="2、对于别人分享的内容"></a>2、对于别人分享的内容</h3><p>可直接通过网页链接访问。<br>可在主页左上角的输入框输入索引进行访问。<br>对于准备上传的内容<br>永久保存<br>在主页进行保存。</p>
+<h3 id="3、阅后即焚"><a href="#3、阅后即焚" class="headerlink" title="3、阅后即焚"></a>3、阅后即焚</h3><p>在左上角输入含有字母的索引，如果这个索引存在则显示索引内容，不存在则创建一份新的索引。</p>
+<p>在主页直接勾选 阅后即焚。</p>
+<p>所有阅后即焚的内容一旦以任何方式（包括 API ）被成功访问就会永久从数据库中消失</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" data-id="cll6artwd0007gnro5xqv11yk" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-【京东订单自动评价脚本】批量一键自动评价追加图片" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:41.122Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><strong>1.先打开下面的链接进入待评价商品页面</strong><br>地址：<a target="_blank" rel="noopener" href="https://club.jd.com/myJdcomments/myJdcomments.action?sort=0">https://club.jd.com/myJdcomments/myJdcomments.action?sort=0</a></p>
+<p>2.用Chrome打开上面的链接后按F12键，选择console，复制粘贴以下代码，content 里的内容自由替换，下面两个代码都可以使用的，选择自己需要的版本使用，推荐使用自动追加图片版的，追加图片也有京东奖励的。</p>
+<p><strong>京东自动评价脚本1：</strong>一键批量评价-不能晒单，追加图片</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var content = &#x27;商品质量很好，很满意，配送速度快啊，而且配送员态度也非常好。&#x27;;  </span><br><span class="line">function a()&#123;</span><br><span class="line">var close=document.getElementsByClassName(&#x27;btn-9 fail-close&#x27;);</span><br><span class="line">if(close.length&gt;0)&#123;close[0].click()&#125;</span><br><span class="line">var assess=document.getElementsByClassName(&#x27;btn-9&#x27;)[0];</span><br><span class="line">if(assess!=null)&#123;for(var i=0;i&lt;2;i++)&#123;</span><br><span class="line">assess.click();</span><br><span class="line">var area=document.getElementsByClassName(&#x27;area area01&#x27;)[0];</span><br><span class="line">area.value=content;area.setAttribute(&#x27;id&#x27;,&#x27;id&#x27;+0);</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">(<span class="string">&#x27;#id&#x27;</span>+0).blur();</span></span><br><span class="line">var star=document.getElementsByClassName(&#x27;star5&#x27;)[0];star.click()&#125;</span><br><span class="line">var submit=document.getElementsByClassName(&#x27;btn-5 mr10 setcomment&#x27;)[0];</span><br><span class="line">submit.click();</span><br><span class="line">setTimeout(&#x27;a()&#x27;,5000)&#125;&#125;;</span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+<p><strong>京东自动评价脚本2</strong>：支持一键批量晒单&#x2F;追加图片</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var time;  </span><br><span class="line">function a() &#123;  </span><br><span class="line">    var close = document.getElementsByClassName(&#x27;btn-9&#x27;);  </span><br><span class="line">    if (close.length &gt; 0) &#123;  </span><br><span class="line">        close[0].click()  </span><br><span class="line">        var imgs = document.getElementsByName(&#x27;imgs1&#x27;)[0];  </span><br><span class="line">        if (imgs != null) &#123;  </span><br><span class="line">            imgs.value = &quot;//img30.360buyimg.com/shaidan/jfs/t6565/276/1439852732/41507/d7dc6d5e/59522c69N31c33f50.jpg&quot;;  </span><br><span class="line">            var submit = document.getElementsByClassName(&#x27;btn-5 mr10 setcomment&#x27;)[0];  </span><br><span class="line">            submit.click();  </span><br><span class="line">            time = setTimeout(&#x27;a()&#x27;, 5000)  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125; else &#123;  </span><br><span class="line">        clearTimeout(time);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;;  </span><br><span class="line">a();</span><br></pre></td></tr></table></figure>
+<p><strong>3.程序每5秒就会执行一次，直到把所有待评价的订单都评价完，评价后就可以收到赠送的京豆奖励了，每单大概是10-40京豆奖励</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/" data-id="cll6artwx000lgnro701p04nl" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-AdGuardHome 安装及部署教程_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:39.558Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="AdGuardHome是什么"><a href="#AdGuardHome是什么" class="headerlink" title="AdGuardHome是什么"></a>AdGuardHome是什么</h1><blockquote>
+<p>AdGuardHome 是一款全网广告拦截与反跟踪软件。它是一个开源的 DNS 服务器，部署方便、UI 友好易用，有着防污染、防跟踪、防篡改的能力，其次才是它的去广告、反跟踪功能，是通过重定向 DNS 解析记录实现的。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://adguard.com/adguard-home.html">官网地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/AdguardTeam/AdGuardHome">项目GitHub地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://hub.docker.com/r/adguard/adguardhome">项目Docker地址</a></p>
+<h1 id="AdGuard-Home-去广告效果怎样？"><a href="#AdGuard-Home-去广告效果怎样？" class="headerlink" title="AdGuard Home 去广告效果怎样？"></a>AdGuard Home 去广告效果怎样？</h1><p>既然有去广告功能，自然还是要讨论它的去广告效果的。不过在这里博主要给小伙伴们直接泼一盆冷水了，广告的种类和形态是多样的，不要指望一个 DNS 能把所有的广告消灭干净了。</p>
+<p>对于 PC 端的网页广告效果最好的有且仅有浏览器插件，如果配合 Ad­Guard Home 在广告到达浏览器之前进行阻挡一些会给设备节省不少的计算开销，理论上来说会起到一定的省电效果，但估计也没人会在意。如果只是单纯的使用 Ad­Guard Home 并没有什么效果，少量的被拦截的广告会在页面上留下一个空白区域。</p>
+<p>对于手机上的广告最直观的感受是手机收到的推送广告明显减少了，然后是部分 App 的开屏广告消失了，还是能起到一定作用的。对于 ADUI 这样的广告级魔改安卓系统效果尤其明显</p>
+<h1 id="AdGuard-Home安装教程"><a href="#AdGuard-Home安装教程" class="headerlink" title="AdGuard Home安装教程"></a>AdGuard Home安装教程</h1><h2 id="1、开放端口"><a href="#1、开放端口" class="headerlink" title="1、开放端口"></a>1、开放端口</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">`53`</span>：<span class="variable constant_">DNS</span> 端口。即其他设备访问 <span class="title class_">AdGuard</span> <span class="title class_">Home</span> 进行 <span class="variable constant_">DNS</span> 解析的默认端口。因为部分系统不支持自定义 <span class="variable constant_">DNS</span> 端口，所以不建议自定义。部署前务必要查看是否有其它程序占用。</span><br><span class="line"><span class="string">`67, 68`</span>： <span class="variable constant_">DHCP</span> 端口。除非想代替你路由上的 <span class="variable constant_">DHCP</span> 服务器，否则用不到。</span><br><span class="line"><span class="string">`80`</span>: 管理页面默认 <span class="variable constant_">HTTP</span> 端口。可忽略，在初始化页面设置管理端口为 <span class="string">`3000`</span> 端口即可。</span><br><span class="line"><span class="string">`443`</span>：<span class="variable constant_">HTTPS</span> 和 <span class="title class_">DoH</span> 端口。本地内网环境不需要。</span><br><span class="line"><span class="string">`853`</span>：<span class="title class_">DoT</span> 端口。不使用相关功能可忽略。</span><br><span class="line"><span class="string">`3000`</span>：初始化设置端口。除非通过配置文件去设置，否则必须开启。</span><br></pre></td></tr></table></figure>
+
+<h2 id="2、自动安装（Linux和Mac）"><a href="#2、自动安装（Linux和Mac）" class="headerlink" title="2、自动安装（Linux和Mac）"></a>2、自动安装（Linux和Mac）</h2><p>在终端中运行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -sSL <span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh | sh</span></span><br></pre></td></tr></table></figure>
+<p>如果提示 curl: command not found ，那是因为没装 Curl ubuntu&#x2F;debian 系统安装 Curl 方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install curl -y</span><br></pre></td></tr></table></figure>
+<p>centos 系统安装 Curl 方法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install curl -y</span><br></pre></td></tr></table></figure>
+<h2 id="3、手动安装（Linux-x64）"><a href="#3、手动安装（Linux-x64）" class="headerlink" title="3、手动安装（Linux x64）"></a>3、手动安装（Linux x64）</h2><p>在终端中运行以下命令：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">https</span>:<span class="comment">//static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar xvf <span class="title class_">AdGuardHome</span>_linux_amd64.<span class="property">tar</span>.<span class="property">gz</span></span><br></pre></td></tr></table></figure>
+<p>进入解压目录执行以下命令安装</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="title class_">AdGuardHome</span></span><br><span class="line">./<span class="title class_">AdGuardHome</span> -s install</span><br></pre></td></tr></table></figure>
+<h2 id="4、Windows安装"><a href="#4、Windows安装" class="headerlink" title="4、Windows安装"></a>4、Windows安装</h2><p>前往  <a target="_blank" rel="noopener" href="https://adguard.com/zh_cn/adguard-home/overview.html">AdGuard Home 官网</a>下载安装包。<br>下载二进制文件</p>
+<p>使用浏览器 &#x2F; 下载工具下载：<a target="_blank" rel="noopener" href="https://static.adguard.com/adguardhome/edge/AdGuardHome_windows_amd64.zip">https://static.adguard.com/adguardhome/edge/AdGuardHome_windows_amd64.zip</a><br>解压压缩包得到 <code>AdGuardHome.exe</code> 文件<br><img src="https://tc.edunote.cn/i/2022/11/21/1619667954788637b8ebbcae18.png"></p>
+<p>将 <code>AdGuardHome.exe</code> 移动到 <code>C:\Program Files\AdGuard_Home</code> 文件夹中<br><img src="https://tc.edunote.cn/i/2022/11/21/1619668027249637b8ebd78c6c.png"><br><strong>以管理员身份打开命令提示符，执行以下命令</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd <span class="string">&quot;C:\Program Files\AdGuard_Home&quot;</span></span><br><span class="line">.\<span class="title class_">AdGuardHome</span>.<span class="property">exe</span> --service install</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/1619668061778637b8ebf3f455.png"><br>当提示 <code>AdGuard Home is successfully installed and will automatically start on boot</code>. 即表示 AdGuard Home 在当前系统上安装成功。在命令行中会显示管理后台的地址与端口，默认为 <code>http://IP:3000</code></p>
+<h2 id="5、Docker安装（Linux-x64）"><a href="#5、Docker安装（Linux-x64）" class="headerlink" title="5、Docker安装（Linux x64）"></a>5、Docker安装（Linux x64）</h2><h3 id="1-Bridge-网络模式"><a href="#1-Bridge-网络模式" class="headerlink" title="(1)Bridge 网络模式"></a>(1)Bridge 网络模式</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">    --name adguardhome \</span><br><span class="line">    -v $PWD/adguardhome/<span class="attr">work</span>:<span class="regexp">/opt/</span>adguardhome/work \</span><br><span class="line">    -v $PWD/adguardhome/<span class="attr">conf</span>:<span class="regexp">/opt/</span>adguardhome/conf \</span><br><span class="line">    -p <span class="number">53</span>:<span class="number">53</span>/tcp \</span><br><span class="line">    -p <span class="number">53</span>:<span class="number">53</span>/udp \</span><br><span class="line">    -p <span class="number">3000</span>:<span class="number">3000</span>/tcp \</span><br><span class="line">    adguard/adguardhome</span><br></pre></td></tr></table></figure>
+<h3 id="2-Host-网络模式"><a href="#2-Host-网络模式" class="headerlink" title="(2)Host 网络模式"></a>(2)Host 网络模式</h3><blockquote>
+<p>Host 网络模式直接使用宿主机的网络，没有网络隔离，不需要考虑容器端口的映射，在容器启动后可以自由调整被占用的端口。适合在本机使用 (lo­cal­host)，或者直通外网的设备对外开放服务，就比如 VPS 、主路由。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">    --name adguardhome \</span><br><span class="line">    --restart unless-stopped \</span><br><span class="line">    --log-opt max-size=1m \</span><br><span class="line">    --network host \</span><br><span class="line">    -v $PWD/adguardhome/<span class="attr">work</span>:<span class="regexp">/opt/</span>adguardhome/work \</span><br><span class="line">    -v $PWD/adguardhome/<span class="attr">conf</span>:<span class="regexp">/opt/</span>adguardhome/conf \</span><br><span class="line">    adguard/adguardhome</span><br></pre></td></tr></table></figure>
+
+<h1 id="AdGuard-Home设置教程"><a href="#AdGuard-Home设置教程" class="headerlink" title="AdGuard Home设置教程"></a>AdGuard Home设置教程</h1><h2 id="1、初始化设置"><a href="#1、初始化设置" class="headerlink" title="1、初始化设置"></a>1、初始化设置</h2><p>使用网页浏览器访问 IP + 3000 端口即可进入到 Ad­Guard Home 的初始化界面，比如 IP 是 10.0.0.53，那么就访问 <a target="_blank" rel="noopener" href="http://10.0.0.53:3000/">http://10.0.0.53:3000</a><br><img src="https://tc.edunote.cn/i/2022/11/21/001637b8ec088ebb.png"><br>接着是监听接口（网卡）和端口设置，根据不同的网络模式和实际情况需要作出不同的修改<br><img src="https://tc.edunote.cn/i/2022/11/21/002637b8ec1c11b4.png"><br>然后是设置管理用户名和密码，后面都是直接下一步：<br><img src="https://tc.edunote.cn/i/2022/11/21/003637b8ec33518d.png"><br>完事之后输入用户名和密码登录，就来到了仪表盘页面。<br><img src="https://tc.edunote.cn/i/2022/11/21/004637b8ec4ab4f8.png"><br>至此 Ad­Guard Home 就部署完成了。</p>
+<h2 id="2、高级配置"><a href="#2、高级配置" class="headerlink" title="2、高级配置"></a>2、高级配置</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/1619665219010637b8ec5c9e2b.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/1619665239311637b8ec697799.png"></p>
+<h3 id="（1）常规设置"><a href="#（1）常规设置" class="headerlink" title="（1）常规设置"></a>（1）常规设置</h3><p><img src="https://tc.edunote.cn/i/2022/11/21/1619665254747637b8ec8e1200.png"></p>
+<ul>
+<li><code>过滤器更新间隔</code>：DNS 过滤清单默认更新间隔，一般为 3 天 - 7 天</li>
+<li><code>使用 AdGuard 「浏览安全」网页服务</code>：作用与 Chrome 网页安全性检查类似，开启后，当用户访问存在潜在威胁的网站时，AdGuard 会主动拦截并弹出提示</li>
+<li><code>使用 AdGuard 「家长控制」 服务</code>：如果家中有尚未成年的孩子，建议开启，避免访问不良网站</li>
+<li><code>强制安全搜索</code>：隐藏 Bing、Google、Yandex、YouTube 网站上 NSFW 等不适宜的内容</li>
+<li><code>查询记录保留时间</code>：AdGuard Home 服务端采用 Sqlite 文件数据库存储日志，长时间保留可能会降低运行速度，同时占用大量的储存空间，家庭用户一般保留 24 小时 - 7 天即可</li>
+<li><code>统计数据保留时间</code>：用于仪表盘的数据展示，一般保留 24 小时 - 7 天即可</li>
+</ul>
+<h3 id="2-DNS-设置"><a href="#2-DNS-设置" class="headerlink" title="(2)DNS 设置"></a>(2)DNS 设置</h3><p><img src="https://tc.edunote.cn/i/2022/11/21/1619665730253637b8ecb36e01.png"></p>
+<ul>
+<li><p><code>上游 DNS 服务器</code>：AdGuard Home 的上游 DNS 服务器，可参考下方推荐列表，一般保留 1 - 2 个即可。AdGuard Home 除了可以作为广告过滤网关，如果设置了纯净 DNS 后，还可以避免运营商的 DNS 劫持</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tls</span>:<span class="comment">//dot.360.cn</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//doh.360.cn/dns-query</span></span><br><span class="line"><span class="attr">tls</span>:<span class="comment">//dns.pub</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//dns.pub/dns-query</span></span><br><span class="line"><span class="attr">tls</span>:<span class="comment">//dns.alidns.com</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//dns.alidns.com/dns-query</span></span><br><span class="line"><span class="attr">tls</span>:<span class="comment">//dns.ipv6dns.com</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//dns.ipv6dns.com/dns-query</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>BootStrap DNS 服务器地址</code>：作为 DoH &#x2F; DoT DNS 的前置 DNS 解析器，可参考下方推荐列表</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">119.29</span><span class="number">.29</span><span class="number">.29</span></span><br><span class="line"><span class="number">223.5</span><span class="number">.5</span><span class="number">.5</span></span><br><span class="line"><span class="number">180.76</span><span class="number">.76</span><span class="number">.76</span></span><br><span class="line"><span class="number">2400</span>:<span class="number">3200</span>::<span class="number">1</span></span><br><span class="line"><span class="number">2400</span>:<span class="attr">da00</span>::<span class="number">6666</span></span><br><span class="line">240<span class="attr">C</span>::<span class="number">6666</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查询方式、速度限制、EDNS、DNSSEC、拦截模式、DNS 缓存设置、访问设置可根据需要进行调整，一般保持默认设置即可</p>
+</li>
+<li><p><code>速度限制</code>：0</p>
+</li>
+<li><p><code>使用 EDNS</code> ：已知前面提及的上游 DNS 服务器都是支持 EDNS 技术的，它有助于获取到更合适的 CDN 节点，建议勾选。</p>
+</li>
+<li><p><code>使用 DNSSEC</code> : 用于效验 DNS 记录的签名，防止 DNS 缓存被投毒，建议勾选。勾选后会在日志页面请求列显示小绿锁图标。</p>
+</li>
+<li><p><code>禁用 IPv6</code> ：丢弃 IPv6 的 DNS 查询。在本地网络和网站都支持 IPv6 会优先使用 IPv6 去访问网站，但目前 IPv6 的建设还处于初级阶段，大多数地区的 IPv6 网络体验都一般。还有一些代理软件对 IPv6 支持不佳，开启后可能会影响国际互联网的访问。如果对此没有特殊需求，那么直勾选即可，这样既不影响 BT 软件连接 IPv6 网络，又可以优先使用 IPv4 来上网。如果只有 IPv4 ，那么是否勾选没有区别</p>
+</li>
+<li><p><code>DNS 缓存配置</code>，目前多数域名的 TTL 值普遍在 300 以内，所以给出以下设置参考值：<code>覆盖最小 TTL 值：600；覆盖最大 TTL 值：3600</code></p>
+</li>
+</ul>
+<h3 id="3-DNS-封锁清单"><a href="#3-DNS-封锁清单" class="headerlink" title="(3) DNS 封锁清单"></a>(3) DNS 封锁清单</h3><p>为了更好地发挥 AdGuard Home 去广告的功能，仅依靠默认的过滤规则是不够的，但也不宜过多，过多的过滤规则会影响解析的速度，各位可以根据需要添加过滤规则。<br><img src="https://tc.edunote.cn/i/2022/11/21/1619666197223637b8ecc6525b.png"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">halflife</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/o0HalfLife0o/list/master/ad.txt</span></span><br><span class="line"></span><br><span class="line">anti-<span class="variable constant_">AD</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//anti-ad.net/easylist.txt</span></span><br><span class="line"></span><br><span class="line">neoHosts</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//cdn.jsdelivr.net/gh/neoFelhz/neohosts@gh-pages/full/hosts.txt</span></span><br><span class="line"></span><br><span class="line">大圣净化 - 针对国内视频网站</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/jdlingyu/ad-wars/master/hosts</span></span><br><span class="line"></span><br><span class="line">adgk手机去广告规则</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/banbendalao/ADgk/master/ADgk.txt</span></span><br><span class="line"></span><br><span class="line">广告终结者</span><br><span class="line"><span class="attr">http</span>:<span class="comment">//sub.adtchrome.com/adt-chinalist-easylist.txt</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">Adbyby</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/adbyby/xwhyc-rules/master/lazy.txt</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">EasyList</span> <span class="title class_">China</span>+<span class="title class_">EasyList</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//easylist-downloads.adblockplus.org/easylistchina+easylist.txt</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">EasyPrivacy</span></span><br><span class="line"><span class="attr">https</span>:<span class="comment">//easylist-downloads.adblockplus.org/easyprivacy.txt</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-DNS允许清单"><a href="#4-DNS允许清单" class="headerlink" title="(4) DNS允许清单"></a>(4) DNS允许清单</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">anti-ad白名单</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/privacy-protection-tools/dead-horse/master/anti-ad-white-list.txt</span></span><br><span class="line"></span><br><span class="line">filter_whitelist</span><br><span class="line"><span class="attr">https</span>:<span class="comment">//raw.githubusercontent.com/hl2guide/Filterlist-for-AdGuard/master/filter_whitelist.txt</span></span><br><span class="line"></span><br><span class="line"><span class="variable constant_">LWJ</span><span class="string">&#x27;s white list</span></span><br><span class="line"><span class="string">https://raw.githubusercontent.com/liwenjie119/adg-rules/master/white.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">DNS允许白名单</span></span><br><span class="line"><span class="string">https://raw.githubusercontent.com/ChengJi-e/AFDNS/master/QD.txt</span></span><br></pre></td></tr></table></figure>
+<p>AdGuard Home 所有的配置参数都保存在一个名为 AdGuardHome.yaml 的配置文件中，这个配置文件默认路径通常为 AdGuard Home 二进制文件 AdGuardHome 所在的目录。</p>
+<p>这里我们只需调整以下两个参数，就是可以明显提升 AdGuard Home 的 QPS 能力。</p>
+<ul>
+<li><code>ratelimit</code> : DDoS保护，客户端每秒接收的数据包数。默认值是 20，建议禁用该参数（将值改为 0）。</li>
+<li><code>blocked_response_ttl</code> : 缓存时间，默认值是 10，建议设置为 60 。</li>
+</ul>
+<h3 id="（5）开启DoH-DoT"><a href="#（5）开启DoH-DoT" class="headerlink" title="（5）开启DoH&#x2F;DoT"></a>（5）开启DoH&#x2F;DoT</h3><p>设置一个DNS的解析域名并申请SSL证书，进入加密设置，勾选启用加密，输入自己刚刚设置好的域名，HTTPS端口填写没有被占用的端口，粘贴好SSL证书和秘钥后保存配置即大功告成，宝塔面板反代<a href="http://ip:8080并开启SSL。">http://ip:8080并开启SSL。</a><br><img src="https://tc.edunote.cn/i/2022/11/21/1619667813958637b8ece22322.png"></p>
+<h1 id="在设备上使用-AdGuard-Home-DNS"><a href="#在设备上使用-AdGuard-Home-DNS" class="headerlink" title="在设备上使用 AdGuard Home DNS"></a>在设备上使用 AdGuard Home DNS</h1><p>最后你可以在 Ad­Guard Home 的设置指导页面找到相应系统的 DNS 设置方法，先不要着急在路由器上使用，建议先设置电脑或手机，通过访问一些网站来测试是否能正常解析。正常的情况下在仪表盘界面会有统计信息，在查询日志界面你会看到解析的详细记录信息。<br><img src="https://tc.edunote.cn/i/2022/11/21/005637b8ed03495d.png"></p>
+<p>完成 AdGuard Home 的设置后，便可将 AdGuard Home 的 DNS 地址部署到局域网设备上。</p>
+<h2 id="1、更改路由器-DNS-地址"><a href="#1、更改路由器-DNS-地址" class="headerlink" title="1、更改路由器 DNS 地址"></a>1、更改路由器 DNS 地址</h2><p>不同品牌路由器修改的方法各有差异，具体步骤可参照说明书或网上的教程（路由器型号 + 更改 DNS），下方以 Redmi AC2100 路由器为例。</p>
+<p>打开并登录路由器的后台管理页面。<br><img src="https://tc.edunote.cn/i/2022/11/21/1619666999879637b8ed136cec.png"><br>在局域网设置中找到 DNS 设置，将首选 DNS 服务器更改为 AdGuard Home 的 DNS 地址，可设置为其它的 DNS 服务商，避免因 AdGuard Home 服务器宕机而导致局域网无法访问互联网。更改完成后点击保存即可。在路由器更改 DNS 后，局域网内的所有设备的 DNS 解析都会通过 AdGuard Home DNS 完成，实现过滤广告与反隐私跟踪。<br><img src="https://tc.edunote.cn/i/2022/11/21/1619667021221637b8ed30a15d.png"></p>
+<h2 id="2、更改手机-DNS-地址"><a href="#2、更改手机-DNS-地址" class="headerlink" title="2、更改手机 DNS 地址"></a>2、更改手机 DNS 地址</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/1619667094376637b8ed52b295.png"></p>
+<ul>
+<li>进入「设定 - 网络和互联网 - Wi-Fi」，点击当前已连接网络的一旁的设置按钮，在 Wi-Fi 详情信息页面点击「编辑」按钮</li>
+<li>找到「IP 设定」</li>
+<li>分别输入该设备的 IP、网关与 AdGuard Home 服务器地址</li>
+</ul>
+<h2 id="3、-iOS-设备"><a href="#3、-iOS-设备" class="headerlink" title="3、 iOS 设备"></a>3、 iOS 设备</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/1619667152400637b8ed73a576.png"></p>
+<ul>
+<li>进入「设置 - 无线局域网」，点击当前已连接网络的名称</li>
+<li>在 Wi-Fi 详情信息页面找到「配置 DNS」</li>
+<li>切换为手动设置，并输入 AdGuard Home 服务器地址</li>
+</ul>
+<h2 id="4、更改电脑-DNS-地址"><a href="#4、更改电脑-DNS-地址" class="headerlink" title="4、更改电脑 DNS 地址"></a>4、更改电脑 DNS 地址</h2><p><img src="https://tc.edunote.cn/i/2022/11/21/1619667218483637b8ed93a74a.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/1619667224437637b8edb04c42.png"><br><img src="https://tc.edunote.cn/i/2022/11/21/1619667231328637b8edcaa1b3.png"></p>
+<ul>
+<li>打开「Windows 设置 - 网络和 Internet」，点击「更改适配器选项」</li>
+<li>选中有线 &#x2F; 无线网卡，点击工具栏「更改此连接的设置」</li>
+<li>找到「Internet 协议版本 4」，点击「属性」按钮</li>
+<li>填写 DNS 服务器，点击「编辑」按钮</li>
+</ul>
+<h1 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h1><h2 id="1、端口冲突"><a href="#1、端口冲突" class="headerlink" title="1、端口冲突"></a>1、端口冲突</h2><p>在 Linux 设备上运行 AdGuard Home，通常会出现 53（本地 DNS 服务器）、68（DHCP 客户端）、80（Http）、443（Https） 端口冲突的问题，可以通过<code>netstat -tunlp | grep </code>端口号 查询占用进程。有两种解决方案：使用不同端口、停用冲突进程。<br>如果是通过 Docker 方式运行 AdGuard Home，出现 listen udp 0.0.0.0:53: bind: address already in use 的提示，需要手动处理，方法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#停止 <span class="title class_">DNSStubListener</span></span><br><span class="line">systemctl stop systemd-resolved</span><br><span class="line"></span><br><span class="line">#创建文件夹（如果不存在）</span><br><span class="line">mkdir /etc/systemd/resolved.<span class="property">conf</span>.<span class="property">d</span>/</span><br><span class="line"></span><br><span class="line">#使用 <span class="title class_">Nano</span> 创建配置文件<span class="number">2021</span>-<span class="number">04</span>-<span class="number">29</span> <span class="number">16</span>:<span class="number">16</span>:<span class="number">00</span> 星期四</span><br><span class="line">nano /etc/systemd/resolved.<span class="property">conf</span>.<span class="property">d</span>/adguardhome.<span class="property">conf</span></span><br></pre></td></tr></table></figure>
+<p>在编辑器中粘贴以下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="title class_">Resolve</span>]</span><br><span class="line"><span class="variable constant_">DNS</span>=<span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span></span><br><span class="line"><span class="title class_">DNSStubListener</span>=no</span><br></pre></td></tr></table></figure>
+<p>保存后执行以下命令。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#创建备份</span><br><span class="line">sudo mv /etc/resolv.<span class="property">conf</span> /etc/resolv.<span class="property">conf</span>.<span class="property">backup</span></span><br><span class="line"></span><br><span class="line">#将 /etc/resolv.<span class="property">conf</span> 链接至 /run/systemd/resolve/resolv.<span class="property">conf</span></span><br><span class="line">ln -s /run/systemd/resolve/resolv.<span class="property">conf</span> /etc/resolv.<span class="property">conf</span></span><br><span class="line"></span><br><span class="line">#重启 <span class="title class_">DNSStubListener</span></span><br><span class="line">systemctl restart systemd-resolved</span><br></pre></td></tr></table></figure>
+<p>完成后使用 <code>netstat -tunlp | grep 53</code> 命令检查是否依旧有进程占用 53 端口，如无冲突，重启 AdGuard Home 容器即可。</p>
+<h2 id="2、平均处理时间过长？"><a href="#2、平均处理时间过长？" class="headerlink" title="2、平均处理时间过长？"></a>2、平均处理时间过长？</h2><p>以下几个因素会使 AdGuard Home 的处理时间过长：</p>
+<ul>
+<li>本地到上游DNS的速度：如果本地运营商的 DNS 没有 DNS 劫持、投毒的问题，建议使用运营商 DNS + 公共 DNS 的方案，DNS 速度可以通过 Ping 值比较。并在 AdGuard Home 中选择以「并行请求」的方式处理 DNS 请求</li>
+<li>浏览安全、家庭控制与强制安全搜索服务：以上三个功能，在 DNS 请求时不会经过 DNS 缓存，直接向上游 DNS 服务器请求，从而减慢 AdGuard Home 的处理速度</li>
+<li>IPv6：如果使用的宽带、校园网不支持 IPv6，可以禁用解析 IPv6，提高响应速度</li>
+<li>过滤规则：过多的过滤规则会影响响应速度，宁缺毋滥，选择最合适自己的规则，一般保留 3 - 4 个广告过滤规则即可。</li>
+<li>统计周期： 在完成以上优化后，发现平均处理时间并没有太大改变，使用体验上也并不慢，有可能是因为统计周期过长，将优化前的结果计入，导致优化前后的结果无太大差异。不妨将仪表盘的统计周期缩短为 24 小时再看看。</li>
+<li>完成以上步骤后使用体验比没有使用 AdGuard Home 还要糟糕，问题有亿点严重了。这个时候需要查找 AdGuard Home 的日志，寻找问题的原因。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/" data-id="cll6artvu0000gnrof9q8duyy" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Aria2 一键安装管理脚本 增强版" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:37.754Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Aria2-一键安装管理脚本-增强版"><a href="#Aria2-一键安装管理脚本-增强版" class="headerlink" title="Aria2 一键安装管理脚本 增强版"></a>Aria2 一键安装管理脚本 增强版</h1><p><a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.sh/blob/master/LICENSE"><img src="https://img.shields.io/github/license/P3TERX/aria2.sh?style=flat-square" alt="LICENSE"></a><br><a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.sh/stargazers"><img src="https://img.shields.io/github/stars/P3TERX/aria2.sh.svg?style=flat-square&label=Stars&logo=github" alt="GitHub Stars"></a><br><a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.sh/fork"><img src="https://img.shields.io/github/forks/P3TERX/aria2.sh.svg?style=flat-square&label=Forks&logo=github" alt="GitHub Forks"></a></p>
+<p>Aria2 是目前最强大的全能型下载工具，它支持 BT、磁力、HTTP、FTP 等下载协议，常用做离线下载的服务端。Aria2 一键安装管理脚本是 Toyo (逗比) 大佬最为知名的脚本作品之一，2018年11月14日逗比大佬因未知原因突然失联。由于博主非常喜欢 Aria2 所以自2018年12月7日起开始接手这个项目并进行了大量的功能与细节优化，一直持续维护至今。增强版脚本整合了 <a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.conf">Aria2 完美配置</a>，在安装 Aria2 的过程中会下载这套配置方案，这套方案包含了配置文件、附加功能脚本等文件，用于实现 Aria2 功能的增强和扩展，提升 Aria2 的下载速度与使用体验，解决 Aria2 在使用中遇到的 BT 下载无速度、文件残留占用磁盘空间、任务丢失、重复下载等问题。</p>
+<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><ul>
+<li><p>使用 <a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.conf">Aria2 完美配置</a>方案</p>
+<ul>
+<li>BT 下载率高、速度快</li>
+<li>重启后不丢失任务进度、不重复下载</li>
+<li>删除正在下载的任务自动删除未完成的文件</li>
+<li>下载错误自动删除未完成的文件</li>
+<li>下载完成自动删除控制文件(<code>.aria2</code>后缀名文件)</li>
+<li>下载完成自动删除种子文件(<code>.torrent</code>后缀名文件)</li>
+<li>下载完成自动删除空目录</li>
+<li>BT 下载完成自动清除垃圾文件(文件类型过滤功能)</li>
+<li>BT 下载完成自动清除小文件(文件大小过滤功能)</li>
+<li>有一定的防版权投诉、防迅雷吸血效果</li>
+<li>更好的 PT 下载支持</li>
+</ul>
+</li>
+<li><p>使用 <a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2-builder">aria2-builder</a> 项目最新静态编译二进制文件</p>
+<ul>
+<li>多平台：<code>amd64</code>, <code>i386</code>, <code>arm64</code>, <code>armhf</code></li>
+<li>全功能：<code>Async DNS</code>, <code>BitTorrent</code>, <code>Firefox3 Cookie</code>, <code>GZip</code>, <code>HTTPS</code>, <code>Message Digest</code>, <code>Metalink</code>, <code>XML-RPC</code>, <code>SFTP</code></li>
+<li>单服务器线程数最大值无上限（已破解线程数限制）</li>
+<li>防掉线程优化</li>
+<li>最新依赖库，下载更安全、稳定、快速</li>
+<li>持续更新最新版本</li>
+</ul>
+</li>
+<li><p>支持与 <a target="_blank" rel="noopener" href="https://rclone.org/">RCLONE</a> 联动，更多扩展功能与玩法：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://p3terx.com/archives/offline-download-of-onedrive-gdrive.html">OneDrive、Google Drive 等网盘离线下载</a></li>
+<li><a target="_blank" rel="noopener" href="https://p3terx.com/archives/baidunetdisk-transfer-to-onedrive-and-google-drive.html">百度网盘转存到 OneDrive 、Google Drive 等其他网盘</a></li>
+</ul>
+</li>
+<li><p>支持新一代互联网协议 IPv6</p>
+</li>
+<li><p>定时自动更新 BT tracker 列表（无需重启）</p>
+</li>
+</ul>
+<h2 id="项目地址"><a href="#项目地址" class="headerlink" title="项目地址"></a>项目地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/P3TERX/aria2.sh">https://github.com/P3TERX/aria2.sh</a></p>
+<p>支持项目请随手点个<code>star</code>，可以让更多的人发现、使用并受益。你的支持是我持续开发维护的动力。</p>
+<h2 id="系统要求"><a href="#系统要求" class="headerlink" title="系统要求"></a>系统要求</h2><p><code>CentOS 6+ / Debian 6+ / Ubuntu 14.04+</code></p>
+<h2 id="架构支持"><a href="#架构支持" class="headerlink" title="架构支持"></a>架构支持</h2><p><code>x86_64 / i386 / ARM64 / ARM32v7 / ARM32v6</code></p>
+<h2 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h2><ul>
+<li><p>为了确保能正常使用，请先安装基础组件<code>wget</code>、<code>curl</code>、<code>ca-certificates</code>，以 Debian 为例子：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install wget curl ca-certificates</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>下载脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N git.io/aria2.sh &amp;&amp; chmod +x aria2.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行脚本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./aria2.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>选择你要执行的选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Aria2 一键安装管理脚本 增强版 [v2.6.2] by P3TERX.COM</span><br><span class="line"></span><br><span class="line"> 0. 升级脚本</span><br><span class="line">———————————————————————</span><br><span class="line"> 1. 安装 Aria2</span><br><span class="line"> 2. 更新 Aria2</span><br><span class="line"> 3. 卸载 Aria2</span><br><span class="line">———————————————————————</span><br><span class="line"> 4. 启动 Aria2</span><br><span class="line"> 5. 停止 Aria2</span><br><span class="line"> 6. 重启 Aria2</span><br><span class="line">———————————————————————</span><br><span class="line"> 7. 修改 配置</span><br><span class="line"> 8. 查看 配置</span><br><span class="line"> 9. 查看 日志</span><br><span class="line">10. 清空 日志</span><br><span class="line">———————————————————————</span><br><span class="line">11. 手动更新 BT-Tracker</span><br><span class="line">12. 自动更新 BT-Tracker</span><br><span class="line">———————————————————————</span><br><span class="line"></span><br><span class="line">Aria2 状态: 已安装 | 已启动</span><br><span class="line"></span><br><span class="line">自动更新 BT-Tracker: 已开启</span><br><span class="line"></span><br><span class="line">请输入数字 [0-12]:</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h2><p>启动：<code>/etc/init.d/aria2 start</code> | <code>service aria2 start</code></p>
+<p>停止：<code>/etc/init.d/aria2 stop</code> | <code>service aria2 stop</code></p>
+<p>重启：<code>/etc/init.d/aria2 restart</code> | <code>service aria2 restart</code></p>
+<p>查看状态：<code>/etc/init.d/aria2 status</code> | <code>service aria2 status</code></p>
+<p>配置文件路径：<code>/root/.aria2c/aria2.conf</code> （配置文件有中文注释，若语言设置有问题会导致中文乱码）</p>
+<p>默认下载目录：<code>/root/downloads</code></p>
+<p>RPC 密钥：随机生成，可使用选项<code>7. 修改 配置文件</code>自定义</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/" data-id="cll6artw50001gnro05zjbg20" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:34.238Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>ZeroSSL 和 Buypass 在 acme 端都有提供别具特色的证书服务。ZeroSSL 与 Let‘s Encrypt 功能重合且没有签发速率限制，Sectigo 的根证书以及网站管理页面也是不错的加分项。至于 Buypass，其能够免费签发 180 天的 DV 单域名证书，与亚信等用途类似不过并不需要实名认证或者手机号之类的敏感信息。</p>
+<p>之前不少人都是直接在 freessl.org 进行签发，后来改版之后就只剩下付费的选择了。而 ACME 在设计上更倾向于证书托管自动更新的方式，而像我这种临时签发证书测试或者用在一些不能使用 ACME 的平台上时，手动签发还是有一定的意义。</p>
+<p>安装 ACME 的服务器要跟 Buypass 和 ZeroSSL 的 API 能够稳定通信，我这里就用的腾讯云香港 24 的轻量作为演示，不仅国内操作比较稳定而且国际方向速度也很快。前段时间宝塔发布了腾讯云定制版，然后赠送了很多的轻量代金卷，选择轻量的大佬应该不在少数。</p>
+<h1 id="一、安装-ACME"><a href="#一、安装-ACME" class="headerlink" title="一、安装 ACME"></a>一、安装 ACME</h1><p>只需要执行一下这条命令就可以一键安装，然后我并没有把证书托管到他自动化所以就直接在 crontab -e 将它的计划任务注释掉了。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https:<span class="comment">//get.acme.sh | sh</span></span><br></pre></td></tr></table></figure>
+<h1 id="二、配置-API"><a href="#二、配置-API" class="headerlink" title="二、配置 API"></a>二、配置 API</h1><p>ZeroSSL 获取 EAB 凭证，在此注册并获取 <a target="_blank" rel="noopener" href="https://app.zerossl.com/developer">https://app.zerossl.com/developer</a> 。然后执行以下命令将账户信息导入 ACME 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --register-account --server zerossl --eab-kid [账户 eab-kid] --eab-hmac-key [账户 eab-hmac-key]</span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/bmbk11669044827.png" alt="BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请"></p>
+<p>Buypass 则只需要注册一下账户即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --register-account --accountemail [你的邮箱]</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/bmbk21669044829.png" alt="BuyPass 申请免费多域名 SSL 证书及ZeroSSL证书申请"></p>
+<h1 id="三、签发证书"><a href="#三、签发证书" class="headerlink" title="三、签发证书"></a>三、签发证书</h1><p>因为我是偶尔使用，所以这次写的直接用 DNS 手动模式进行签发，首先执行 issue 进行签发它会返回错误信息告诉你没有正确添加 DNS 记录。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --issue -d [你的域名] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span></span><br></pre></td></tr></table></figure>
+<p>然后按照他的错误信息手动去 DNS 添加完，再执行一次 renew 就可以正确签发了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server <span class="attr">https</span>:<span class="comment">//api.buypass.com/acme/directory --renew -d [你的域名] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span></span><br></pre></td></tr></table></figure>
+<p>对于 ZeroSSL，只需要把前面的—server 换成 zerossl，并且可以包含多个域名进行签发，例如下面这样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server zerossl --issue -d [你的域名 <span class="number">1</span>] -d [你的域名 <span class="number">2</span>] --dns --yes-I-know-dns-manual-mode-enough-go-ahead-please</span><br></pre></td></tr></table></figure>
+<p>手动进行 file 验证则把包括–dns 后的内容全部换为-w [验证文件目录]即可，比如下面这样。手动把验证文件复制到你网站目录下，然后和 dns 方式一样 renew 一次验证就可以了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">acme.<span class="property">sh</span> --server zerossl --issue -d [你的域名 <span class="number">1</span>] -d [你的域名 <span class="number">2</span>] -w [验证文件目录]</span><br></pre></td></tr></table></figure>
+<p>签发后的证书在你的用户文件夹下 .acme.sh 文件夹下面，fullchain.cer 是你的完整证书，.key 就是你的密钥文件。之后续签这个证书依然可以使用上面的 renew 指令，在手动添加记录后再进行 renew 即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/" data-id="cll6artw80002gnro5i7f5md9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CentOS 7安装配置美化Transmission" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:32.430Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h1><p>Transmission包含在EPEL拓展仓库中，如果没有安装EPEL源，安装前需要输入以下命令安装EPEL源（需要root权限）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
+<p>EPEL源安装成功后，即可安装Transmission：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install transmission-daemon</span><br></pre></td></tr></table></figure>
+<h1 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start transmission-daemon.<span class="property">service</span>  #启动<span class="title class_">Transmission</span></span><br></pre></td></tr></table></figure>
+<p>如果用浏览器打开web端（http:&#x2F;&#x2F;域名:9091或http:&#x2F;&#x2F; IP地址:9091），会提示“403: Forbidden”（页面打不开可能是防火墙没有放行相应端口），这是因为Transmission还没配置好。</p>
+<p>先停止Transmission服务，再进行配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop transmission-daemon.<span class="property">service</span></span><br></pre></td></tr></table></figure>
+<p>注意，如果安装后没有启动过Transmission，是不会生成配置文件。因而，需要先启动服务，再停止服务，生成json配置文件后再进行配置。</p>
+<p>打开配置文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /<span class="keyword">var</span>/lib/transmission/.<span class="property">config</span>/transmission-daemon/settings.<span class="property">json</span></span><br></pre></td></tr></table></figure>
+<p>配置文件的参数非常多，可按自己需求进行修改。如果对vi编辑器不了解，Google或百度一下就有简单的使用介绍。以下条目的修改是本人自己在用的参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;encryption&quot;</span>: <span class="number">2</span>,</span><br><span class="line">“dht-enabled”: <span class="literal">false</span>,</span><br><span class="line"><span class="string">&quot;rpc-authentication-required&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;rpc-enabled&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;rpc-password&quot;</span>: <span class="string">&quot;输入你的管理密码&quot;</span>,</span><br><span class="line"><span class="string">&quot;rpc-username&quot;</span>: <span class="string">&quot;管理你的用户名&quot;</span>,</span><br><span class="line"><span class="string">&quot;rpc-whitelist-enabled&quot;</span>: <span class="literal">false</span>,</span><br></pre></td></tr></table></figure>
+<p>配置好后，保存退出json文件，再次输入<code>systemctl start transmission-daemon.service</code>启动Transmission服务，即可用浏览器打开web端（http:&#x2F;&#x2F;域名:9091或http:&#x2F;&#x2F; IP地址:9091），上传种子进行下载。</p>
+<p>注意，如果Transmission下载上传失败，大多是设置了防火墙导致的，这时还需要放行9091端口。CentOS 7默认开启的一般是firewalld，分别输入<code>firewall-cmd --permanent --zone=public --add-port=9091/tcp</code>和<code>firewall-cmd --reload</code>即可放行9091端口的TCP协议。如果不需要启用防火墙，也可以分别输入<code>systemctl stop firewalld</code>和<code>systemctl disable firewalld</code>关闭防火墙。</p>
+<p><em>默认下载路径一般不需更改。如果要修改，除了要在配置文件中修改“download-dir”参数，还需要修改新下载文件夹的权限和用户组：</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R transmission 新下载文件路径</span><br><span class="line">chgrp -R transmission 新下载文件路径</span><br></pre></td></tr></table></figure>
+<h1 id="3、Web-UI美化界面"><a href="#3、Web-UI美化界面" class="headerlink" title="3、Web UI美化界面"></a>3、Web UI美化界面</h1><p>Transmission自带的网页UI比较简陋，可以安装<a target="_blank" rel="noopener" href="https://github.com/ronggang/transmission-web-control">transmission-web-control</a>进行美化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">https</span>:<span class="comment">//github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control.sh --no-check-certificate</span></span><br><span class="line">bash install-tr-control.<span class="property">sh</span></span><br></pre></td></tr></table></figure>
+<p>再次打开网页，即可使用transmission-web-control的UI。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" data-id="cll6artwa0004gnroa7y8d183" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CentOS 8.2更换yum源报错Errors during downloading metadata" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:28.306Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>提一件拉胯的事：别去参考阿里和华为云官方镜像上面的解决办法，本人试了几遍，没luan用。拉胯！！！！！！！！ </p>
+</blockquote>
+<h3 id="1、具体报错信息"><a href="#1、具体报错信息" class="headerlink" title="1、具体报错信息"></a>1、具体报错信息</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Errors during downloading metadata for repository &#x27;epel&#x27;:</span><br><span class="line">  - Status code: 404 for http://archives.fedoraproject.org/pub/archive/epel/8/Everything/x86_64/repodata/repomd.xml (IP: 38.145.60.23)</span><br><span class="line">Error: Failed to download metadata for repo &#x27;epel&#x27;: Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、原因"><a href="#2、原因" class="headerlink" title="2、原因"></a>2、原因</h3><blockquote>
+<p>第三方的镜像站中均已移除CentOS 8的源，Centos 8版本已停止更新相应依赖导致的，下载新的yum源即可搞定 </p>
+</blockquote>
+<h3 id="3、解决办法"><a href="#3、解决办法" class="headerlink" title="3、解决办法"></a>3、解决办法</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/yum.repos.d /etc/yum.repos.d.bak</span><br><span class="line"></span><br><span class="line">mkdir -p /etc/yum.repos.d</span><br><span class="line"></span><br><span class="line">curl https://mirrors.aliyun.com/repo/Centos-vault-8.5.2111.repo &gt; /etc/yum.repos.d/Centos-vault-8.5.2111.repo</span><br><span class="line"></span><br><span class="line">curl https://mirrors.aliyun.com/repo/epel-archive-8.repo &gt; /etc/yum.repos.d/epel-archive-8.repo</span><br><span class="line"></span><br><span class="line">yum clean all</span><br><span class="line"></span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/" data-id="cll6artwb0005gnro7lsd9vf9" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-CF-SpeedTest - 测试 CF CDN 延迟和速度，CF自选IP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/CF-SpeedTest%20-%20%E6%B5%8B%E8%AF%95%20CF%20CDN%20%E5%BB%B6%E8%BF%9F%E5%92%8C%E9%80%9F%E5%BA%A6%EF%BC%8CCF%E8%87%AA%E9%80%89IP/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:26.726Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="XIU2-CloudflareSpeedTest"><a href="#XIU2-CloudflareSpeedTest" class="headerlink" title="XIU2&#x2F;CloudflareSpeedTest"></a>XIU2&#x2F;CloudflareSpeedTest</h1><p><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/blob/master/go.mod"><img src="https://img.shields.io/github/go-mod/go-version/XIU2/CloudflareSpeedTest.svg?style=flat-square&label=Go&color=00ADD8" alt="Go Version"></a><br><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/releases/latest"><img src="https://img.shields.io/github/v/release/XIU2/CloudflareSpeedTest.svg?style=flat-square&label=Release&color=1784ff" alt="Release Version"></a><br><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/blob/master/LICENSE"><img src="https://img.shields.io/github/license/XIU2/CloudflareSpeedTest.svg?style=flat-square&label=License&color=f38020" alt="GitHub license"></a><br><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/stargazers"><img src="https://img.shields.io/github/stars/XIU2/CloudflareSpeedTest.svg?style=flat-square&label=Star&color=f38020" alt="GitHub Star"></a><br><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/network/members"><img src="https://img.shields.io/github/forks/XIU2/CloudflareSpeedTest.svg?style=flat-square&label=Fork&color=f38020" alt="GitHub Fork"></a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/discussions/62">国外很多网站</a>都在使用 Cloudflare CDN，但分配给中国访客的 IP 并不友好（高延迟&#x2F;高丢包&#x2F;速度慢等）。<br>虽然 Cloudflare 公开了所有 <a target="_blank" rel="noopener" href="https://www.cloudflare.com/ips/">IP 段</a> ，但想要在这么多 IP 中找到适合自己的，怕是要累死，所以就有了这个软件。  </p>
+<p>该软件可以<strong>测试 Cloudflare CDN 延迟和速度，获取最快 IP (IPv4+IPv6)<strong>！觉得好用请</strong>点个⭐鼓励一下下~</strong>  </p>
+<blockquote>
+<p><em>我另一个开源项目： <strong><a target="_blank" rel="noopener" href="https://github.com/XIU2/UserScript">一个 [油猴脚本] 轻松解决「Github」文件下载速度慢的问题！</a></strong></em>   </p>
+</blockquote>
+<hr>
+<h2 id="快速使用"><a href="#快速使用" class="headerlink" title="快速使用"></a>快速使用</h2><h3 id="下载运行"><a href="#下载运行" class="headerlink" title="下载运行"></a>下载运行</h3><ol>
+<li>下载编译好的可执行文件 <a target="_blank" rel="noopener" href="https://xiu.lanzoux.com/b0742hkxe">蓝奏云</a> &#x2F; <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/releases">Github</a> 并解压。  </li>
+<li>双击运行 <code>CloudflareST.exe</code>文件（Windows），等待测速完成…</li>
+</ol>
+<details>
+<summary><code><strong>「 点击查看 Linux 下载运行命令示例 」</strong></code></summary>
+
+<hr>
+<p>以下命令仅为示例，版本号和文件名请前往 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/releases"><strong>Releases</strong></a> 查看。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如果是第一次使用，则建议创建新文件夹（后续更新请跳过该步骤）</span></span><br><span class="line"><span class="built_in">mkdir</span> CloudflareST</span><br><span class="line"></span><br><span class="line"><span class="comment"># 进入文件夹（后续更新，只需要从这里重复下面的下载、解压命令即可）</span></span><br><span class="line"><span class="built_in">cd</span> CloudflareST</span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 CloudflareST 压缩包（自行根据需求替换 URL 中版本号和文件名）</span></span><br><span class="line">wget -N https://github.com/XIU2/CloudflareSpeedTest/releases/download/v1.4.7/CloudflareST_linux_amd64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 解压（不需要删除旧文件，会直接覆盖，自行根据需求替换 文件名）</span></span><br><span class="line">tar -zxf CloudflareST_linux_amd64.tar.gz</span><br><span class="line"></span><br><span class="line"><span class="comment"># 赋予执行权限</span></span><br><span class="line"><span class="built_in">chmod</span> +x CloudflareST</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行</span></span><br><span class="line">./CloudflareST</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果平<strong>均延迟非常低</strong>（如 0.xx），则说明 CloudflareST <strong>测速时走了代理</strong>，请先关闭代理软件后再测速。<br>如果在<strong>路由器</strong>上运行（如 OpenWrt），请先关闭路由器内的代理，否则测速结果会<strong>不准确且无法使用</strong>。</p>
+</blockquote>
+</details>
+
+<hr>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/discussions/61"><em><strong>在 Android 手机上运行 CloudflareST 测速的简单教程 …</strong></em></a><br><em><strong>建议测速时避开晚上高峰期（20:00~24:00）</strong>，否则测速结果会与其他时间<strong>相差很大…</strong></em>  </p>
+</blockquote>
+<h3 id="结果示例"><a href="#结果示例" class="headerlink" title="结果示例"></a>结果示例</h3><p>测速完毕后，默认会显示<strong>最快的 20 个 IP</strong>，示例（我联通白天测速结果）：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">IP 地址           已发送  已接收  丢包率  平均延迟  下载速度 (MB/s)</span><br><span class="line">104.27.200.69     4       4       0.00    146.23    28.64</span><br><span class="line">172.67.60.78      4       4       0.00    139.82    15.02</span><br><span class="line">104.25.140.153    4       4       0.00    146.49    14.90</span><br><span class="line">104.27.192.65     4       4       0.00    140.28    14.07</span><br><span class="line">172.67.62.214     4       4       0.00    139.29    12.71</span><br><span class="line">104.27.207.5      4       4       0.00    145.92    11.95</span><br><span class="line">172.67.54.193     4       4       0.00    146.71    11.55</span><br><span class="line">104.22.66.8       4       4       0.00    147.42    11.11</span><br><span class="line">104.27.197.63     4       4       0.00    131.29    10.26</span><br><span class="line">172.67.58.91      4       4       0.00    140.19    9.14</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果平均延迟非常低（如 0.xx），则说明 CloudflareST 测速时走了代理，请先关闭代理软件后再测速。</span></span><br><span class="line"><span class="comment"># 如果在路由器上运行（如 OpenWrt），请先关闭路由器内的代理，否则测速结果会不准确且无法使用。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为默认下载测速地址的文件大小只有 300MB，如果你速度太快的话，测速结果可能会低于实际速度。</span></span><br><span class="line"><span class="comment"># 因为每次测速都是在每个 IP 段中随机 IP，所以每次的测速结果都不可能相同，这是正常的！</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 软件是先 延迟测速并按从低到高排序后，再从 最低延迟的 IP 开始下载测速的，所以：</span></span><br></pre></td></tr></table></figure>
+
+<p>测速结果第一行就是<strong>既下载速度最快、又平均延迟最低的最快 IP</strong>！至于拿来干嘛？取决于你~  </p>
+<p>完整结果保存在当前目录下的 <code>result.csv</code> 文件中，用<strong>记事本&#x2F;表格软件</strong>打开，格式如下：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IP 地址, 已发送, 已接收, 丢包率, 平均延迟, 下载速度 (MB/s)</span><br><span class="line">104.27.200.69, 4, 4, 0.00, 146.23, 28.64</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><em>大家可以按自己需求，对完整结果<strong>进一步筛选处理</strong>，或者去看一看进阶使用<strong>指定过滤条件</strong>！</em></p>
+</blockquote>
+<hr>
+<h2 id="进阶使用"><a href="#进阶使用" class="headerlink" title="进阶使用"></a>进阶使用</h2><p>直接运行使用的是默认参数，如果想要测速结果更全面、更符合自己的要求，可以自定义参数。  </p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\&gt;<span class="title">CloudflareST.exe</span> -<span class="title">h</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">CloudflareSpeedTest</span> <span class="title">vX.X.X</span></span></span><br><span class="line"><span class="function">测试 <span class="title">Cloudflare</span> <span class="title">CDN</span> 所有 <span class="title">IP</span> 的延迟和速度，获取最快 <span class="title">IP</span> (<span class="title">IPv4</span>+<span class="title">IPv6</span>)！</span></span><br><span class="line"><span class="function"><span class="title">https</span>://<span class="title">github.com</span>/<span class="title">XIU2</span>/<span class="title">CloudflareSpeedTest</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">参数：</span></span><br><span class="line"><span class="function">    -<span class="title">n</span> 500</span></span><br><span class="line"><span class="function">        测速线程数量；越多测速越快，性能弱的设备 (如路由器) 请适当调低；(默认 500 最多 1000 )</span></span><br><span class="line"><span class="function">    -<span class="title">t</span> 4</span></span><br><span class="line"><span class="function">        延迟测速次数；单个 <span class="title">IP</span> 延迟测速次数，为 1 时将过滤丢包的<span class="title">IP</span>，<span class="title">TCP</span>协议；(默认 4 )</span></span><br><span class="line"><span class="function">    -<span class="title">tp</span> 443</span></span><br><span class="line"><span class="function">        延迟测速端口；延迟测速 <span class="title">TCP</span> 协议的端口；(默认 443 )</span></span><br><span class="line"><span class="function">    -<span class="title">dn</span> 20</span></span><br><span class="line"><span class="function">        下载测速数量；延迟测速并排序后，从最低延迟起下载测速的数量；(默认 20 )</span></span><br><span class="line"><span class="function">    -<span class="title">dt</span> 10</span></span><br><span class="line"><span class="function">        下载测速时间；单个 <span class="title">IP</span> 下载测速最长时间，单位：秒；(默认 10 )</span></span><br><span class="line"><span class="function">    -<span class="title">url</span> <span class="title">https</span>://<span class="title">cf.xiu2.xyz</span>/<span class="title">Github</span>/<span class="title">CloudflareSpeedTest.png</span></span></span><br><span class="line"><span class="function">        下载测速地址；用来下载测速的 <span class="title">Cloudflare</span> <span class="title">CDN</span> 文件地址，如地址含有空格请加上引号；</span></span><br><span class="line"><span class="function">    -<span class="title">tl</span> 200</span></span><br><span class="line"><span class="function">        平均延迟上限；只输出低于指定平均延迟的 <span class="title">IP</span>，可单独使用也可搭配下载速度下限；(默认 9999.00 <span class="title">ms</span>)</span></span><br><span class="line"><span class="function">    -<span class="title">sl</span> 5</span></span><br><span class="line"><span class="function">        下载速度下限；只输出高于指定下载速度的 <span class="title">IP</span>，凑够指定数量 [-<span class="title">dn</span>] 才会停止测速；(默认 0.00 <span class="title">MB</span>/<span class="title">s</span> )</span></span><br><span class="line"><span class="function">    -<span class="title">p</span> 20</span></span><br><span class="line"><span class="function">        显示结果数量；测速后直接显示指定数量的结果，为 0 时不显示结果直接退出；(默认 20 )</span></span><br><span class="line"><span class="function">    -<span class="title">f</span> <span class="title">ip.txt</span></span></span><br><span class="line"><span class="function">        <span class="title">IP</span>段数据文件；如路径含有空格请加上引号；支持其他 <span class="title">CDN</span> <span class="title">IP</span>段；(默认 <span class="title">ip.txt</span> )</span></span><br><span class="line"><span class="function">    -<span class="title">o</span> <span class="title">result.csv</span></span></span><br><span class="line"><span class="function">        输出结果文件；如路径含有空格请加上引号；值为空格时不输出 [-<span class="title">o</span> &quot; &quot;]；(默认 <span class="title">result.csv</span> )</span></span><br><span class="line"><span class="function">    -<span class="title">dd</span></span></span><br><span class="line"><span class="function">        禁用下载测速；禁用后测速结果会按延迟排序 (默认按下载速度排序)；(默认 启用 )</span></span><br><span class="line"><span class="function">    -<span class="title">ipv6</span></span></span><br><span class="line"><span class="function">        <span class="title">IPv6</span>测速模式；确保 <span class="title">IP</span> 段数据文件内只包含 <span class="title">IPv6</span> <span class="title">IP</span>段，软件不支持同时测速 <span class="title">IPv4</span>+<span class="title">IPv6</span>；(默认 <span class="title">IPv4</span> )</span></span><br><span class="line"><span class="function">    -<span class="title">allip</span></span></span><br><span class="line"><span class="function">        测速全部的<span class="title">IP</span>；对 <span class="title">IP</span> 段中的每个 <span class="title">IP</span> (仅支持 <span class="title">IPv4</span>) 进行测速；(默认 每个 <span class="title">IP</span> 段随机测速一个 <span class="title">IP</span> )</span></span><br><span class="line"><span class="function">    -<span class="title">v</span></span></span><br><span class="line"><span class="function">        打印程序版本+检查版本更新</span></span><br><span class="line"><span class="function">    -<span class="title">h</span></span></span><br><span class="line"><span class="function">        打印帮助说明</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="使用示例"><a href="#使用示例" class="headerlink" title="使用示例"></a>使用示例</h3><p>Windows 要指定参数需要在 CMD 中运行，或者把参数添加到快捷方式目标中。  </p>
+<blockquote>
+<p><strong>注意</strong>：各参数均有<strong>默认值</strong>，使用默认值的参数是可以省略的（<strong>按需选择</strong>），参数<strong>不分前后顺序</strong>。<br><strong>提示</strong>：Linux 系统只需要把下面命令中的 <code>CloudflareST.exe</code> 改为 <code>./CloudflareST</code> 即可。  </p>
+</blockquote>
+<h4 id="IPv4-IPv6"><a href="#IPv4-IPv6" class="headerlink" title="# IPv4&#x2F;IPv6"></a># IPv4&#x2F;IPv6</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定 IPv4 数据文件（-f 默认值就是 ip.txt，所以该参数可以省略）</span></span><br><span class="line">CloudflareST.exe -f ip.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定 IPv6 数据文件( ipv6.txt )，需要加上 -ipv6 参数</span></span><br><span class="line">CloudflareST.exe -f ipv6.txt -ipv6</span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="文件相对-绝对路径"><a href="#文件相对-绝对路径" class="headerlink" title="# 文件相对&#x2F;绝对路径"></a># 文件相对&#x2F;绝对路径</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定 IPv4 数据文件，不显示结果直接退出，输出结果到文件（-p 值为 0）</span></span><br><span class="line">CloudflareST.exe -f 1.txt -p 0 -<span class="built_in">dd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定 IPv4 数据文件，不输出结果到文件，直接显示结果（-p 值为 10 条，-o 值为空格）</span></span><br><span class="line">CloudflareST.exe -f 2.txt -o <span class="string">&quot; &quot;</span> -p 10 -<span class="built_in">dd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定 IPv4 数据文件 及 输出结果到文件（相对路径，即当前目录下，如含空格请加上引号）</span></span><br><span class="line">CloudflareST.exe -f 3.txt -o result.txt -<span class="built_in">dd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定 IPv4 数据文件 及 输出结果到文件（绝对路径，即 C:\abc\ 目录下，如含空格请加上引号）</span></span><br><span class="line">CloudflareST.exe -f C:\abc\4.txt -o C:\abc\result.csv -<span class="built_in">dd</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="自定义下载测速地址"><a href="#自定义下载测速地址" class="headerlink" title="# 自定义下载测速地址"></a># 自定义下载测速地址</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 地址要求：可以直接下载、文件大小超过 200MB、用的是 Cloudflare CDN</span></span><br><span class="line">CloudflareST.exe -url https://cf.xiu2.xyz/Github/CloudflareSpeedTest.png</span><br><span class="line"><span class="comment"># 因为默认下载测速地址的文件大小只有 300MB，如果你速度太快的话，测速结果可能会低于实际速度。</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h4 id="自定义测速条件"><a href="#自定义测速条件" class="headerlink" title="# 自定义测速条件"></a># 自定义测速条件</h4><details>
+<summary><code><strong>「 点击展开 查看内容 」</strong></code></summary>
+
+<hr>
+<ul>
+<li>仅指定 <strong>[平均延迟上限]</strong> 条件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 平均延迟上限：200 ms，下载速度下限：0 MB/s，数量：10 个（可选）</span></span><br><span class="line"><span class="comment"># 即找到平均延迟低于 200 ms 的 IP，然后再按延迟从低到高进行 10 次下载测速</span></span><br><span class="line">CloudflareST.exe -tl 200 -dn 10</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果没有一个 IP <strong>平均延迟低于 200ms</strong>，那么不会输出任何内容。  </p>
+</blockquote>
+<hr>
+<ul>
+<li>仅指定 <strong>[平均延迟上限]</strong> 条件，且<strong>只延迟测速，不下载测速</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 平均延迟上限：200 ms，下载速度下限：0 MB/s，数量：不知道多少 个</span></span><br><span class="line"><span class="comment"># 即只输出低于 200ms 的 IP，且不再下载测速（因为不再下载测速，所以 -dn 参数就无效了）</span></span><br><span class="line">CloudflareST.exe -tl 200 -<span class="built_in">dd</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<ul>
+<li>仅指定 <strong>[下载速度下限]</strong> 条件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 平均延迟上限：9999 ms，下载速度下限：5 MB/s，数量：10 个（可选）</span></span><br><span class="line"><span class="comment"># 即需要找到 10 个平均延迟低于 9999 ms 且下载速度高于 5 MB/s 的 IP 才会停止测速</span></span><br><span class="line">CloudflareST.exe -sl 5 -dn 10</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>没有指定平均延迟上限时，如果一直<strong>凑不够</strong>满足条件的 IP 数量，就会<strong>一直测速</strong>下去。<br>所以建议**同时指定 [下载速度下限] + [平均延迟上限]**，这样测速到指定延迟上限还没凑够数量，就会终止测速。</p>
+</blockquote>
+<hr>
+<ul>
+<li>同时指定 <strong>[平均延迟上限] + [下载速度下限]</strong> 条件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 平均延迟上限、下载速度下限均支持小数（如 -sl 0.5）</span></span><br><span class="line"><span class="comment"># 平均延迟上限：200 ms，下载速度下限：5.6 MB/s，数量：10 个（可选）</span></span><br><span class="line"><span class="comment"># 即需要找到 10 个平均延迟低于 200 ms 且下载速度高于 5 .6MB/s 的 IP 才会停止测速</span></span><br><span class="line">CloudflareST.exe -tl 200 -sl 5.6 -dn 10</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果没有一个 IP <strong>平均延迟低于 200ms</strong>，那么不会输出任何内容。<br>如果没有一个 IP <strong>下载速度高于 5.6 MB&#x2F;s</strong>，那么就会<strong>和不指定 [下载速度下限] 条件一样</strong>输出结果。<br>所以建议先不指定条件测速一遍，看看平均延迟和下载速度大概在什么范围，避免指定条件<strong>过低&#x2F;过高</strong>！</p>
+</blockquote>
+<blockquote>
+<p>因为Cloudflare 公开的 IP 段是<strong>回源 IP+任播 IP</strong>，而<strong>回源 IP</strong>是无法使用的，所以下载测速是 0.00。<br>运行时可以加上 <code>-sl 0.01</code>（下载速度下限），过滤掉<strong>回源 IP</strong>（下载测速低于 0.01MB&#x2F;s 的结果）。</p>
+</blockquote>
+</details>
+
+<hr>
+<h4 id="Windows-快捷方式如何使用参数"><a href="#Windows-快捷方式如何使用参数" class="headerlink" title="# Windows 快捷方式如何使用参数"></a># Windows 快捷方式如何使用参数</h4><details>
+<summary><code><strong>「 点击展开 查看内容 」</strong></code></summary>
+
+<hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 右键快捷方式 - 目标</span></span><br><span class="line"><span class="comment"># 如果要不输出结果文件，那么请加上 -o &quot; &quot;，引号里的是空格（没有空格会导致该参数被省略）。</span></span><br><span class="line">D:\ABC\CloudflareST\CloudflareST.exe -n 500 -t 4 -dn 20 -dt 5 -o <span class="string">&quot; &quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果文件路径包含引号，则需要把启动参数放在引号外面，记得引号和 - 之间有空格。</span></span><br><span class="line"><span class="string">&quot;D:\Program Files\CloudflareST\CloudflareST.exe&quot;</span> -n 500 -t 4 -dn 20 -dt 5 -o <span class="string">&quot; &quot;</span></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<h4 id="单独对一个或多个-IP-测速"><a href="#单独对一个或多个-IP-测速" class="headerlink" title="# 单独对一个或多个 IP 测速"></a># 单独对一个或多个 IP 测速</h4><details>
+<summary><code><strong>「 点击展开 查看内容 」</strong></code></summary>
+
+<hr>
+<p>如果要单独<strong>对一个或多个 IP 进行测速</strong>，只需要把这些 IP 按如下格式写入到任意文本文件中，例如：<code>1.txt</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.1</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line"><span class="number">1.1</span><span class="number">.1</span><span class="number">.200</span></span><br><span class="line"><span class="number">1.0</span><span class="number">.0</span><span class="number">.1</span>/<span class="number">24</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>自从 v1.4.10 版本后，单个 IP 就不需要添加子网掩码 <code>/32</code> 了（<code>1.1.1.1</code>等同于 <code>1.1.1.1/32</code>）。<br>子网掩码 <code>/24</code> 指的是这个 IP 最后一段，即 <code>1.0.0.1~1.0.0.255</code>。</p>
+</blockquote>
+<p>然后运行 CloudflareST 时加上启动参数 <code>-f 1.txt</code> 即可。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先进入 CloudflareST 所在目录，然后运行：</span></span><br><span class="line"><span class="comment"># Windows 系统（在 CMD 中运行）</span></span><br><span class="line">CloudflareST.exe -f 1.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># Linux 系统</span></span><br><span class="line">./CloudflareST -f 1.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对于 IP 段 1.0.0.1/24 软件只会随机最后一段（1.0.0.1~255），如果要测速该 IP 段中的所有 IP，需要加上 -allip 参数。</span></span><br></pre></td></tr></table></figure>
+
+</details>
+
+<hr>
+<h4 id="一劳永逸加速所有使用-Cloudflare-CDN-的网站（不需要再一个个添加域名到-Hosts-了）"><a href="#一劳永逸加速所有使用-Cloudflare-CDN-的网站（不需要再一个个添加域名到-Hosts-了）" class="headerlink" title="# 一劳永逸加速所有使用 Cloudflare CDN 的网站（不需要再一个个添加域名到 Hosts 了）"></a># 一劳永逸加速所有使用 Cloudflare CDN 的网站（不需要再一个个添加域名到 Hosts 了）</h4><p>我以前说过，开发该软件项目的目的就是为了通过<strong>改 Hosts 的方式来加速访问使用 Cloudflare CDN 的网站</strong>。</p>
+<p>但就如 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/8"><strong>#8</strong></a> 所说，一个个添加域名到 Hosts 实在<strong>太麻烦</strong>了，于是我就找到了个<strong>一劳永逸</strong>的办法！</p>
+<p>可以看这个 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/discussions/71"><strong>还在一个个添加 Hosts？完美本地加速所有使用 Cloudflare CDN 的网站方法来了！</strong></a> </p>
+<hr>
+<h4 id="自动更新-Hosts"><a href="#自动更新-Hosts" class="headerlink" title="# 自动更新 Hosts"></a># 自动更新 Hosts</h4><p>考虑到很多人获得最快 Cloudflare CDN IP 后，需要替换 Hosts 文件中的 IP。</p>
+<p>可以看这个 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/42"><strong>Issues</strong></a> 获取 <strong>Windows&#x2F;Linux 自动更新 Hosts 脚本</strong>！</p>
+<hr>
+<h4 id="自动更新域名解析记录"><a href="#自动更新域名解析记录" class="headerlink" title="# 自动更新域名解析记录"></a># 自动更新域名解析记录</h4><p>如果你的域名托管在 Cloudflare，则可以通过 Cloudflare 官方提供的 API 来自动更新域名解析记录。  </p>
+<p>可以看这个 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/40"><strong>Issues</strong></a> 获取<strong>手动教程</strong>或 <strong>Windows&#x2F;Linux 自动更新脚本</strong>！</p>
+<hr>
+<h2 id="问题反馈"><a href="#问题反馈" class="headerlink" title="问题反馈"></a>问题反馈</h2><p>如果你遇到什么问题，可以先去 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues"><strong>Issues</strong></a> 里看看是否有别人问过了（记得去看下  <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues?q=is:issue+is:closed"><strong>Closed</strong></a> 的）。<br>如果没找到类似问题，请新开个 <a target="_blank" rel="noopener" href="https://github.com/XIU2/CloudflareSpeedTest/issues/new"><strong>Issues</strong></a> 来告诉我！</p>
+<blockquote>
+<p><em>有问题请<strong>大胆告诉我</strong>，描述越详细越好（必要时可远程协助），如果不说那我怎么去完善功能或<del>修复 BUG</del> 呢？！</em></p>
+</blockquote>
+<hr>
+<h2 id="感谢项目"><a href="#感谢项目" class="headerlink" title="感谢项目"></a>感谢项目</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/Spedoske/CloudflareScanner">https://github.com/Spedoske/CloudflareScanner</a></li>
+</ul>
+<blockquote>
+<p><em>因为该项目已经很长时间没更新了，而我又产生了很多功能需求，所以我临时学了下 Go 语言就上手了（菜）…</em><br><em>本软件基于该项目制作，但<strong>已添加大量功能及修复 BUG</strong>，并根据大家的使用反馈积极添加、优化功能（闲）…</em></p>
+</blockquote>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/CF-SpeedTest%20-%20%E6%B5%8B%E8%AF%95%20CF%20CDN%20%E5%BB%B6%E8%BF%9F%E5%92%8C%E9%80%9F%E5%BA%A6%EF%BC%8CCF%E8%87%AA%E9%80%89IP/" data-id="cll6artw90003gnro7em4dtva" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Check酱：监测网页内容变化_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:24.998Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Check酱：监测网页内容变化，并发送异动到微信。亦支持http status、json和rss监测。配合自架云端，关电脑后也能运行。</p>
+</blockquote>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138571669043640.png" alt="Check酱"></p>
+<p>⚠️ 浏览器插件不开源，docker目录下的代码仅供安全核查和编译多平台镜像，采用附加条件的GPLV3授权：</p>
+<ol>
+<li><strong>不得修改或删除</strong>默认对接的Server酱通道。</li>
+<li>不得对接<strong>其他消息通道</strong>后再次发布。</li>
+<li>满足以上两个条件后，遵从<strong>GPLv3</strong>协议。</li>
+</ol>
+<h2 id="最新版本"><a href="#最新版本" class="headerlink" title="最新版本"></a>最新版本</h2><ul>
+<li>插件·Chrome&#x2F;Edge：2022.06.26.14.42 <a href="ckc.zip">下载</a> (<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/raw/master/ckc.zip">Github下载地址，无需注册</a>)</li>
+<li>Docker镜像(云端+远程桌面二合一)：2022.06.26.14.22 <a target="_blank" rel="noopener" href="https://hub.docker.com/repository/docker/easychen/checkchan">Docker Hub</a></li>
+<li>文档：2022.06.26.14.49</li>
+<li>更新日志：<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/commits/main">GitHub</a></li>
+</ul>
+<blockquote>
+<p>Docker镜像安装命令请参阅后文云端架设一节</p>
+</blockquote>
+<h2 id="什么是「Check酱」"><a href="#什么是「Check酱」" class="headerlink" title="什么是「Check酱」"></a>什么是「Check酱」</h2><p>Check酱是方糖气球出品的网页内容监测工具，它包含一个Edge&#x2F;Chrome<strong>浏览器插件</strong>和可以自行架设的<strong>云端</strong>。</p>
+<p>基于浏览器插件，它通过<strong>可视化选择器</strong>理论上可以监控网页上的任意内容（文本）、除了浏览器通知，还可以配合<a target="_blank" rel="noopener" href="https://sct.ftqq.com/">Server酱</a>将异动推送到微信或手机。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138581669043642.png"><br>Check酱的原理是，通过浏览器插件后台打开网页进行监测，从而<strong>完全模拟用户的真实行为</strong>，可以监控绝大部分复杂的动态网页，需要登录的各种后台页面，并（在绝大多数情况下）自动延续登录态。</p>
+<p>除了支持网页内容（Dom）的监测，还支持HTTP状态（通过GET监测）、JSON和RSS方式。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138591669043644.png" alt="enter description here"><br>配合可以自行架设的<strong>云端</strong>，可以将监测任务同步到服务器，这样当浏览器和电脑关掉以后，监测任务依然可以定时运行<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138601669043646.png" alt="enter description here"></p>
+<h2 id="一、插件的安装和使用"><a href="#一、插件的安装和使用" class="headerlink" title="一、插件的安装和使用"></a>一、插件的安装和使用</h2><p>插件可以独立使用，只是关掉后定时监测任务不执行。</p>
+<h3 id="1、-安装"><a href="#1、-安装" class="headerlink" title="1、 安装"></a>1、 安装</h3><blockquote>
+<p>目前Check酱正在内测，尚未上架Edge商店，只能通过手工方式载入</p>
+</blockquote>
+<p>下载<a href="ckc.zip">插件ZIP包</a>(<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/raw/master/ckc.zip">Github下载地址，无需注册</a>)，解压为目录（后文称其为A）。</p>
+<p>打开Edge的插件页面，打开「开发者模式」，点击「Load Unpacked」，选择上边解压得到的目录A。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138611669043652.png" alt="enter description here"><br>成功载入的话，就可以看到Check酱界面了。如果失败，通常是因为解压时多了一层目录导致的，可以试试重新选择A目录的下一级目录</p>
+<h3 id="2、使用"><a href="#2、使用" class="headerlink" title="2、使用"></a>2、使用</h3><h4 id="添加网页监控点"><a href="#添加网页监控点" class="headerlink" title="添加网页监控点"></a>添加网页监控点</h4><p>安装插件后，打开要监控的网页，在网页上点击右键，可以看到「定位监测对象」一项<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138621669043653.png" alt="enter description here"><br>点击后，开始初始化可视化选择器<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138631669043655.png" alt="enter description here"><br>移动鼠标可以看到高亮区域，放到要监控的文字上点击鼠标左键。</p>
+<blockquote>
+<p>注意，选择区域必须包含文本，否则会返回空。有很多文本是印在图片上的，这种也会返回空。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138641669043657.png" alt="enter description here"></p>
+</blockquote>
+<p>将转向到添加页面。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138651669043659.png" alt="enter description here"><br>可以修改名称、设置监控间隔时间、延迟、最大重试次数。在保存之前，最好点击CSS选择器路径一栏后的测试按钮进行测试。</p>
+<p>如果提示「检测内容为空」，说明存在问题。再次点击进行观察：</p>
+<p>如果发现页面打开后favicon没有出来就关了，可以增加「延迟读取」的秒数；如果打开后还是返回空，那么刚才自动生成的选择器路径可能不正确。</p>
+<p>可以更换为浏览器自动生成的，方法如下：</p>
+<p>① 在要检测的文本上点右键，选择「inspect&#x2F;审查元素<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138661669043662.png" alt="enter description here"><br>② 这时候会自动打开开发者工具，并自动选中源码中元素的对应行。在高亮的行上点击右键，选择「复制&#x2F;Copy」→ 「复制选择器&#x2F;Copy selector」<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138671669043664.png" alt="enter description here"><br>③ 将复制到的剪贴板的路径填入到「CSS选择器路径」一行后，再次点击「测试」按钮进行测试。</p>
+<p>测试通过后，点击「提交」保存监测点。</p>
+<p>通过Server酱推送到微信和其他设备<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138681669043665.png" alt="enter description here"><br>在添加和修改监测点时，填入Sendkey即可将消息推送到Server酱。</p>
+<h3 id="3、监测周期限制"><a href="#3、监测周期限制" class="headerlink" title="3、监测周期限制"></a>3、监测周期限制</h3><p>有些任务只需要在特定的时间段执行，为了节省资源，我们添加了「监测周期限制」功能。比如某动画每周五上午十点更新，那么我们可以将「监测周期限制」设置如下：<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138691669043667.png" alt="enter description here"><br>这样其他时间段就不再启动监测。对于无法预知事件段的任务，使用默认的「每分钟」即可。</p>
+<p>注意在「监测周期限制」之上，还有「监控间隔时间」。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138701669043668.png" alt="enter description here"><br>如果 「监测周期限制」 为每分钟，而「监控间隔时间」为60分钟，那么每分钟都会尝试监测，而一旦监测成功一次，那么下次监测将是60分钟后。</p>
+<p>同时，因为执行监测任务本身也耗费时间，所以「监控间隔时间」为1分钟时，往往每隔一分钟（即每两分钟）才会运行一次任务。</p>
+<h3 id="4、日志查看和错误定位"><a href="#4、日志查看和错误定位" class="headerlink" title="4、日志查看和错误定位"></a>4、日志查看和错误定位</h3><p>为了更清楚的了解定时任务的执行情况，你可以打开「开发者工具」（F12）在 <code>Console</code> 标签页中可以看到任务产生的日志<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138711669043668.png" alt="enter description here"><br>错误信息也会在这里以红色高亮的行显示，遇到Bug时提供日志错误截图可以帮助我们更快的定位到问题。</p>
+<h3 id="5、更新浏览器插件"><a href="#5、更新浏览器插件" class="headerlink" title="5、更新浏览器插件"></a>5、更新浏览器插件</h3><p>上架商店后，可以自动升级，在此之前需要手动升级。升级方式为下载zip包解压后覆盖原有文件，再在浏览器的插件管理面板中「reload」一下。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138721669043669.png" alt="enter description here"></p>
+<h2 id="二、镜像的安装和使用"><a href="#二、镜像的安装和使用" class="headerlink" title="二、镜像的安装和使用"></a>二、镜像的安装和使用</h2><p>新版镜像已经将云端和远程桌面版本集成，只需一次安装都可以使用。</p>
+<ul>
+<li>云端：配合自行架设的服务器，可以将任务同步到云端执行，即使关掉浏览器和电脑后监测任务也会一直运行。</li>
+<li>远程桌面：在Docker中封装了Chrome浏览器，可以通过VNC和Web界面像在电脑上一样使用。</li>
+</ul>
+<blockquote>
+<p>⚠️ 特别说明：因为云端的网络、环境都和本机不同，所以并不保证本机能运行的任务都能在云端运行成功，一些复杂网页和有较多动态效果的网页可能失败。</p>
+</blockquote>
+<h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><blockquote>
+<p>架设自架版云端需要技术基础，非技术用户建议购买我们的官方版云端（将在内测完成后发布）</p>
+</blockquote>
+<p>需要docker环境。如果你没有云服务器，可以看看<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/lighthouse">腾讯云轻量服务器</a>。</p>
+<h4 id="2、-通过-Docker-compose-启动"><a href="#2、-通过-Docker-compose-启动" class="headerlink" title="2、 通过 Docker-compose 启动"></a>2、 通过 Docker-compose 启动</h4><p>登录服务器（假设其IP为IPB），在要安装的目录下新建目录 <code>data</code>，并使其可写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data &amp;&amp; <span class="built_in">chmod</span> 0755 data</span><br></pre></td></tr></table></figure>
+<p>新建一个 <code>docker-compose.yml</code> 文件，将下边的内容按提示调整后粘贴保存：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">chrome:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">easychen/checkchan:latest</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./data:/checkchan/data&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;CKC_PASSWD=&lt;这里是远程桌面的密码，写一个你自己想的&gt;&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;VDEBUG=OFF&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;VNC=ON&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;WIN_WIDTH=414&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;WIN_HEIGHT=896&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;XVFB_WHD=500x896x16&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;API_KEY=&lt;这里是云端的API KEY，写一个你自己想的&gt;&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;ERROR_IMAGE=NORMAL&quot;</span> <span class="comment"># NONE,NORMAL,FULL</span></span><br><span class="line">      <span class="comment">#- &quot;SNAP_URL_BASE=&lt;开启截图在这里写服务器地址（结尾不用加/），不开留空&gt;...&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;SNAP_FULL=1&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;TZ=Asia/Chongqing&quot;</span></span><br><span class="line">      <span class="comment"># - WEBHOOK_URL=http://... # 云端 Webhook地址，不需要则不用设置</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5900:5900&quot;</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8088:80&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>将其中<code>&lt;这里是远程桌面的密码，写一个你自己想的&gt;</code>和 <code>&lt;这里是云端的API KEY，写一个你自己想的&gt;</code> 换成别人不知道的密码（下文称密码C和D）。注意不要包含<code>$</code>字符，替换完后也不再有两边的尖括号<code>&lt;&gt;</code>。</p>
+<p>如果不希望启动远程桌面，请将 <code>VNC=ON</code> 改为 <code>VNC=OFF</code>。</p>
+<p>保证Docker用户对此目录有写权限，并在同一目录下运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如提示docker服务未安装&#x2F;找不到&#x2F;未启动，可在 docker-compose 前加 sudo 再试</p>
+</blockquote>
+<p>等待初始化完成后，访问 <code>http://$BBB:8080</code>( 将$BBB替换为IP B)，看到 NoVNC Web界面说明容器已经启动。</p>
+<p>服务所在的端口为：</p>
+<ul>
+<li>云端：8088</li>
+<li>远程桌面(VNC): 5900</li>
+<li>远程桌面的Web界面(NoVNC): 8080</li>
+</ul>
+<h4 id="3、通过-Docker-启动"><a href="#3、通过-Docker-启动" class="headerlink" title="3、通过 Docker 启动"></a>3、通过 Docker 启动</h4><p>你也可以将 <code>docker-compose</code> 中的参数传给 docker 来启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8088:80 -p 8080:8080 -p 5900:5900 -v <span class="variable">$&#123;PWD&#125;</span>/data:/checkchan/data -e API_KEY=123  -e VDEBUG=OFF -e VNC=ON -e SNAP_URL_BASE=http://localhost:8088  -e CKC_PASSWD=123 -e TZ=Asia/Chongqing easychen/checkchan:latest</span><br></pre></td></tr></table></figure>
+
+<p>请将上述命令中的123替换为你想要设定的密码、将<code>SNAP_URL_BASE</code>换成服务器的外网IP(如果想通过手机查看截图)。</p>
+<h4 id="4、更新镜像"><a href="#4、更新镜像" class="headerlink" title="4、更新镜像"></a>4、更新镜像</h4><p>Check酱云端镜像更新后，你可以将正在运行的云端服务升级到最新版。方式如下：</p>
+<p>首先停现有的容器：</p>
+<p>通过 docker-compose 启动的运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
+<p>通过 docker 直接启动的运行 <code>docker ps</code> 查询到容器id，通过 <code>docker stop 容器id</code> 停止。</p>
+<p>然后运行 docker pull 拉取最新版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull easychen/checkchan:latest</span><br></pre></td></tr></table></figure>
+<p>完成后再启动服务即可。</p>
+<h2 id="三、云端的使用"><a href="#三、云端的使用" class="headerlink" title="三、云端的使用"></a>三、云端的使用</h2><h3 id="将浏览器插件对接云端"><a href="#将浏览器插件对接云端" class="headerlink" title="将浏览器插件对接云端"></a>将浏览器插件对接云端</h3><p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138731669043671.png" alt="enter description here"></p>
+<p>点击插件右上方菜单中的<code>云端服务</code>。</p>
+<p>在<code>服务器地址</code>一栏输入 <code>http://$BBB:8088</code>(将$BBB替换为IP B，这里的URL不用加key参数)；在<code>API_KEY</code>一栏输入密码C。</p>
+<p>点击保存，连接成功后，配置完成。</p>
+<h3 id="同步本地任务到云端"><a href="#同步本地任务到云端" class="headerlink" title="同步本地任务到云端"></a>同步本地任务到云端</h3><p>配置好云端以后回到列表页，每行最右边会多出来一个「电脑」图标，点击后会变成「云」图标，该任务将改为在云端执行。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138741669043674.png" alt="enter description here"><br>点击右上角 「云+箭头」的按钮，可以主动同步任务到云端。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138751669043676.png" alt="enter description here"><br>Check酱也会每十分钟自动同步一次</p>
+<h3 id="云端截图"><a href="#云端截图" class="headerlink" title="云端截图"></a>云端截图</h3><p>Check酱自架云端支持对网页（dom）类型任务进行截图，可以通过给镜像传递环境变量来开启：</p>
+<ul>
+<li>SNAP_URL_BASE&#x3D;&lt;开启截图在这里写服务器地址，不开留空&gt; #如 <a target="_blank" rel="noopener" href="http://ip.com/">http://ip.com/</a></li>
+<li>SNAP_FULL&#x3D;1 #完整网页长图</li>
+</ul>
+<p>可参考上文的<code>docker-compser.yml</code>。添加环境变量后重启服务即可。</p>
+<p>注意</p>
+<ul>
+<li>截图功能需要较大的内存，部分服务器可能会报错</li>
+<li>云端网络和本地不同，可能会超时失败，请适当增加延时，并将取消完整截图</li>
+</ul>
+<h3 id="云端任务的安全性"><a href="#云端任务的安全性" class="headerlink" title="云端任务的安全性"></a>云端任务的安全性</h3><p>Check酱云端任务的原理是将cookie同步到云端，然后用浏览器查看，本质和用户操作一样。但因为出口IP可能是机房和数据中心，频次太高也有被风控的可能。如果将云端部署在家里，则和在家用电脑访问效果一样。</p>
+<h3 id="云端错误排查"><a href="#云端错误排查" class="headerlink" title="云端错误排查"></a>云端错误排查</h3><p>通常来讲，出现本地任务可以执行，云端不能执行的问题，是因为两者网络环境、浏览器软件存在差异，比如：</p>
+<ol>
+<li>页面结构每次都会变动：比如一些网站的首页，建议进入分类列表页面选择监控点</li>
+<li>电脑网络和云端网络不同：在浏览器中可以访问的内容，在数据中心可能访问不到</li>
+<li>CDN更新延迟：电脑和云端CDN节点刷新未完成，会造成一边可用一边不可用，等待更新完成后再监控</li>
+<li>浏览器插件改变了网页结构：比如本地通过 AdBlock 过滤了广告，但云端没有，造成结构不同，监测失败</li>
+</ol>
+<p>由于服务器内存通常没大家电脑大，所以很多在本地执行OK的任务同步到云端后会因为「延迟读取」秒数太小中途停止而失败。如果遇到类似情况，请尝试增加「延迟读取」</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/" data-id="cll6artwc0006gnroga20hkjp" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Docker 部署 PasteMe,一款无需注册的文本分享平台" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:22.974Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="一、产品简介"><a href="#一、产品简介" class="headerlink" title="一、产品简介"></a>一、产品简介</h2><blockquote>
+<p>PasteMe 是一个无需注册的文本分享平台，针对代码提供了额外的高亮功能。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/LucienShui/PasteMe">Github开源地址：https://github.com/LucienShui/PasteMe</a><br><a target="_blank" rel="noopener" href="https://docs.pasteme.cn/">开发文档：https://docs.pasteme.cn</a></p>
+<ul>
+<li><p>如果你要发给某人一些私密的信息，比如一段 token，但是通过 QQ 、微信等聊天工具可能会被 “查水表”，你可以将私密信息以阅后即焚形式上传至 PasteMe ，将一次性链接分享给别人，别人查看一次之后这个链接就会失效</p>
+</li>
+<li><p>如果你要发布一个脚本，可以把 Bash 或者 Python 等脚本上传至 PasteMe ，然后通过 curl 和管道机制来进行优雅的发布，比如：<code>curl api.pasteme.cn/8219 | python3</code></p>
+</li>
+<li><p>想要向服务器内粘贴一段代码，但是苦于字符集，复制、上传上去之后有其它的字符，此时你可以上传至 pasteme ，然后通过 <code>wget api.pasteme.cn/&lt;key&gt; -O file_name</code> 来进行优雅的拉取</p>
+</li>
+</ul>
+<h2 id="二、产品功能"><a href="#二、产品功能" class="headerlink" title="二、产品功能"></a>二、产品功能</h2><ul>
+<li>在存储内容时，设置密码和阅后即焚可以高度保证用户内容的安全性和私密性。</li>
+<li>在将自己的内容分享给别人时，提供了一键复制链接和二维码分享等多种途径。</li>
+<li>在查看别人的内容时，可以一键复制所有文本。如果查看的是阅后即焚的内容，那么在网页加载完成之前，实体数据就已经不存在了。</li>
+</ul>
+<h2 id="三、Docker搭建"><a href="#三、Docker搭建" class="headerlink" title="三、Docker搭建"></a>三、Docker搭建</h2><p>服务器安装Docker环境，步骤不再赘述</p>
+<h3 id="1、部署"><a href="#1、部署" class="headerlink" title="1、部署"></a>1、部署</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">https</span>:<span class="comment">//cdn.jsdelivr.net/gh/LucienShui/PasteMe@main/docker-compose.yml</span></span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>命令执行完成后等待 30s（因为需要初始化数据库和等待 <code>healthy check</code>），然后运行 <code>docker ps -a</code>，当看到所有的容器的状态没有 <code>unhealthy</code> 或<code> Exited (x) xxx</code> 就代表 PasteMe 已经启动成功</p>
+<p>如果出现该错误，大概率是映射端口冲突</p>
+<h3 id="2、更新"><a href="#2、更新" class="headerlink" title="2、更新"></a>2、更新</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker-compose pull</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<h3 id="3、文件夹介绍"><a href="#3、文件夹介绍" class="headerlink" title="3、文件夹介绍"></a>3、文件夹介绍</h3><p>第一次执行完 <code>docker-compose up -d</code> 之后，会出现一个名为 <code>data</code> 的文件夹，其中有四个文件夹。</p>
+<table>
+<thead>
+<tr>
+<th align="center">文件夹名</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>backend-config</code></td>
+<td align="center">后端的配置文件</td>
+</tr>
+<tr>
+<td align="center"><code>frontend-user</code></td>
+<td align="center">前端的配置文件和用户文件</td>
+</tr>
+<tr>
+<td align="center"><code>nginx-logs</code></td>
+<td align="center">前端 Nginx 的日志文件</td>
+</tr>
+<tr>
+<td align="center"><code>mysql</code></td>
+<td align="center">MySQL 的持久化文件</td>
+</tr>
+</tbody></table>
+<h3 id="4、日志"><a href="#4、日志" class="headerlink" title="4、日志"></a>4、日志</h3><ul>
+<li>前端 Nginx 日志位于 <code>data/nginx-logs</code> 下</li>
+<li>后端日志通过 <code>docker logs pasteme-backend</code> 查看</li>
+<li>数据库日志通过 <code>docker logs pasteme-mysql</code> 查看</li>
+</ul>
+<h2 id="四、使用指南"><a href="#四、使用指南" class="headerlink" title="四、使用指南"></a>四、使用指南</h2><h3 id="1、什么是索引"><a href="#1、什么是索引" class="headerlink" title="1、什么是索引"></a>1、什么是索引</h3><p>每一个被上传的文本都有一个字符串去对其进行唯一标识，就像是门牌号一样，我称它为“索引”（Paste ID）。纯数字的索引对应永久空间的文本，包含字母的索引对应阅后即焚的文本。</p>
+<p>索引的长度至少为三个字符，至多为八个字符。</p>
+<h3 id="2、对于别人分享的内容"><a href="#2、对于别人分享的内容" class="headerlink" title="2、对于别人分享的内容"></a>2、对于别人分享的内容</h3><p>可直接通过网页链接访问。<br>可在主页左上角的输入框输入索引进行访问。<br>对于准备上传的内容<br>永久保存<br>在主页进行保存。</p>
+<h3 id="3、阅后即焚"><a href="#3、阅后即焚" class="headerlink" title="3、阅后即焚"></a>3、阅后即焚</h3><p>在左上角输入含有字母的索引，如果这个索引存在则显示索引内容，不存在则创建一份新的索引。</p>
+<p>在主页直接勾选 阅后即焚。</p>
+<p>所有阅后即焚的内容一旦以任何方式（包括 API ）被成功访问就会永久从数据库中消失</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" data-id="cll6artwd0007gnro5xqv11yk" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Docker搭建Frp内网穿透服务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:18.030Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Docker搭建Frp内网穿透服务</p>
+<blockquote>
+<p>frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。 可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。</p>
+<p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">FRP github网址</a></p>
+<p>通过在具有公网 IP 的节点上部署 frp 服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：</p>
+<ol>
+<li>客户端服务端通信支持 TCP、KCP 以及 Websocket 等多种协议。</li>
+<li>采用 TCP 连接流式复用，在单个连接间承载更多请求，节省连接建立时间</li>
+<li>代理组间的负载均衡</li>
+<li>端口复用，多个服务通过同一个服务端端口暴露</li>
+<li>多个原生支持的客户端插件（静态文件查看，HTTP、SOCK5 代理等），便于独立使用 frp 客户端完成某些工作</li>
+</ol>
+</blockquote>
+<h2 id="一、服务端部署"><a href="#一、服务端部署" class="headerlink" title="一、服务端部署"></a>一、服务端部署</h2><h3 id="1-debian、ubuntu、Centos系统一键安装docker"><a href="#1-debian、ubuntu、Centos系统一键安装docker" class="headerlink" title="1.debian、ubuntu、Centos系统一键安装docker"></a>1.debian、ubuntu、Centos系统一键安装docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建frp-ini文件并创建目录"><a href="#2-创建frp-ini文件并创建目录" class="headerlink" title="2.创建frp.ini文件并创建目录"></a>2.创建frp.ini文件并创建目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /frp</span><br><span class="line">vim /frp/frps.ini</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-编辑frps-ini配置文件"><a href="#3-编辑frps-ini配置文件" class="headerlink" title="3.编辑frps.ini配置文件"></a>3.编辑frps.ini配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用面板</span></span><br><span class="line">dashboard_port = 7500</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">面板登录名和密码</span></span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = xxxxxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用http代理并使用80端口进行穿透</span></span><br><span class="line">vhost_http_port = 80</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用https代理并使用443端口进行穿透</span></span><br><span class="line">vhost_https_port = 443</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志路径</span></span><br><span class="line">log_file = ./frps.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志级别</span></span><br><span class="line">log_level = info</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志最大保存天数</span></span><br><span class="line">log_max_days = 2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">认证超时时间</span></span><br><span class="line">authentication_timeout = 900</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">认证token，客户端需要和此对应</span></span><br><span class="line">token=123123123</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">最大连接数</span></span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-拉取镜像"><a href="#4-拉取镜像" class="headerlink" title="4.拉取镜像"></a>4.拉取镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull snowdreamtech/frps:latest</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af975c5a220.png" alt="docker安装frp"></p>
+<h3 id="5-启动docker容器"><a href="#5-启动docker容器" class="headerlink" title="5.启动docker容器"></a>5.启动docker容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --restart=always --network host -d -v /frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af977ab08d9.png" alt="运行容器"></p>
+<h3 id="6-直接访问dashboard，输入账号密码"><a href="#6-直接访问dashboard，输入账号密码" class="headerlink" title="6.直接访问dashboard，输入账号密码"></a>6.直接访问dashboard，输入账号密码</h3><p><img src="https://pic.edunote.cn/i/2023/07/13/64af979b92b5c.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af97ad95c4b.png" alt="dashboard界面"></p>
+<p>可以直接访问，说明部署成功</p>
+<h2 id="二、Windows客户端部署"><a href="#二、Windows客户端部署" class="headerlink" title="二、Windows客户端部署"></a>二、Windows客户端部署</h2><p><a target="_blank" rel="noopener" href="https://diannaobos.com/frp/"><strong>内网穿透工具</strong>：配置生成</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">Windows客户端下载</a></p>
+<p>压缩包里包含以下文件</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99c300ba8.png" alt="frp客户端"></p>
+<p>配置客户端文件，找到压缩包里的frpc.ini。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99d2e685d.png" alt="配置客户端"></p>
+<p>打开frp客户端，运行 打开frpc.bat 即可打开</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99e89ddd5.png" alt="img"></p>
+<h2 id="三、Android客户端部署"><a href="#三、Android客户端部署" class="headerlink" title="三、Android客户端部署"></a>三、Android客户端部署</h2><p>首先下载Frpc客户端</p>
+<p>GitHub开源项目：<a target="_blank" rel="noopener" href="https://github.com/mainfunx/frpc_android">https://github.com/mainfunx/frpc_android</a></p>
+<p>下载仓库最新的(虽说frps须与frpc版本一致，但frps不配置token还是可以跨版本使用的)：<br><a target="_blank" rel="noopener" href="https://github.com/mainfunx/frpc_android/releases/download/0.39.1.1/frpc_adnroid-v0.39.1.1.apk">https://github.com/mainfunx/frpc_android/releases/download/0.39.1.1/frpc_adnroid-v0.39.1.1.apk</a><br>下载安装好就是这个样子</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9a4a09390.jpg" alt="photo_2023-02-22_17-31-14"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9a944c49f.png" alt="photo_2023-02-22_17-31-17"></p>
+<p>配置文件如下：（根据个人需求进行修改，切勿照搬）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 54.180.101.36</span><br><span class="line">server_port = 55185</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 9978</span><br><span class="line">remote_port = 7080</span><br><span class="line"></span><br><span class="line">[web02]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 5245</span><br><span class="line">remote_port = 7081</span><br></pre></td></tr></table></figure>
+
+<p>点保存名字随便取</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9aea6665d.png" alt="photo_2023-02-22_17-31-20"></p>
+<h2 id="四、Magisk-FRPC部署"><a href="#四、Magisk-FRPC部署" class="headerlink" title="四、Magisk-FRPC部署"></a>四、Magisk-FRPC部署</h2><p>用于在 Android 设备上运行 FRPC 的 Magisk 模块。</p>
+<p>如果您的终端设备使用WEB服务或者其他需要远程访问的服务，那么该模块将是您不错的选择。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yang2635/Magisk-FRPC/releases">Magisk-FRPC:https://github.com/Yang2635/Magisk-FRPC/releases</a></p>
+<ul>
+<li>模块支持<code>arm</code>、<code>arm64</code>、<code>amd64</code>、<code>x86</code>架构。安装时自动判断设备指令架构并应用。</li>
+<li>使用模块携带的 Busybox 程序中 crond 命令建立定时任务检测状态。</li>
+<li>FRPC 配置文件修改后会自动检测并重载配置文件。</li>
+<li>Magisk 模块页面自动显示模块状态信息。</li>
+<li>检验文件完整性，防止模块被破坏。（感谢 Riru 模块提供的灵感）。</li>
+<li>可在 Magisk 模块中开启或关闭来控制 FRPC 程序启动与结束。</li>
+<li>设备电量低于 20% 且未在充电自动终止 FRPC 程序，请保持设备电量充足！</li>
+<li>在模块目录创建 <code>screen</code> 文件则表示息屏检测，反之不检测。</li>
+</ul>
+<p>模块安装完成后，请到 <code>Android/frpc</code> 目录下浏览并编辑 frpc.ini 配置文件文件。然后重启设备，设备运行后，会在你的设备上运行 FRPC 守护程序。</p>
+<p>模块仅在设备 Android&#x2F;frpc 目录释放额外工作需要的文件（不含 frpc 日志自定义其它路径设置），若模块卸载时未执行 <code>uninstall.sh</code> 脚本，请手动清除 Android&#x2F;frpc 目录内文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/" data-id="cll6artwe0008gnroe1y71mcd" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

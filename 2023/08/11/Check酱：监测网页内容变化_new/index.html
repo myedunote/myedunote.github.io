@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Check酱：监测网页内容变化，并发送异动到微信。亦支持http status、json和rss监测。配合自架云端，关电脑后也能运行。   ⚠️ 浏览器插件不开源，docker目录下的代码仅供安全核查和编译多平台镜像，采用附加条件的GPLV3授权：  不得修改或删除默认对接的Server酱通道。 不得对接其他消息通道后再次发布。 满足以上两个条件后，遵从GPLv3协议。  最新版本 插件·Chr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Check酱：监测网页内容变化，并发送异动到微信。亦支持http status、json和rss监测。配合自架云端，关电脑后也能运行。   ⚠️ 浏览器插件不开源，docker目录下的代码仅供安全核查和编译多平台镜像，采用附加条件的GPLV3授权：  不得修改或删除默认对接的Server酱通道。 不得对接其他消息通道后再次发布。 满足以上两个条件后，遵从GPLv3协议。  最新版本 插件·Chr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138571669043640.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138581669043642.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138591669043644.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138601669043646.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138611669043652.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138621669043653.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138631669043655.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138641669043657.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138651669043659.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138661669043662.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138671669043664.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138681669043665.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138691669043667.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138701669043668.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138711669043668.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138721669043669.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138731669043671.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138741669043674.png">
+<meta property="og:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138751669043676.png">
+<meta property="article:published_time" content="2023-08-11T07:56:24.998Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:25.002Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tc.edunote.cn/i/2022/11/21/2022112123138571669043640.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Check酱：监测网页内容变化_new" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:24.998Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Check酱：监测网页内容变化，并发送异动到微信。亦支持http status、json和rss监测。配合自架云端，关电脑后也能运行。</p>
+</blockquote>
+<p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138571669043640.png" alt="Check酱"></p>
+<p>⚠️ 浏览器插件不开源，docker目录下的代码仅供安全核查和编译多平台镜像，采用附加条件的GPLV3授权：</p>
+<ol>
+<li><strong>不得修改或删除</strong>默认对接的Server酱通道。</li>
+<li>不得对接<strong>其他消息通道</strong>后再次发布。</li>
+<li>满足以上两个条件后，遵从<strong>GPLv3</strong>协议。</li>
+</ol>
+<h2 id="最新版本"><a href="#最新版本" class="headerlink" title="最新版本"></a>最新版本</h2><ul>
+<li>插件·Chrome&#x2F;Edge：2022.06.26.14.42 <a href="ckc.zip">下载</a> (<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/raw/master/ckc.zip">Github下载地址，无需注册</a>)</li>
+<li>Docker镜像(云端+远程桌面二合一)：2022.06.26.14.22 <a target="_blank" rel="noopener" href="https://hub.docker.com/repository/docker/easychen/checkchan">Docker Hub</a></li>
+<li>文档：2022.06.26.14.49</li>
+<li>更新日志：<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/commits/main">GitHub</a></li>
+</ul>
+<blockquote>
+<p>Docker镜像安装命令请参阅后文云端架设一节</p>
+</blockquote>
+<h2 id="什么是「Check酱」"><a href="#什么是「Check酱」" class="headerlink" title="什么是「Check酱」"></a>什么是「Check酱」</h2><p>Check酱是方糖气球出品的网页内容监测工具，它包含一个Edge&#x2F;Chrome<strong>浏览器插件</strong>和可以自行架设的<strong>云端</strong>。</p>
+<p>基于浏览器插件，它通过<strong>可视化选择器</strong>理论上可以监控网页上的任意内容（文本）、除了浏览器通知，还可以配合<a target="_blank" rel="noopener" href="https://sct.ftqq.com/">Server酱</a>将异动推送到微信或手机。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138581669043642.png"><br>Check酱的原理是，通过浏览器插件后台打开网页进行监测，从而<strong>完全模拟用户的真实行为</strong>，可以监控绝大部分复杂的动态网页，需要登录的各种后台页面，并（在绝大多数情况下）自动延续登录态。</p>
+<p>除了支持网页内容（Dom）的监测，还支持HTTP状态（通过GET监测）、JSON和RSS方式。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138591669043644.png" alt="enter description here"><br>配合可以自行架设的<strong>云端</strong>，可以将监测任务同步到服务器，这样当浏览器和电脑关掉以后，监测任务依然可以定时运行<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138601669043646.png" alt="enter description here"></p>
+<h2 id="一、插件的安装和使用"><a href="#一、插件的安装和使用" class="headerlink" title="一、插件的安装和使用"></a>一、插件的安装和使用</h2><p>插件可以独立使用，只是关掉后定时监测任务不执行。</p>
+<h3 id="1、-安装"><a href="#1、-安装" class="headerlink" title="1、 安装"></a>1、 安装</h3><blockquote>
+<p>目前Check酱正在内测，尚未上架Edge商店，只能通过手工方式载入</p>
+</blockquote>
+<p>下载<a href="ckc.zip">插件ZIP包</a>(<a target="_blank" rel="noopener" href="https://github.com/easychen/checkchan-dist/raw/master/ckc.zip">Github下载地址，无需注册</a>)，解压为目录（后文称其为A）。</p>
+<p>打开Edge的插件页面，打开「开发者模式」，点击「Load Unpacked」，选择上边解压得到的目录A。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138611669043652.png" alt="enter description here"><br>成功载入的话，就可以看到Check酱界面了。如果失败，通常是因为解压时多了一层目录导致的，可以试试重新选择A目录的下一级目录</p>
+<h3 id="2、使用"><a href="#2、使用" class="headerlink" title="2、使用"></a>2、使用</h3><h4 id="添加网页监控点"><a href="#添加网页监控点" class="headerlink" title="添加网页监控点"></a>添加网页监控点</h4><p>安装插件后，打开要监控的网页，在网页上点击右键，可以看到「定位监测对象」一项<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138621669043653.png" alt="enter description here"><br>点击后，开始初始化可视化选择器<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138631669043655.png" alt="enter description here"><br>移动鼠标可以看到高亮区域，放到要监控的文字上点击鼠标左键。</p>
+<blockquote>
+<p>注意，选择区域必须包含文本，否则会返回空。有很多文本是印在图片上的，这种也会返回空。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138641669043657.png" alt="enter description here"></p>
+</blockquote>
+<p>将转向到添加页面。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138651669043659.png" alt="enter description here"><br>可以修改名称、设置监控间隔时间、延迟、最大重试次数。在保存之前，最好点击CSS选择器路径一栏后的测试按钮进行测试。</p>
+<p>如果提示「检测内容为空」，说明存在问题。再次点击进行观察：</p>
+<p>如果发现页面打开后favicon没有出来就关了，可以增加「延迟读取」的秒数；如果打开后还是返回空，那么刚才自动生成的选择器路径可能不正确。</p>
+<p>可以更换为浏览器自动生成的，方法如下：</p>
+<p>① 在要检测的文本上点右键，选择「inspect&#x2F;审查元素<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138661669043662.png" alt="enter description here"><br>② 这时候会自动打开开发者工具，并自动选中源码中元素的对应行。在高亮的行上点击右键，选择「复制&#x2F;Copy」→ 「复制选择器&#x2F;Copy selector」<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138671669043664.png" alt="enter description here"><br>③ 将复制到的剪贴板的路径填入到「CSS选择器路径」一行后，再次点击「测试」按钮进行测试。</p>
+<p>测试通过后，点击「提交」保存监测点。</p>
+<p>通过Server酱推送到微信和其他设备<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138681669043665.png" alt="enter description here"><br>在添加和修改监测点时，填入Sendkey即可将消息推送到Server酱。</p>
+<h3 id="3、监测周期限制"><a href="#3、监测周期限制" class="headerlink" title="3、监测周期限制"></a>3、监测周期限制</h3><p>有些任务只需要在特定的时间段执行，为了节省资源，我们添加了「监测周期限制」功能。比如某动画每周五上午十点更新，那么我们可以将「监测周期限制」设置如下：<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138691669043667.png" alt="enter description here"><br>这样其他时间段就不再启动监测。对于无法预知事件段的任务，使用默认的「每分钟」即可。</p>
+<p>注意在「监测周期限制」之上，还有「监控间隔时间」。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138701669043668.png" alt="enter description here"><br>如果 「监测周期限制」 为每分钟，而「监控间隔时间」为60分钟，那么每分钟都会尝试监测，而一旦监测成功一次，那么下次监测将是60分钟后。</p>
+<p>同时，因为执行监测任务本身也耗费时间，所以「监控间隔时间」为1分钟时，往往每隔一分钟（即每两分钟）才会运行一次任务。</p>
+<h3 id="4、日志查看和错误定位"><a href="#4、日志查看和错误定位" class="headerlink" title="4、日志查看和错误定位"></a>4、日志查看和错误定位</h3><p>为了更清楚的了解定时任务的执行情况，你可以打开「开发者工具」（F12）在 <code>Console</code> 标签页中可以看到任务产生的日志<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138711669043668.png" alt="enter description here"><br>错误信息也会在这里以红色高亮的行显示，遇到Bug时提供日志错误截图可以帮助我们更快的定位到问题。</p>
+<h3 id="5、更新浏览器插件"><a href="#5、更新浏览器插件" class="headerlink" title="5、更新浏览器插件"></a>5、更新浏览器插件</h3><p>上架商店后，可以自动升级，在此之前需要手动升级。升级方式为下载zip包解压后覆盖原有文件，再在浏览器的插件管理面板中「reload」一下。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138721669043669.png" alt="enter description here"></p>
+<h2 id="二、镜像的安装和使用"><a href="#二、镜像的安装和使用" class="headerlink" title="二、镜像的安装和使用"></a>二、镜像的安装和使用</h2><p>新版镜像已经将云端和远程桌面版本集成，只需一次安装都可以使用。</p>
+<ul>
+<li>云端：配合自行架设的服务器，可以将任务同步到云端执行，即使关掉浏览器和电脑后监测任务也会一直运行。</li>
+<li>远程桌面：在Docker中封装了Chrome浏览器，可以通过VNC和Web界面像在电脑上一样使用。</li>
+</ul>
+<blockquote>
+<p>⚠️ 特别说明：因为云端的网络、环境都和本机不同，所以并不保证本机能运行的任务都能在云端运行成功，一些复杂网页和有较多动态效果的网页可能失败。</p>
+</blockquote>
+<h3 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h3><blockquote>
+<p>架设自架版云端需要技术基础，非技术用户建议购买我们的官方版云端（将在内测完成后发布）</p>
+</blockquote>
+<p>需要docker环境。如果你没有云服务器，可以看看<a target="_blank" rel="noopener" href="https://cloud.tencent.com/act/lighthouse">腾讯云轻量服务器</a>。</p>
+<h4 id="2、-通过-Docker-compose-启动"><a href="#2、-通过-Docker-compose-启动" class="headerlink" title="2、 通过 Docker-compose 启动"></a>2、 通过 Docker-compose 启动</h4><p>登录服务器（假设其IP为IPB），在要安装的目录下新建目录 <code>data</code>，并使其可写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> data &amp;&amp; <span class="built_in">chmod</span> 0755 data</span><br></pre></td></tr></table></figure>
+<p>新建一个 <code>docker-compose.yml</code> 文件，将下边的内容按提示调整后粘贴保存：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">chrome:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">easychen/checkchan:latest</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;./data:/checkchan/data&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;CKC_PASSWD=&lt;这里是远程桌面的密码，写一个你自己想的&gt;&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;VDEBUG=OFF&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;VNC=ON&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;WIN_WIDTH=414&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;WIN_HEIGHT=896&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;XVFB_WHD=500x896x16&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;API_KEY=&lt;这里是云端的API KEY，写一个你自己想的&gt;&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;ERROR_IMAGE=NORMAL&quot;</span> <span class="comment"># NONE,NORMAL,FULL</span></span><br><span class="line">      <span class="comment">#- &quot;SNAP_URL_BASE=&lt;开启截图在这里写服务器地址（结尾不用加/），不开留空&gt;...&quot;</span></span><br><span class="line">      <span class="comment">#- &quot;SNAP_FULL=1&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;TZ=Asia/Chongqing&quot;</span></span><br><span class="line">      <span class="comment"># - WEBHOOK_URL=http://... # 云端 Webhook地址，不需要则不用设置</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5900:5900&quot;</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:8080&quot;</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8088:80&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>将其中<code>&lt;这里是远程桌面的密码，写一个你自己想的&gt;</code>和 <code>&lt;这里是云端的API KEY，写一个你自己想的&gt;</code> 换成别人不知道的密码（下文称密码C和D）。注意不要包含<code>$</code>字符，替换完后也不再有两边的尖括号<code>&lt;&gt;</code>。</p>
+<p>如果不希望启动远程桌面，请将 <code>VNC=ON</code> 改为 <code>VNC=OFF</code>。</p>
+<p>保证Docker用户对此目录有写权限，并在同一目录下运行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如提示docker服务未安装&#x2F;找不到&#x2F;未启动，可在 docker-compose 前加 sudo 再试</p>
+</blockquote>
+<p>等待初始化完成后，访问 <code>http://$BBB:8080</code>( 将$BBB替换为IP B)，看到 NoVNC Web界面说明容器已经启动。</p>
+<p>服务所在的端口为：</p>
+<ul>
+<li>云端：8088</li>
+<li>远程桌面(VNC): 5900</li>
+<li>远程桌面的Web界面(NoVNC): 8080</li>
+</ul>
+<h4 id="3、通过-Docker-启动"><a href="#3、通过-Docker-启动" class="headerlink" title="3、通过 Docker 启动"></a>3、通过 Docker 启动</h4><p>你也可以将 <code>docker-compose</code> 中的参数传给 docker 来启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 8088:80 -p 8080:8080 -p 5900:5900 -v <span class="variable">$&#123;PWD&#125;</span>/data:/checkchan/data -e API_KEY=123  -e VDEBUG=OFF -e VNC=ON -e SNAP_URL_BASE=http://localhost:8088  -e CKC_PASSWD=123 -e TZ=Asia/Chongqing easychen/checkchan:latest</span><br></pre></td></tr></table></figure>
+
+<p>请将上述命令中的123替换为你想要设定的密码、将<code>SNAP_URL_BASE</code>换成服务器的外网IP(如果想通过手机查看截图)。</p>
+<h4 id="4、更新镜像"><a href="#4、更新镜像" class="headerlink" title="4、更新镜像"></a>4、更新镜像</h4><p>Check酱云端镜像更新后，你可以将正在运行的云端服务升级到最新版。方式如下：</p>
+<p>首先停现有的容器：</p>
+<p>通过 docker-compose 启动的运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose down</span><br></pre></td></tr></table></figure>
+<p>通过 docker 直接启动的运行 <code>docker ps</code> 查询到容器id，通过 <code>docker stop 容器id</code> 停止。</p>
+<p>然后运行 docker pull 拉取最新版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull easychen/checkchan:latest</span><br></pre></td></tr></table></figure>
+<p>完成后再启动服务即可。</p>
+<h2 id="三、云端的使用"><a href="#三、云端的使用" class="headerlink" title="三、云端的使用"></a>三、云端的使用</h2><h3 id="将浏览器插件对接云端"><a href="#将浏览器插件对接云端" class="headerlink" title="将浏览器插件对接云端"></a>将浏览器插件对接云端</h3><p><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138731669043671.png" alt="enter description here"></p>
+<p>点击插件右上方菜单中的<code>云端服务</code>。</p>
+<p>在<code>服务器地址</code>一栏输入 <code>http://$BBB:8088</code>(将$BBB替换为IP B，这里的URL不用加key参数)；在<code>API_KEY</code>一栏输入密码C。</p>
+<p>点击保存，连接成功后，配置完成。</p>
+<h3 id="同步本地任务到云端"><a href="#同步本地任务到云端" class="headerlink" title="同步本地任务到云端"></a>同步本地任务到云端</h3><p>配置好云端以后回到列表页，每行最右边会多出来一个「电脑」图标，点击后会变成「云」图标，该任务将改为在云端执行。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138741669043674.png" alt="enter description here"><br>点击右上角 「云+箭头」的按钮，可以主动同步任务到云端。<br><img src="https://tc.edunote.cn/i/2022/11/21/2022112123138751669043676.png" alt="enter description here"><br>Check酱也会每十分钟自动同步一次</p>
+<h3 id="云端截图"><a href="#云端截图" class="headerlink" title="云端截图"></a>云端截图</h3><p>Check酱自架云端支持对网页（dom）类型任务进行截图，可以通过给镜像传递环境变量来开启：</p>
+<ul>
+<li>SNAP_URL_BASE&#x3D;&lt;开启截图在这里写服务器地址，不开留空&gt; #如 <a target="_blank" rel="noopener" href="http://ip.com/">http://ip.com/</a></li>
+<li>SNAP_FULL&#x3D;1 #完整网页长图</li>
+</ul>
+<p>可参考上文的<code>docker-compser.yml</code>。添加环境变量后重启服务即可。</p>
+<p>注意</p>
+<ul>
+<li>截图功能需要较大的内存，部分服务器可能会报错</li>
+<li>云端网络和本地不同，可能会超时失败，请适当增加延时，并将取消完整截图</li>
+</ul>
+<h3 id="云端任务的安全性"><a href="#云端任务的安全性" class="headerlink" title="云端任务的安全性"></a>云端任务的安全性</h3><p>Check酱云端任务的原理是将cookie同步到云端，然后用浏览器查看，本质和用户操作一样。但因为出口IP可能是机房和数据中心，频次太高也有被风控的可能。如果将云端部署在家里，则和在家用电脑访问效果一样。</p>
+<h3 id="云端错误排查"><a href="#云端错误排查" class="headerlink" title="云端错误排查"></a>云端错误排查</h3><p>通常来讲，出现本地任务可以执行，云端不能执行的问题，是因为两者网络环境、浏览器软件存在差异，比如：</p>
+<ol>
+<li>页面结构每次都会变动：比如一些网站的首页，建议进入分类列表页面选择监控点</li>
+<li>电脑网络和云端网络不同：在浏览器中可以访问的内容，在数据中心可能访问不到</li>
+<li>CDN更新延迟：电脑和云端CDN节点刷新未完成，会造成一边可用一边不可用，等待更新完成后再监控</li>
+<li>浏览器插件改变了网页结构：比如本地通过 AdBlock 过滤了广告，但云端没有，造成结构不同，监测失败</li>
+</ol>
+<p>由于服务器内存通常没大家电脑大，所以很多在本地执行OK的任务同步到云端后会因为「延迟读取」秒数太小中途停止而失败。如果遇到类似情况，请尝试增加「延迟读取」</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Check%E9%85%B1%EF%BC%9A%E7%9B%91%E6%B5%8B%E7%BD%91%E9%A1%B5%E5%86%85%E5%AE%B9%E5%8F%98%E5%8C%96_new/" data-id="cll6artwc0006gnroga20hkjp" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/CF-SpeedTest%20-%20%E6%B5%8B%E8%AF%95%20CF%20CDN%20%E5%BB%B6%E8%BF%9F%E5%92%8C%E9%80%9F%E5%BA%A6%EF%BC%8CCF%E8%87%AA%E9%80%89IP/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

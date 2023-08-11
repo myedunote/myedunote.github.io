@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="为什么要使用qBittorrent 玩过BT&#x2F;PT的人应该对Transmission和qBittorrent都不陌生，两者各具特点，qBittorrent在抢占上传方面比Transmission更具优势。而Transmission在资源方面占用更低。因此一般玩PT建议Transmission + qBittorrent共用，qBittorrent用来刷上传，Transmission用来做">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8CqBittorrent%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87WEB%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为什么要使用qBittorrent 玩过BT&#x2F;PT的人应该对Transmission和qBittorrent都不陌生，两者各具特点，qBittorrent在抢占上传方面比Transmission更具优势。而Transmission在资源方面占用更低。因此一般玩PT建议Transmission + qBittorrent共用，qBittorrent用来刷上传，Transmission用来做">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xsj/20201128230444.jpg">
+<meta property="article:published_time" content="2023-08-11T07:55:20.918Z">
+<meta property="article:modified_time" content="2023-08-11T07:55:20.918Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xsj/20201128230444.jpg">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-使用Docker运行qBittorrent，并通过WEB界面管理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8CqBittorrent%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87WEB%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:55:20.918Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="为什么要使用qBittorrent"><a href="#为什么要使用qBittorrent" class="headerlink" title="为什么要使用qBittorrent"></a>为什么要使用qBittorrent</h1><blockquote>
+<p>玩过BT&#x2F;PT的人应该对Transmission和qBittorrent都不陌生，两者各具特点，qBittorrent在抢占上传方面比Transmission更具优势。而Transmission在资源方面占用更低。因此一般玩PT建议Transmission + qBittorrent共用，qBittorrent用来刷上传，Transmission用来做种赚魔力。</p>
+</blockquote>
+<ul>
+<li>qBittorrent镜像说明</li>
+<li>基于Debian 10 x64镜像制作</li>
+<li>qBittorrent版本为v4.1.5</li>
+<li>已内置GeoIP数据库</li>
+<li>默认设置为简体中文界面</li>
+</ul>
+<h1 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Docker</span>安装</span><br><span class="line">yum install docker</span><br><span class="line">启动docker</span><br><span class="line">systemctl start docker</span><br><span class="line">查看当前版本</span><br><span class="line">docker -v</span><br><span class="line">实现开机启动docker</span><br><span class="line">systemctl enable docker</span><br><span class="line">停止docker</span><br><span class="line">systemctl stop docker</span><br></pre></td></tr></table></figure>
+<h1 id="Docker运行qBittorrent"><a href="#Docker运行qBittorrent" class="headerlink" title="Docker运行qBittorrent"></a>Docker运行qBittorrent</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">  --name=qbittorrent \</span><br><span class="line">  -p <span class="number">7881</span>:<span class="number">7881</span> \</span><br><span class="line">  -p <span class="number">7881</span>:<span class="number">7881</span>/udp \</span><br><span class="line">  -p <span class="number">18080</span>:<span class="number">18080</span> \</span><br><span class="line">  -v /data/qbittorrent/<span class="attr">config</span>:<span class="regexp">/etc/</span>qBittorrent \</span><br><span class="line">  -v /data/qbittorrent/<span class="attr">downloads</span>:/downloads \</span><br><span class="line">  --restart unless-stopped \</span><br><span class="line">  helloz/qbittorrent</span><br></pre></td></tr></table></figure>
+<ul>
+<li>7881：用于传入连接的端口，TCP&#x2F;UDP都需要映射，且主机端口和容器端口必须一致，否则无法下载和上传</li>
+<li>18080：qBittorrentWEBUI访问端口，主机端口和容器端口必须一致，否则无法打开WEB界面</li>
+<li><code>/data/qbittorrent/config</code>：qbittorrent配置文件存储目录，可自行修改</li>
+<li><code>/data/qbittorrent/downloads</code>：下载目录，可自行修改</li>
+</ul>
+<h1 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h1><p>运行成功后可通过<code>http://IP:18080</code>进行访问，用户名为<code>admin</code>，密码为<code>adminadmin</code>，默认已经设置为了中文界面。</p>
+<p>大部分设置均可通过WEB界面直接修改，若需要修改部分特殊配置，可自行修改配置文件夹&#x2F;你的挂载路径<code>/config/qBittorrent.conf</code>，修改后重启下容器<code>docker restart qbittorrent</code></p>
+<p>项目地址<br>Github：<a target="_blank" rel="noopener" href="https://github.com/helloxz/qbittorrent">Github</a><br>镜像地址：<a target="_blank" rel="noopener" href="https://hub.docker.com/repository/docker/helloz/qbittorrent">镜像地址</a></p>
+<h1 id="手机上使用"><a href="#手机上使用" class="headerlink" title="手机上使用"></a>手机上使用</h1><p>手机上访问Transmission WEB操作还是挺麻烦的，我们可以打开微信小程序搜索“TransClient”进行使用，该小程序支持添加Transmission&#x2F;BitTorrent等服务端，这样手机上添加、删除BT&#x2F;PT任务就非常方便了。<br><img src="https://cc-1255426782.cos.ap-guangzhou.myqcloud.com/xsj/20201128230444.jpg" alt="TransClient"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/%E4%BD%BF%E7%94%A8Docker%E8%BF%90%E8%A1%8CqBittorrent%EF%BC%8C%E5%B9%B6%E9%80%9A%E8%BF%87WEB%E7%95%8C%E9%9D%A2%E7%AE%A1%E7%90%86/" data-id="cll6artwx000mgnroe6srhtyz" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/%E9%9D%92%E9%BE%99%E9%9D%A2%E6%9D%BF%E5%BF%85%E8%A3%85%E4%BE%9D%E8%B5%96%E5%8F%8A%E9%9D%92%E9%BE%99%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/%E4%BD%BF%E7%94%A8Searx%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%A7%81%E4%BA%BA%E7%9A%84%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E5%B9%B3%E5%8F%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

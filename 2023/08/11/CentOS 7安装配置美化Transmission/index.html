@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1、安装Transmission包含在EPEL拓展仓库中，如果没有安装EPEL源，安装前需要输入以下命令安装EPEL源（需要root权限）： 12yum -y install epel-releaseyum -y update EPEL源安装成功后，即可安装Transmission： 1yum install transmission-daemon 2、配置1systemctl start tra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1、安装Transmission包含在EPEL拓展仓库中，如果没有安装EPEL源，安装前需要输入以下命令安装EPEL源（需要root权限）： 12yum -y install epel-releaseyum -y update EPEL源安装成功后，即可安装Transmission： 1yum install transmission-daemon 2、配置1systemctl start tra">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-08-11T07:56:32.430Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:32.430Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-CentOS 7安装配置美化Transmission" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:32.430Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1、安装"><a href="#1、安装" class="headerlink" title="1、安装"></a>1、安装</h1><p>Transmission包含在EPEL拓展仓库中，如果没有安装EPEL源，安装前需要输入以下命令安装EPEL源（需要root权限）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install epel-release</span><br><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
+<p>EPEL源安装成功后，即可安装Transmission：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install transmission-daemon</span><br></pre></td></tr></table></figure>
+<h1 id="2、配置"><a href="#2、配置" class="headerlink" title="2、配置"></a>2、配置</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start transmission-daemon.<span class="property">service</span>  #启动<span class="title class_">Transmission</span></span><br></pre></td></tr></table></figure>
+<p>如果用浏览器打开web端（http:&#x2F;&#x2F;域名:9091或http:&#x2F;&#x2F; IP地址:9091），会提示“403: Forbidden”（页面打不开可能是防火墙没有放行相应端口），这是因为Transmission还没配置好。</p>
+<p>先停止Transmission服务，再进行配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop transmission-daemon.<span class="property">service</span></span><br></pre></td></tr></table></figure>
+<p>注意，如果安装后没有启动过Transmission，是不会生成配置文件。因而，需要先启动服务，再停止服务，生成json配置文件后再进行配置。</p>
+<p>打开配置文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /<span class="keyword">var</span>/lib/transmission/.<span class="property">config</span>/transmission-daemon/settings.<span class="property">json</span></span><br></pre></td></tr></table></figure>
+<p>配置文件的参数非常多，可按自己需求进行修改。如果对vi编辑器不了解，Google或百度一下就有简单的使用介绍。以下条目的修改是本人自己在用的参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;encryption&quot;</span>: <span class="number">2</span>,</span><br><span class="line">“dht-enabled”: <span class="literal">false</span>,</span><br><span class="line"><span class="string">&quot;rpc-authentication-required&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;rpc-enabled&quot;</span>: <span class="literal">true</span>,</span><br><span class="line"><span class="string">&quot;rpc-password&quot;</span>: <span class="string">&quot;输入你的管理密码&quot;</span>,</span><br><span class="line"><span class="string">&quot;rpc-username&quot;</span>: <span class="string">&quot;管理你的用户名&quot;</span>,</span><br><span class="line"><span class="string">&quot;rpc-whitelist-enabled&quot;</span>: <span class="literal">false</span>,</span><br></pre></td></tr></table></figure>
+<p>配置好后，保存退出json文件，再次输入<code>systemctl start transmission-daemon.service</code>启动Transmission服务，即可用浏览器打开web端（http:&#x2F;&#x2F;域名:9091或http:&#x2F;&#x2F; IP地址:9091），上传种子进行下载。</p>
+<p>注意，如果Transmission下载上传失败，大多是设置了防火墙导致的，这时还需要放行9091端口。CentOS 7默认开启的一般是firewalld，分别输入<code>firewall-cmd --permanent --zone=public --add-port=9091/tcp</code>和<code>firewall-cmd --reload</code>即可放行9091端口的TCP协议。如果不需要启用防火墙，也可以分别输入<code>systemctl stop firewalld</code>和<code>systemctl disable firewalld</code>关闭防火墙。</p>
+<p><em>默认下载路径一般不需更改。如果要修改，除了要在配置文件中修改“download-dir”参数，还需要修改新下载文件夹的权限和用户组：</em></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R transmission 新下载文件路径</span><br><span class="line">chgrp -R transmission 新下载文件路径</span><br></pre></td></tr></table></figure>
+<h1 id="3、Web-UI美化界面"><a href="#3、Web-UI美化界面" class="headerlink" title="3、Web UI美化界面"></a>3、Web UI美化界面</h1><p>Transmission自带的网页UI比较简陋，可以安装<a target="_blank" rel="noopener" href="https://github.com/ronggang/transmission-web-control">transmission-web-control</a>进行美化：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget <span class="attr">https</span>:<span class="comment">//github.com/ronggang/transmission-web-control/raw/master/release/install-tr-control.sh --no-check-certificate</span></span><br><span class="line">bash install-tr-control.<span class="property">sh</span></span><br></pre></td></tr></table></figure>
+<p>再次打开网页，即可使用transmission-web-control的UI。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/" data-id="cll6artwa0004gnroa7y8d183" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/CentOS%208.2%E6%9B%B4%E6%8D%A2yum%E6%BA%90%E6%8A%A5%E9%94%99Errors%20during%20downloading%20metadata/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

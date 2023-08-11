@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Docker搭建Frp内网穿透服务  frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。 可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。 开源地址：FRP github网址 通过在具有公网 IP 的节点上部署 frp 服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：  客户端服务端通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Docker搭建Frp内网穿透服务  frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。 可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。 开源地址：FRP github网址 通过在具有公网 IP 的节点上部署 frp 服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：  客户端服务端通信">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af975c5a220.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af977ab08d9.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af979b92b5c.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af97ad95c4b.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af99c300ba8.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af99d2e685d.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af99e89ddd5.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af9a4a09390.jpg">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af9a944c49f.png">
+<meta property="og:image" content="https://pic.edunote.cn/i/2023/07/13/64af9aea6665d.png">
+<meta property="article:published_time" content="2023-08-11T07:56:18.030Z">
+<meta property="article:modified_time" content="2023-08-11T07:56:18.030Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic.edunote.cn/i/2023/07/13/64af975c5a220.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Docker搭建Frp内网穿透服务" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/" class="article-date">
+  <time class="dt-published" datetime="2023-08-11T07:56:18.030Z" itemprop="datePublished">2023-08-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Docker搭建Frp内网穿透服务</p>
+<blockquote>
+<p>frp 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议。 可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。</p>
+<p>开源地址：<a target="_blank" rel="noopener" href="https://github.com/fatedier/frp">FRP github网址</a></p>
+<p>通过在具有公网 IP 的节点上部署 frp 服务端，可以轻松地将内网服务穿透到公网，同时提供诸多专业的功能特性，这包括：</p>
+<ol>
+<li>客户端服务端通信支持 TCP、KCP 以及 Websocket 等多种协议。</li>
+<li>采用 TCP 连接流式复用，在单个连接间承载更多请求，节省连接建立时间</li>
+<li>代理组间的负载均衡</li>
+<li>端口复用，多个服务通过同一个服务端端口暴露</li>
+<li>多个原生支持的客户端插件（静态文件查看，HTTP、SOCK5 代理等），便于独立使用 frp 客户端完成某些工作</li>
+</ol>
+</blockquote>
+<h2 id="一、服务端部署"><a href="#一、服务端部署" class="headerlink" title="一、服务端部署"></a>一、服务端部署</h2><h3 id="1-debian、ubuntu、Centos系统一键安装docker"><a href="#1-debian、ubuntu、Centos系统一键安装docker" class="headerlink" title="1.debian、ubuntu、Centos系统一键安装docker"></a>1.debian、ubuntu、Centos系统一键安装docker</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">curl -sSL https://get.daocloud.io/docker | sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建frp-ini文件并创建目录"><a href="#2-创建frp-ini文件并创建目录" class="headerlink" title="2.创建frp.ini文件并创建目录"></a>2.创建frp.ini文件并创建目录</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /frp</span><br><span class="line">vim /frp/frps.ini</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-编辑frps-ini配置文件"><a href="#3-编辑frps-ini配置文件" class="headerlink" title="3.编辑frps.ini配置文件"></a>3.编辑frps.ini配置文件</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">启用面板</span></span><br><span class="line">dashboard_port = 7500</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">面板登录名和密码</span></span><br><span class="line">dashboard_user = admin</span><br><span class="line">dashboard_pwd = xxxxxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用http代理并使用80端口进行穿透</span></span><br><span class="line">vhost_http_port = 80</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">使用https代理并使用443端口进行穿透</span></span><br><span class="line">vhost_https_port = 443</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志路径</span></span><br><span class="line">log_file = ./frps.log</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志级别</span></span><br><span class="line">log_level = info</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">日志最大保存天数</span></span><br><span class="line">log_max_days = 2</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">认证超时时间</span></span><br><span class="line">authentication_timeout = 900</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">认证token，客户端需要和此对应</span></span><br><span class="line">token=123123123</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">最大连接数</span></span><br><span class="line">max_pool_count = 5</span><br><span class="line">max_ports_per_client = 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-拉取镜像"><a href="#4-拉取镜像" class="headerlink" title="4.拉取镜像"></a>4.拉取镜像</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull snowdreamtech/frps:latest</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af975c5a220.png" alt="docker安装frp"></p>
+<h3 id="5-启动docker容器"><a href="#5-启动docker容器" class="headerlink" title="5.启动docker容器"></a>5.启动docker容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --restart=always --network host -d -v /frp/frps.ini:/etc/frp/frps.ini --name frps snowdreamtech/frps</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af977ab08d9.png" alt="运行容器"></p>
+<h3 id="6-直接访问dashboard，输入账号密码"><a href="#6-直接访问dashboard，输入账号密码" class="headerlink" title="6.直接访问dashboard，输入账号密码"></a>6.直接访问dashboard，输入账号密码</h3><p><img src="https://pic.edunote.cn/i/2023/07/13/64af979b92b5c.png" alt="img"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af97ad95c4b.png" alt="dashboard界面"></p>
+<p>可以直接访问，说明部署成功</p>
+<h2 id="二、Windows客户端部署"><a href="#二、Windows客户端部署" class="headerlink" title="二、Windows客户端部署"></a>二、Windows客户端部署</h2><p><a target="_blank" rel="noopener" href="https://diannaobos.com/frp/"><strong>内网穿透工具</strong>：配置生成</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/releases">Windows客户端下载</a></p>
+<p>压缩包里包含以下文件</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99c300ba8.png" alt="frp客户端"></p>
+<p>配置客户端文件，找到压缩包里的frpc.ini。</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99d2e685d.png" alt="配置客户端"></p>
+<p>打开frp客户端，运行 打开frpc.bat 即可打开</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af99e89ddd5.png" alt="img"></p>
+<h2 id="三、Android客户端部署"><a href="#三、Android客户端部署" class="headerlink" title="三、Android客户端部署"></a>三、Android客户端部署</h2><p>首先下载Frpc客户端</p>
+<p>GitHub开源项目：<a target="_blank" rel="noopener" href="https://github.com/mainfunx/frpc_android">https://github.com/mainfunx/frpc_android</a></p>
+<p>下载仓库最新的(虽说frps须与frpc版本一致，但frps不配置token还是可以跨版本使用的)：<br><a target="_blank" rel="noopener" href="https://github.com/mainfunx/frpc_android/releases/download/0.39.1.1/frpc_adnroid-v0.39.1.1.apk">https://github.com/mainfunx/frpc_android/releases/download/0.39.1.1/frpc_adnroid-v0.39.1.1.apk</a><br>下载安装好就是这个样子</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9a4a09390.jpg" alt="photo_2023-02-22_17-31-14"></p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9a944c49f.png" alt="photo_2023-02-22_17-31-17"></p>
+<p>配置文件如下：（根据个人需求进行修改，切勿照搬）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = 54.180.101.36</span><br><span class="line">server_port = 55185</span><br><span class="line"></span><br><span class="line">[web]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 9978</span><br><span class="line">remote_port = 7080</span><br><span class="line"></span><br><span class="line">[web02]</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 5245</span><br><span class="line">remote_port = 7081</span><br></pre></td></tr></table></figure>
+
+<p>点保存名字随便取</p>
+<p><img src="https://pic.edunote.cn/i/2023/07/13/64af9aea6665d.png" alt="photo_2023-02-22_17-31-20"></p>
+<h2 id="四、Magisk-FRPC部署"><a href="#四、Magisk-FRPC部署" class="headerlink" title="四、Magisk-FRPC部署"></a>四、Magisk-FRPC部署</h2><p>用于在 Android 设备上运行 FRPC 的 Magisk 模块。</p>
+<p>如果您的终端设备使用WEB服务或者其他需要远程访问的服务，那么该模块将是您不错的选择。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Yang2635/Magisk-FRPC/releases">Magisk-FRPC:https://github.com/Yang2635/Magisk-FRPC/releases</a></p>
+<ul>
+<li>模块支持<code>arm</code>、<code>arm64</code>、<code>amd64</code>、<code>x86</code>架构。安装时自动判断设备指令架构并应用。</li>
+<li>使用模块携带的 Busybox 程序中 crond 命令建立定时任务检测状态。</li>
+<li>FRPC 配置文件修改后会自动检测并重载配置文件。</li>
+<li>Magisk 模块页面自动显示模块状态信息。</li>
+<li>检验文件完整性，防止模块被破坏。（感谢 Riru 模块提供的灵感）。</li>
+<li>可在 Magisk 模块中开启或关闭来控制 FRPC 程序启动与结束。</li>
+<li>设备电量低于 20% 且未在充电自动终止 FRPC 程序，请保持设备电量充足！</li>
+<li>在模块目录创建 <code>screen</code> 文件则表示息屏检测，反之不检测。</li>
+</ul>
+<p>模块安装完成后，请到 <code>Android/frpc</code> 目录下浏览并编辑 frpc.ini 配置文件文件。然后重启设备，设备运行后，会在你的设备上运行 FRPC 守护程序。</p>
+<p>模块仅在设备 Android&#x2F;frpc 目录释放额外工作需要的文件（不含 frpc 日志自定义其它路径设置），若模块卸载时未执行 <code>uninstall.sh</code> 脚本，请手动清除 Android&#x2F;frpc 目录内文件。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2023/08/11/Docker%E6%90%AD%E5%BB%BAFrp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%9C%8D%E5%8A%A1/" data-id="cll6artwe0008gnroe1y71mcd" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/08/11/Docker%20%E9%83%A8%E7%BD%B2%20PasteMe,%E4%B8%80%E6%AC%BE%E6%97%A0%E9%9C%80%E6%B3%A8%E5%86%8C%E7%9A%84%E6%96%87%E6%9C%AC%E5%88%86%E4%BA%AB%E5%B9%B3%E5%8F%B0/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/08/11/Docker%E7%AE%A1%E7%90%86%E9%9D%A2%E6%9D%BFPortainer%E4%B8%AD%E6%96%87%E7%89%88%E5%AE%89%E8%A3%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/08/11/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/AdGuardHome%20%E5%AE%89%E8%A3%85%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%95%99%E7%A8%8B_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/Aria2%20%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E7%AE%A1%E7%90%86%E8%84%9A%E6%9C%AC%20%E5%A2%9E%E5%BC%BA%E7%89%88/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/BuyPass%20%E7%94%B3%E8%AF%B7%E5%85%8D%E8%B4%B9%E5%A4%9A%E5%9F%9F%E5%90%8D%20SSL%20%E8%AF%81%E4%B9%A6%E5%8F%8AZeroSSL%E8%AF%81%E4%B9%A6%E7%94%B3%E8%AF%B7_new/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2023/08/11/CentOS%207%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96Transmission/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
