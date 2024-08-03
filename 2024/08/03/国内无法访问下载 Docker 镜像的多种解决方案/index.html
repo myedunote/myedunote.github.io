@@ -1,0 +1,1991 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>国内无法访问下载 Docker 镜像的多种解决方案 | Uexo</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    
+        <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    
+
+    
+        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  
+  <!-- 预加载动画 -->
+  <!-- 页面预加载动画 -->
+
+  
+    <div class="preloader_2" id="loader">
+  <div class="loader"></div>
+</div>
+
+  
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+</script>
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">Uexo</h3>
+      <h5 class="drawer-box-head_desc">寄蜉蝣于天地，渺沧海之一粟</h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/myedunote">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">Uexo</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">本地搜索</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/myedunote" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        国内无法访问下载 Docker 镜像的多种解决方案
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2024-08-03 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%90%AC%E7%A0%96/" class="post-detail-header_category">
+              技术搬砖
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <p><img src="https://i0.wp.com/t.663618.xyz/file/266da90e90a3352379887.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/266da90e90a3352379887.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>2023 年 5 月， hub.docker.com  “不知” 何种原因国内均无法正常访问了。当时只是官网不能访问，但不影响 pull 镜像。</p>
+<p>2024年6月7日，GFW正式DNS污染+SNI阻断了docker.com及其相关域名。从国内解析得到的IP地址为Twitter&#x2F;Facebook的IP，符合大墙DNS污染的特征。而如果使用海外解析得到的正常IP地址从国内访问则会被SNI重置阻断链接。</p>
+<p><img src="https://i0.wp.com/t.663618.xyz/file/682b1d87abff96c4c278d.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/682b1d87abff96c4c278d.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<p>2024 年 6 月，国内几家 Docker Hub 镜像服务平台均发公告说 “被” 要求下架，停止服务。不知以后是否开放？或开启白名单模式？</p>
+<p>与此同时，上交镜像站等一系列中国大陆公益镜像站点也“接上级主管部门通知，暂时关闭 Docker Hub 镜像缓存服务”。（通知链接 <a target="_blank" rel="noopener" href="https://mirrors.ustc.edu.cn/help/dockerhub.html">1</a> <a target="_blank" rel="noopener" href="https://sjtug.org/post/mirror-news/2024-06-06-takedown-dockerhub/">2</a>）</p>
+<p>更新：南京大学、中科大、上海交大 目前明确停止docker镜像<br>网易之前死了<br>腾讯微软据说内网可用<br>阿里登陆后就可以拿到子域名<br>百度好像也挂了<br>dockerproxy被墙</p>
+<p>这里不讨论其原因！这里分享几个便捷方法，帮助有需求的朋友正常的拉取 Docker 镜像！</p>
+<h2 id="零门槛"><a href="#零门槛" class="headerlink" title="零门槛"></a>零门槛</h2><h3 id="境外镜像"><a href="#境外镜像" class="headerlink" title="境外镜像"></a>境外镜像</h3><p><strong>优点：不需大量修改，只需几个命令</strong></p>
+<p><strong>缺点：网络可能慢或者不稳定</strong></p>
+<p>下面命令可直接执行~</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;-&#x27;EOF&#x27;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [</span><br><span class="line">        &quot;https://docker.m.daocloud.io&quot;,</span><br><span class="line">        &quot;https://huecker.io&quot;,</span><br><span class="line">        &quot;https://dockerhub.timeweb.cloud&quot;,</span><br><span class="line">        &quot;https://noohub.ru&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>命令行执行 <code>docker info</code>，如果从结果中看到了如下内容，说明配置成功。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Registry Mirrors:</span><br><span class="line"> [...]</span><br><span class="line"> https://docker.m.daocloud.io</span><br></pre></td></tr></table></figure>
+
+<h4 id="Docker-Hub-镜像加速器列表"><a href="#Docker-Hub-镜像加速器列表" class="headerlink" title="Docker Hub 镜像加速器列表"></a>Docker Hub 镜像加速器列表</h4><p>以下镜像站来源于互联网（感谢热心网友），可能出现宕机、转内网、关停等情况，建议同时配置多个镜像源。<br><strong>2024年6月27日 亲测可用</strong></p>
+<table>
+<thead>
+<tr>
+<th>镜像加速器地址</th>
+<th>其他说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://dockerpull.com/">https://dockerpull.com</a></td>
+<td>CF的workers来搭建</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://dockerproxy.cn/">https://dockerproxy.cn</a></td>
+<td>CF的workers来搭建</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.1panel.live/">https://docker.1panel.live</a></td>
+<td>1Panel 面板提供（推荐）</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://hub.rat.dev/">https://hub.rat.dev</a></td>
+<td>耗子面板提供</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.chenby.cn/">https://docker.chenby.cn</a></td>
+<td>Docker Hub</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.anyhub.us.kg/">https://docker.anyhub.us.kg</a></td>
+<td><a target="_blank" rel="noopener" href="https://docker.anyhub.us.kg/">DockerHub 镜像加速代理</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://dockerhub.icu/">https://dockerhub.icu</a></td>
+<td><a target="_blank" rel="noopener" href="https://docker.ckyl.me/">Docker镜像加速站</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.ckyl.me/">https://docker.ckyl.me</a></td>
+<td><a target="_blank" rel="noopener" href="https://docker.ckyl.me/">Docker镜像加速站</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://dockerhub.jobcher.com/">https://dockerhub.jobcher.com</a></td>
+<td>Docker Hub</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.hpcloud.cloud/">https://docker.hpcloud.cloud</a></td>
+<td><a target="_blank" rel="noopener" href="https://docker.hpcloud.cloud/">镜像使用说明</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://docker.awsl9527.cn/">https://docker.awsl9527.cn</a></td>
+<td><a target="_blank" rel="noopener" href="https://docker.awsl9527.cn/">镜像使用说明</a></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://www.hallodocker.com/">https://www.hallodocker.com/</a></td>
+<td><a target="_blank" rel="noopener" href="https://www.hallodocker.com//">镜像使用说明</a></td>
+</tr>
+</tbody></table>
+<h3 id="Yandex-容器加速"><a href="#Yandex-容器加速" class="headerlink" title="Yandex 容器加速"></a>Yandex 容器加速</h3><p><strong>优点：适合单独 pull 镜像使用，俄罗斯大厂提供服务</strong></p>
+<p><strong>缺点：不支持配置到 daemon.json</strong></p>
+<p>官方镜像：<a target="_blank" rel="noopener" href="https://mirror.yandex.ru/">https://mirror.yandex.ru/</a></p>
+<p>使用方式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull cr.yandex/mirror/nginx</span><br></pre></td></tr></table></figure>
+
+<h2 id="低门槛"><a href="#低门槛" class="headerlink" title="低门槛"></a>低门槛</h2><h3 id="Docker-使用-HTTP-代理"><a href="#Docker-使用-HTTP-代理" class="headerlink" title="Docker 使用 HTTP 代理"></a>Docker 使用 HTTP 代理</h3><p><strong>优点：可从 Docker 官方直接拉取</strong></p>
+<p>这里主要介绍如何让服务器的 Docker Pull 的时候能走代理！</p>
+<p>1，新建目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /etc/systemd/system/docker.service.d</span><br></pre></td></tr></table></figure>
+
+<p>2，新建文件，粘贴并内容，并保存！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/systemd/system/docker.service.d/http-proxy.conf</span><br></pre></td></tr></table></figure>
+
+<p>以下粘贴内容，IP 一定要换成你代理软件运行的电脑的内网 IP，通过 ipconfig 可以查看</p>
+<p>端口一定要是代理软件设置的局域网端口！</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">Environment=&quot;HTTP_PROXY=http://USERNAME:PASSWORD@[your.proxy.server]:[port]&quot;</span><br><span class="line">Environment=&quot;HTTPS_PROXY=http://USERNAME:PASSWORD@[your.proxy.server]:[port]0&quot;</span><br><span class="line">Environment=&quot;NO_PROXY=localhost,127.0.0.1,.example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<p>3，重启 Docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>4，检查环境变量是否生效</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl show --property=Environment docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="高门槛"><a href="#高门槛" class="headerlink" title="高门槛"></a>高门槛</h2><h3 id="Cloudflare-反向代理"><a href="#Cloudflare-反向代理" class="headerlink" title="Cloudflare 反向代理"></a>Cloudflare 反向代理</h3><p><strong>优点：只需有 CF 账号就行，自己专属，不用自己签发证书</strong></p>
+<p><strong>缺点：CF 在国内有 DNS 污染，可能无法正常访问</strong></p>
+<h4 id="简要步骤："><a href="#简要步骤：" class="headerlink" title="简要步骤："></a>简要步骤：</h4><h5 id="1，登录到-CF"><a href="#1，登录到-CF" class="headerlink" title="1，登录到 CF"></a>1，登录到 CF</h5><p><a target="_blank" rel="noopener" href="https://dash.cloudflare.com/">https://dash.cloudflare.com/</a></p>
+<h5 id="2，创建Workers"><a href="#2，创建Workers" class="headerlink" title="2，创建Workers"></a>2，创建Workers</h5><p>控制台面板 -&gt; 左侧 Workers 和 Pages  -&gt;  创建应用程序  -&gt; 创建 Worker -&gt;  点击保存 -&gt; 点击完成 -&gt; 编辑代码<br><img src="https://i0.wp.com/t.663618.xyz/file/ba4e0b2aee6a75ba363aa.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/ba4e0b2aee6a75ba363aa.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/a784484b55e9fe512a1c4.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/a784484b55e9fe512a1c4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/c9f5528247a9d02951504.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/c9f5528247a9d02951504.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/24f0c9374fc5f9b3d92e7.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/24f0c9374fc5f9b3d92e7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/b94c3b45250e11377a582.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/b94c3b45250e11377a582.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/80dabbe9bf5b03bb6cd63.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/80dabbe9bf5b03bb6cd63.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/b46167b0026540fd077d9.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/b46167b0026540fd077d9.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<p><strong>worker.js 内容</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// _worker.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Docker镜像仓库主机地址</span></span><br><span class="line"><span class="keyword">let</span> hub_host = <span class="string">&#x27;registry-1.docker.io&#x27;</span></span><br><span class="line"><span class="comment">// Docker认证服务器地址</span></span><br><span class="line"><span class="keyword">const</span> auth_url = <span class="string">&#x27;https://auth.docker.io&#x27;</span></span><br><span class="line"><span class="comment">// 自定义的工作服务器地址</span></span><br><span class="line"><span class="keyword">let</span> workers_url = <span class="string">&#x27;https://你的域名&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 根据主机名选择对应的上游地址</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">routeByHosts</span>(<span class="params">host</span>) &#123;</span><br><span class="line">		<span class="comment">// 定义路由表</span></span><br><span class="line">	<span class="keyword">const</span> routes = &#123;</span><br><span class="line">		<span class="comment">// 生产环境</span></span><br><span class="line">		<span class="string">&quot;quay&quot;</span>: <span class="string">&quot;quay.io&quot;</span>,</span><br><span class="line">		<span class="string">&quot;gcr&quot;</span>: <span class="string">&quot;gcr.io&quot;</span>,</span><br><span class="line">		<span class="string">&quot;k8s-gcr&quot;</span>: <span class="string">&quot;k8s.gcr.io&quot;</span>,</span><br><span class="line">		<span class="string">&quot;k8s&quot;</span>: <span class="string">&quot;registry.k8s.io&quot;</span>,</span><br><span class="line">		<span class="string">&quot;ghcr&quot;</span>: <span class="string">&quot;ghcr.io&quot;</span>,</span><br><span class="line">		<span class="string">&quot;cloudsmith&quot;</span>: <span class="string">&quot;docker.cloudsmith.io&quot;</span>,</span><br><span class="line">	</span><br><span class="line">		<span class="comment">// 测试环境</span></span><br><span class="line">		<span class="string">&quot;test&quot;</span>: <span class="string">&quot;registry-1.docker.io&quot;</span>,</span><br><span class="line">	&#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (host <span class="keyword">in</span> routes) <span class="keyword">return</span> [ routes[host], <span class="literal">false</span> ];</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> [ hub_host, <span class="literal">true</span> ];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** <span class="doctag">@type</span> &#123;<span class="type">RequestInit</span>&#125; */</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PREFLIGHT_INIT</span> = &#123;</span><br><span class="line">	<span class="comment">// 预检请求配置</span></span><br><span class="line">	<span class="attr">headers</span>: <span class="keyword">new</span> <span class="title class_">Headers</span>(&#123;</span><br><span class="line">		<span class="string">&#x27;access-control-allow-origin&#x27;</span>: <span class="string">&#x27;*&#x27;</span>, <span class="comment">// 允许所有来源</span></span><br><span class="line">		<span class="string">&#x27;access-control-allow-methods&#x27;</span>: <span class="string">&#x27;GET,POST,PUT,PATCH,TRACE,DELETE,HEAD,OPTIONS&#x27;</span>, <span class="comment">// 允许的HTTP方法</span></span><br><span class="line">		<span class="string">&#x27;access-control-max-age&#x27;</span>: <span class="string">&#x27;1728000&#x27;</span>, <span class="comment">// 预检请求的缓存时间</span></span><br><span class="line">	&#125;),</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构造响应</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">any</span>&#125; body 响应体</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; status 响应状态码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Object&lt;string, string&gt;</span>&#125; headers 响应头</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">makeRes</span>(<span class="params">body, status = <span class="number">200</span>, headers = &#123;&#125;</span>) &#123;</span><br><span class="line">	headers[<span class="string">&#x27;access-control-allow-origin&#x27;</span>] = <span class="string">&#x27;*&#x27;</span> <span class="comment">// 允许所有来源</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(body, &#123; status, headers &#125;) <span class="comment">// 返回新构造的响应</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构造新的URL对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; urlStr URL字符串</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">newUrl</span>(<span class="params">urlStr</span>) &#123;</span><br><span class="line">	<span class="keyword">try</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title function_">URL</span>(urlStr) <span class="comment">// 尝试构造新的URL对象</span></span><br><span class="line">	&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">null</span> <span class="comment">// 构造失败返回null</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">isUUID</span>(<span class="params">uuid</span>) &#123;</span><br><span class="line">	<span class="comment">// 定义一个正则表达式来匹配 UUID 格式</span></span><br><span class="line">	<span class="keyword">const</span> uuidRegex = <span class="regexp">/^[0-9a-f]&#123;8&#125;-[0-9a-f]&#123;4&#125;-[4][0-9a-f]&#123;3&#125;-[89ab][0-9a-f]&#123;3&#125;-[0-9a-f]&#123;12&#125;$/i</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 使用正则表达式测试 UUID 字符串</span></span><br><span class="line">	<span class="keyword">return</span> uuidRegex.<span class="title function_">test</span>(uuid);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">nginx</span>(<span class="params"></span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> text = <span class="string">`</span></span><br><span class="line"><span class="string">	&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="string">	&lt;html&gt;</span></span><br><span class="line"><span class="string">	&lt;head&gt;</span></span><br><span class="line"><span class="string">	&lt;title&gt;Welcome to nginx!&lt;/title&gt;</span></span><br><span class="line"><span class="string">	&lt;style&gt;</span></span><br><span class="line"><span class="string">		body &#123;</span></span><br><span class="line"><span class="string">			width: 35em;</span></span><br><span class="line"><span class="string">			margin: 0 auto;</span></span><br><span class="line"><span class="string">			font-family: Tahoma, Verdana, Arial, sans-serif;</span></span><br><span class="line"><span class="string">		&#125;</span></span><br><span class="line"><span class="string">	&lt;/style&gt;</span></span><br><span class="line"><span class="string">	&lt;/head&gt;</span></span><br><span class="line"><span class="string">	&lt;body&gt;</span></span><br><span class="line"><span class="string">	&lt;h1&gt;Welcome to nginx!&lt;/h1&gt;</span></span><br><span class="line"><span class="string">	&lt;p&gt;If you see this page, the nginx web server is successfully installed and</span></span><br><span class="line"><span class="string">	working. Further configuration is required.&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	&lt;p&gt;For online documentation and support please refer to</span></span><br><span class="line"><span class="string">	&lt;a href=&quot;http://nginx.org/&quot;&gt;nginx.org&lt;/a&gt;.&lt;br/&gt;</span></span><br><span class="line"><span class="string">	Commercial support is available at</span></span><br><span class="line"><span class="string">	&lt;a href=&quot;http://nginx.com/&quot;&gt;nginx.com&lt;/a&gt;.&lt;/p&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	&lt;p&gt;&lt;em&gt;Thank you for using nginx.&lt;/em&gt;&lt;/p&gt;</span></span><br><span class="line"><span class="string">	&lt;/body&gt;</span></span><br><span class="line"><span class="string">	&lt;/html&gt;</span></span><br><span class="line"><span class="string">	`</span></span><br><span class="line">	<span class="keyword">return</span> text ;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="keyword">async</span> <span class="title function_">fetch</span>(<span class="params">request, env, ctx</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> <span class="title function_">getReqHeader</span> = (<span class="params">key</span>) =&gt; request.<span class="property">headers</span>.<span class="title function_">get</span>(key); <span class="comment">// 获取请求头</span></span><br><span class="line"></span><br><span class="line">		<span class="keyword">let</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(request.<span class="property">url</span>); <span class="comment">// 解析请求URL</span></span><br><span class="line">		workers_url = <span class="string">`https://<span class="subst">$&#123;url.hostname&#125;</span>`</span>;</span><br><span class="line">		<span class="keyword">const</span> pathname = url.<span class="property">pathname</span>;</span><br><span class="line">		<span class="keyword">const</span> hostname = url.<span class="property">searchParams</span>.<span class="title function_">get</span>(<span class="string">&#x27;hubhost&#x27;</span>) || url.<span class="property">hostname</span>; </span><br><span class="line">		<span class="keyword">const</span> hostTop = hostname.<span class="title function_">split</span>(<span class="string">&#x27;.&#x27;</span>)[<span class="number">0</span>];<span class="comment">// 获取主机名的第一部分</span></span><br><span class="line">		<span class="keyword">const</span> checkHost = <span class="title function_">routeByHosts</span>(hostTop);</span><br><span class="line">		hub_host = checkHost[<span class="number">0</span>]; <span class="comment">// 获取上游地址</span></span><br><span class="line">		<span class="keyword">const</span> fakePage = checkHost[<span class="number">1</span>];</span><br><span class="line">		<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`域名头部: <span class="subst">$&#123;hostTop&#125;</span>\n反代地址: <span class="subst">$&#123;hub_host&#125;</span>\n伪装首页: <span class="subst">$&#123;fakePage&#125;</span>`</span>);</span><br><span class="line">		<span class="keyword">const</span> isUuid = <span class="title function_">isUUID</span>(pathname.<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>)[<span class="number">1</span>].<span class="title function_">split</span>(<span class="string">&#x27;/&#x27;</span>)[<span class="number">0</span>]);</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">const</span> conditions = [</span><br><span class="line">			isUuid,</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/_&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/r&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/v2/user&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/v2/orgs&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/v2/_catalog&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/v2/categories&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;/v2/feature-flags&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;search&#x27;</span>),</span><br><span class="line">			pathname.<span class="title function_">includes</span>(<span class="string">&#x27;source&#x27;</span>),</span><br><span class="line">			pathname === <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">			pathname === <span class="string">&#x27;/favicon.ico&#x27;</span>,</span><br><span class="line">			pathname === <span class="string">&#x27;/auth/profile&#x27;</span>,</span><br><span class="line">		];</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (conditions.<span class="title function_">some</span>(<span class="function"><span class="params">condition</span> =&gt;</span> condition) &amp;&amp; (fakePage === <span class="literal">true</span> || hostTop == <span class="string">&#x27;docker&#x27;</span>)) &#123;</span><br><span class="line">			<span class="keyword">if</span> (env.<span class="property">URL302</span>)&#123;</span><br><span class="line">				<span class="keyword">return</span> <span class="title class_">Response</span>.<span class="title function_">redirect</span>(env.<span class="property">URL302</span>, <span class="number">302</span>);</span><br><span class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> (env.<span class="property">URL</span>)&#123;</span><br><span class="line">				<span class="keyword">if</span> (env.<span class="property">URL</span>.<span class="title function_">toLowerCase</span>() == <span class="string">&#x27;nginx&#x27;</span>)&#123;</span><br><span class="line">					<span class="comment">//首页改成一个nginx伪装页</span></span><br><span class="line">					<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="keyword">await</span> <span class="title function_">nginx</span>(), &#123;</span><br><span class="line">						<span class="attr">headers</span>: &#123;</span><br><span class="line">							<span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;text/html; charset=UTF-8&#x27;</span>,</span><br><span class="line">						&#125;,</span><br><span class="line">					&#125;);</span><br><span class="line">				&#125; <span class="keyword">else</span> <span class="keyword">return</span> <span class="title function_">fetch</span>(<span class="keyword">new</span> <span class="title class_">Request</span>(env.<span class="property">URL</span>, request));</span><br><span class="line">			&#125;</span><br><span class="line">		</span><br><span class="line">			<span class="keyword">const</span> newUrl = <span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&quot;https://registry.hub.docker.com&quot;</span> + pathname + url.<span class="property">search</span>);</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 复制原始请求的标头</span></span><br><span class="line">			<span class="keyword">const</span> headers = <span class="keyword">new</span> <span class="title class_">Headers</span>(request.<span class="property">headers</span>);</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 确保 Host 头部被替换为 hub.docker.com</span></span><br><span class="line">			headers.<span class="title function_">set</span>(<span class="string">&#x27;Host&#x27;</span>, <span class="string">&#x27;registry.hub.docker.com&#x27;</span>);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">const</span> newRequest = <span class="keyword">new</span> <span class="title class_">Request</span>(newUrl, &#123;</span><br><span class="line">					<span class="attr">method</span>: request.<span class="property">method</span>,</span><br><span class="line">					<span class="attr">headers</span>: headers,</span><br><span class="line">					<span class="attr">body</span>: request.<span class="property">method</span> !== <span class="string">&#x27;GET&#x27;</span> &amp;&amp; request.<span class="property">method</span> !== <span class="string">&#x27;HEAD&#x27;</span> ? <span class="keyword">await</span> request.<span class="title function_">blob</span>() : <span class="literal">null</span>,</span><br><span class="line">					<span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span></span><br><span class="line">			&#125;);</span><br><span class="line"></span><br><span class="line">			<span class="keyword">return</span> <span class="title function_">fetch</span>(newRequest);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 修改包含 %2F 和 %3A 的请求</span></span><br><span class="line">		<span class="keyword">if</span> (!<span class="regexp">/%2F/</span>.<span class="title function_">test</span>(url.<span class="property">search</span>) &amp;&amp; <span class="regexp">/%3A/</span>.<span class="title function_">test</span>(url.<span class="title function_">toString</span>())) &#123;</span><br><span class="line">			<span class="keyword">let</span> modifiedUrl = url.<span class="title function_">toString</span>().<span class="title function_">replace</span>(<span class="regexp">/%3A(?=.*?&amp;)/</span>, <span class="string">&#x27;%3Alibrary%2F&#x27;</span>);</span><br><span class="line">			url = <span class="keyword">new</span> <span class="title function_">URL</span>(modifiedUrl);</span><br><span class="line">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`handle_url: <span class="subst">$&#123;url&#125;</span>`</span>)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 处理token请求</span></span><br><span class="line">		<span class="keyword">if</span> (url.<span class="property">pathname</span>.<span class="title function_">includes</span>(<span class="string">&#x27;/token&#x27;</span>)) &#123;</span><br><span class="line">			<span class="keyword">let</span> token_parameter = &#123;</span><br><span class="line">				<span class="attr">headers</span>: &#123;</span><br><span class="line">					<span class="string">&#x27;Host&#x27;</span>: <span class="string">&#x27;auth.docker.io&#x27;</span>,</span><br><span class="line">					<span class="string">&#x27;User-Agent&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;User-Agent&quot;</span>),</span><br><span class="line">					<span class="string">&#x27;Accept&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept&quot;</span>),</span><br><span class="line">					<span class="string">&#x27;Accept-Language&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept-Language&quot;</span>),</span><br><span class="line">					<span class="string">&#x27;Accept-Encoding&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept-Encoding&quot;</span>),</span><br><span class="line">					<span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>,</span><br><span class="line">					<span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;max-age=0&#x27;</span></span><br><span class="line">				&#125;</span><br><span class="line">			&#125;;</span><br><span class="line">			<span class="keyword">let</span> token_url = auth_url + url.<span class="property">pathname</span> + url.<span class="property">search</span></span><br><span class="line">			<span class="keyword">return</span> <span class="title function_">fetch</span>(<span class="keyword">new</span> <span class="title class_">Request</span>(token_url, request), token_parameter)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 修改 /v2/ 请求路径</span></span><br><span class="line">		<span class="keyword">if</span> (<span class="regexp">/^\/v2\/[^/]+\/[^/]+\/[^/]+$/</span>.<span class="title function_">test</span>(url.<span class="property">pathname</span>) &amp;&amp; !<span class="regexp">/^\/v2\/library/</span>.<span class="title function_">test</span>(url.<span class="property">pathname</span>)) &#123;</span><br><span class="line">			url.<span class="property">pathname</span> = url.<span class="property">pathname</span>.<span class="title function_">replace</span>(<span class="regexp">/\/v2\//</span>, <span class="string">&#x27;/v2/library/&#x27;</span>);</span><br><span class="line">			<span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`modified_url: <span class="subst">$&#123;url.pathname&#125;</span>`</span>)</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 更改请求的主机名</span></span><br><span class="line">		url.<span class="property">hostname</span> = hub_host;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 构造请求参数</span></span><br><span class="line">		<span class="keyword">let</span> parameter = &#123;</span><br><span class="line">			<span class="attr">headers</span>: &#123;</span><br><span class="line">				<span class="string">&#x27;Host&#x27;</span>: hub_host,</span><br><span class="line">				<span class="string">&#x27;User-Agent&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;User-Agent&quot;</span>),</span><br><span class="line">				<span class="string">&#x27;Accept&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept&quot;</span>),</span><br><span class="line">				<span class="string">&#x27;Accept-Language&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept-Language&quot;</span>),</span><br><span class="line">				<span class="string">&#x27;Accept-Encoding&#x27;</span>: <span class="title function_">getReqHeader</span>(<span class="string">&quot;Accept-Encoding&quot;</span>),</span><br><span class="line">				<span class="string">&#x27;Connection&#x27;</span>: <span class="string">&#x27;keep-alive&#x27;</span>,</span><br><span class="line">				<span class="string">&#x27;Cache-Control&#x27;</span>: <span class="string">&#x27;max-age=0&#x27;</span></span><br><span class="line">			&#125;,</span><br><span class="line">			<span class="attr">cacheTtl</span>: <span class="number">3600</span> <span class="comment">// 缓存时间</span></span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 添加Authorization头</span></span><br><span class="line">		<span class="keyword">if</span> (request.<span class="property">headers</span>.<span class="title function_">has</span>(<span class="string">&quot;Authorization&quot;</span>)) &#123;</span><br><span class="line">			parameter.<span class="property">headers</span>.<span class="property">Authorization</span> = <span class="title function_">getReqHeader</span>(<span class="string">&quot;Authorization&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 发起请求并处理响应</span></span><br><span class="line">		<span class="keyword">let</span> original_response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="keyword">new</span> <span class="title class_">Request</span>(url, request), parameter)</span><br><span class="line">		<span class="keyword">let</span> original_response_clone = original_response.<span class="title function_">clone</span>();</span><br><span class="line">		<span class="keyword">let</span> original_text = original_response_clone.<span class="property">body</span>;</span><br><span class="line">		<span class="keyword">let</span> response_headers = original_response.<span class="property">headers</span>;</span><br><span class="line">		<span class="keyword">let</span> new_response_headers = <span class="keyword">new</span> <span class="title class_">Headers</span>(response_headers);</span><br><span class="line">		<span class="keyword">let</span> status = original_response.<span class="property">status</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 修改 Www-Authenticate 头</span></span><br><span class="line">		<span class="keyword">if</span> (new_response_headers.<span class="title function_">get</span>(<span class="string">&quot;Www-Authenticate&quot;</span>)) &#123;</span><br><span class="line">			<span class="keyword">let</span> auth = new_response_headers.<span class="title function_">get</span>(<span class="string">&quot;Www-Authenticate&quot;</span>);</span><br><span class="line">			<span class="keyword">let</span> re = <span class="keyword">new</span> <span class="title class_">RegExp</span>(auth_url, <span class="string">&#x27;g&#x27;</span>);</span><br><span class="line">			new_response_headers.<span class="title function_">set</span>(<span class="string">&quot;Www-Authenticate&quot;</span>, response_headers.<span class="title function_">get</span>(<span class="string">&quot;Www-Authenticate&quot;</span>).<span class="title function_">replace</span>(re, workers_url));</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 处理重定向</span></span><br><span class="line">		<span class="keyword">if</span> (new_response_headers.<span class="title function_">get</span>(<span class="string">&quot;Location&quot;</span>)) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="title function_">httpHandler</span>(request, new_response_headers.<span class="title function_">get</span>(<span class="string">&quot;Location&quot;</span>))</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 返回修改后的响应</span></span><br><span class="line">		<span class="keyword">let</span> response = <span class="keyword">new</span> <span class="title class_">Response</span>(original_text, &#123;</span><br><span class="line">			status,</span><br><span class="line">			<span class="attr">headers</span>: new_response_headers</span><br><span class="line">		&#125;)</span><br><span class="line">		<span class="keyword">return</span> response;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 处理HTTP请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">Request</span>&#125; req 请求对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; pathname 请求路径</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">httpHandler</span>(<span class="params">req, pathname</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> reqHdrRaw = req.<span class="property">headers</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">// 处理预检请求</span></span><br><span class="line">	<span class="keyword">if</span> (req.<span class="property">method</span> === <span class="string">&#x27;OPTIONS&#x27;</span> &amp;&amp;</span><br><span class="line">		reqHdrRaw.<span class="title function_">has</span>(<span class="string">&#x27;access-control-request-headers&#x27;</span>)</span><br><span class="line">	) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(<span class="literal">null</span>, <span class="variable constant_">PREFLIGHT_INIT</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> rawLen = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> reqHdrNew = <span class="keyword">new</span> <span class="title class_">Headers</span>(reqHdrRaw)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> refer = reqHdrNew.<span class="title function_">get</span>(<span class="string">&#x27;referer&#x27;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">let</span> urlStr = pathname</span><br><span class="line"></span><br><span class="line">	<span class="keyword">const</span> urlObj = <span class="title function_">newUrl</span>(urlStr)</span><br><span class="line"></span><br><span class="line">	<span class="comment">/** <span class="doctag">@type</span> &#123;<span class="type">RequestInit</span>&#125; */</span></span><br><span class="line">	<span class="keyword">const</span> reqInit = &#123;</span><br><span class="line">		<span class="attr">method</span>: req.<span class="property">method</span>,</span><br><span class="line">		<span class="attr">headers</span>: reqHdrNew,</span><br><span class="line">		<span class="attr">redirect</span>: <span class="string">&#x27;follow&#x27;</span>,</span><br><span class="line">		<span class="attr">body</span>: req.<span class="property">body</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="title function_">proxy</span>(urlObj, reqInit, rawLen)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 代理请求</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">URL</span>&#125; urlObj URL对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">RequestInit</span>&#125; reqInit 请求初始化对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; rawLen 原始长度</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">proxy</span>(<span class="params">urlObj, reqInit, rawLen</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(urlObj.<span class="property">href</span>, reqInit)</span><br><span class="line">	<span class="keyword">const</span> resHdrOld = res.<span class="property">headers</span></span><br><span class="line">	<span class="keyword">const</span> resHdrNew = <span class="keyword">new</span> <span class="title class_">Headers</span>(resHdrOld)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 验证长度</span></span><br><span class="line">	<span class="keyword">if</span> (rawLen) &#123;</span><br><span class="line">		<span class="keyword">const</span> newLen = resHdrOld.<span class="title function_">get</span>(<span class="string">&#x27;content-length&#x27;</span>) || <span class="string">&#x27;&#x27;</span></span><br><span class="line">		<span class="keyword">const</span> badLen = (rawLen !== newLen)</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (badLen) &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="title function_">makeRes</span>(res.<span class="property">body</span>, <span class="number">400</span>, &#123;</span><br><span class="line">				<span class="string">&#x27;--error&#x27;</span>: <span class="string">`bad len: <span class="subst">$&#123;newLen&#125;</span>, except: <span class="subst">$&#123;rawLen&#125;</span>`</span>,</span><br><span class="line">				<span class="string">&#x27;access-control-expose-headers&#x27;</span>: <span class="string">&#x27;--error&#x27;</span>,</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">const</span> status = res.<span class="property">status</span></span><br><span class="line">	resHdrNew.<span class="title function_">set</span>(<span class="string">&#x27;access-control-expose-headers&#x27;</span>, <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">	resHdrNew.<span class="title function_">set</span>(<span class="string">&#x27;access-control-allow-origin&#x27;</span>, <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">	resHdrNew.<span class="title function_">set</span>(<span class="string">&#x27;Cache-Control&#x27;</span>, <span class="string">&#x27;max-age=1500&#x27;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 删除不必要的头</span></span><br><span class="line">	resHdrNew.<span class="title function_">delete</span>(<span class="string">&#x27;content-security-policy&#x27;</span>)</span><br><span class="line">	resHdrNew.<span class="title function_">delete</span>(<span class="string">&#x27;content-security-policy-report-only&#x27;</span>)</span><br><span class="line">	resHdrNew.<span class="title function_">delete</span>(<span class="string">&#x27;clear-site-data&#x27;</span>)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Response</span>(res.<span class="property">body</span>, &#123;</span><br><span class="line">		status,</span><br><span class="line">		<span class="attr">headers</span>: resHdrNew</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改自定义域名 需要是托管dns在cloudflare的域名才可以<br><img src="https://i0.wp.com/t.663618.xyz/file/10452181adbfaa8331b7e.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/10452181adbfaa8331b7e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br><img src="https://i0.wp.com/t.663618.xyz/file/3989bf3d506bd7c03666b.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/3989bf3d506bd7c03666b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<h5 id="3，点击部署即可，右上角-deploy保存"><a href="#3，点击部署即可，右上角-deploy保存" class="headerlink" title="3，点击部署即可，右上角 deploy保存"></a><strong>3，点击部署即可，右上角 deploy保存</strong></h5><p><img src="https://i0.wp.com/t.663618.xyz/file/2c1ec18403e82221aafc8.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/2c1ec18403e82221aafc8.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<h5 id="4，绑定自定义域名"><a href="#4，绑定自定义域名" class="headerlink" title="4，绑定自定义域名"></a><strong>4，绑定自定义域名</strong></h5><p>设置 -&gt; 触发器 -&gt; 自定义域 -&gt; 点击【添加自定义域】<br><img src="https://i0.wp.com/t.663618.xyz/file/c66e8ee6ccd6ee18322cc.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/c66e8ee6ccd6ee18322cc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"></p>
+<p>这里添加上自定义域名 [假如我的是mirrors.dockerpull.com]<br><img src="https://i0.wp.com/t.663618.xyz/file/c07247b2579b5bc9627d2.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/c07247b2579b5bc9627d2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br>保存 大功告成 现在可以用这个自定义的域名访问了<br><strong>演示地址：dockerhub.o0o.us.kg</strong><br>接下来还有可以选择开启的环境变量功能 就是伪装首页</p>
+<h4 id="变量说明"><a href="#变量说明" class="headerlink" title="变量说明"></a>变量说明</h4><table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>URL302</td>
+<td><a target="_blank" rel="noopener" href="https://baidu.com/">https://baidu.com</a></td>
+<td>主页302跳转</td>
+</tr>
+<tr>
+<td>URL</td>
+<td><a target="_blank" rel="noopener" href="https://dockerpull.com/">https://dockerpull.com 121</a></td>
+<td>主页伪装(设为<code>nginx</code>则伪装为nginx默认页面)</td>
+</tr>
+</tbody></table>
+<p>如果你像我的<a target="_blank" rel="noopener" href="https://dockerpull.com/">dockerpull.com 40</a>无所畏惧 就可以不管<br>如果你想自己稳定使用 不想公开的话 可以设置伪装页面<br>找到设置 环境变量<br><img src="https://i0.wp.com/t.663618.xyz/file/be66523d7d9fb43e3a726.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/be66523d7d9fb43e3a726.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br>如果想别人访问域名首页的时候重定向到别的网站<br>可以加入环境变量<code>URL302</code>必须要大写的哈 然后值填写需要目标域名 我以跳转到百度为例<br><img src="https://i0.wp.com/t.663618.xyz/file/da67febcfff2494887d22.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/da67febcfff2494887d22.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br>保存之后 访问首页就会自动跳转到百度 但是拉取docker镜像的时候 不会受到影响</p>
+<p>第二种 是伪装首页 可以伪装成任意的网页首页 变量名称改为<code>URL</code> 也是要大写 值输入<a target="_blank" rel="noopener" href="https://dockerpull.com/">https://dockerpull.com</a> 保存<br><img src="https://i0.wp.com/t.663618.xyz/file/1bf42e3a7e3dcf6f0debc.png" class="lazyload placeholder" data-srcset="https://i0.wp.com/t.663618.xyz/file/1bf42e3a7e3dcf6f0debc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image.png"><br>这时候访问域名 就会出现我的那个镜像站的页面，当然也可以用别的页面</p>
+<h3 id="使用服务器自建"><a href="#使用服务器自建" class="headerlink" title="使用服务器自建"></a>使用服务器自建</h3><p><strong>优点：需要有境外服务器</strong></p>
+<p><strong>缺点：网络可能慢或者不稳定</strong></p>
+<p>这种方法需要自己有一台境外服务器，签发域名证书。按下面配置即可！</p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>当您首次从本地注册表镜像请求图像时，它会从公共Docker注册表中拉取图像，并在将其返回给您之前将其存储在本地。在后续的请求中，本地注册表镜像可以从自己的存储中提供图像。</p>
+<h4 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h4><p>1.一个没有被墙的、延迟和带宽较好的非大陆小鸡（墙了的话可以试试套cf）</p>
+<p>2.一个域名，无需备案，解析到你的小鸡的ip上，申请好证书，后续反代需要</p>
+<p>3.安装好了docker及docker-compose</p>
+<h4 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h4><h5 id="docker-compose安装"><a href="#docker-compose安装" class="headerlink" title="docker-compose安装"></a>docker-compose安装</h5><p>首先创建一个docker-compose文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi registry/docker-compose.yml</span><br></pre></td></tr></table></figure>
+
+<p>然后粘贴如下内容</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#version: <span class="string">&#x27;3&#x27;</span> #最新版本docker 不在需要此字段</span></span><br><span class="line"><span class="symbol">services:</span></span><br><span class="line"><span class="symbol">  registry:</span></span><br><span class="line"><span class="symbol">    image:</span> registry:<span class="number">2</span></span><br><span class="line"><span class="symbol">    ports:</span></span><br><span class="line">      - <span class="string">&quot;15000:5000&quot;</span></span><br><span class="line"><span class="symbol">    environment:</span></span><br><span class="line"><span class="symbol">      REGISTRY_PROXY_REMOTEURL:</span> https:<span class="comment">//registry-1.docker.io  # 上游源</span></span><br><span class="line"><span class="symbol">      REGISTRY_STORAGE_CACHE_BLOBDESCRIPTOR:</span> inmemory <span class="meta"># 内存缓存</span></span><br><span class="line"><span class="symbol">    volumes:</span></span><br><span class="line">      - ./data:<span class="keyword">/var/</span>lib/registry</span><br></pre></td></tr></table></figure>
+
+<p>使用docker-compose命令一键启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<h5 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h5><p>需要注意的是如果仅仅作为镜像源，需要把push功能ban掉，推荐使用nginx反代的时候禁止其他http method</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 端口, 域名 都改为自己的</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> my-registry-domain.com;</span><br><span class="line"> </span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="comment"># 仅允许 GET 请求</span></span><br><span class="line">        <span class="attribute">limit_except</span> GET &#123;</span><br><span class="line">            <span class="attribute">deny</span> all;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:15000;  <span class="comment"># 假设 Docker Registry 运行在本地的 15000 端口</span></span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="项目脚本部署"><a href="#项目脚本部署" class="headerlink" title="项目脚本部署"></a>项目脚本部署</h4><p>GitHub项目地址：<a target="_blank" rel="noopener" href="https://github.com/dqzboy/Docker-Proxy">https://github.com/dqzboy/Docker-Proxy</a></p>
+<h5 id="一键脚本执行"><a href="#一键脚本执行" class="headerlink" title="一键脚本执行"></a>一键脚本执行</h5><ul>
+<li>✨️ 一键部署Docker镜像代理服务的功能，支持基于官方Docker Registry的镜像代理.</li>
+<li>✨️ 支持多个镜像仓库的代理，包括Docker Hub、GitHub Container Registry (ghcr.io)、Quay Container Registry (quay.io)和 Kubernetes Container Registry (k8s.gcr.io)</li>
+<li>✨️ 自动检查并安装所需的依赖软件，如Docker、Nginx等，并确保系统环境满足运行要求.</li>
+<li>✨️ 自动清理注册表上传目录中的那些不再被任何镜像或清单引用的文件</li>
+<li>✨️ 提供了重启服务、更新服务、更新配置和卸载服务的功能，方便用户进行日常管理和维护</li>
+<li>✨️ 支持主流Linux发行版操作系统,例如centos、Ubuntu、Rocky、Debian、Rhel等</li>
+<li>✨️ 支持主流ARCH架构下部署，包括linux&#x2F;amd64、linux&#x2F;arm64</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">CentOS</span></span><br><span class="line">yum -y install wget curl</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ubuntu</span></span><br><span class="line">apt -y install wget curl</span><br><span class="line"></span><br><span class="line">bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/dqzboy/Docker-Proxy/main/install/DockerProxy_Install.sh)&quot;</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置nginx反向代理"><a href="#配置nginx反向代理" class="headerlink" title="配置nginx反向代理"></a>配置nginx反向代理</h5><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">### docker hub  51000</span></span><br><span class="line"><span class="comment">### gchr 52000</span></span><br><span class="line"><span class="comment">### gcr 53000</span></span><br><span class="line"><span class="comment">### k8s-gcr 54000</span></span><br><span class="line"><span class="comment">### quay 55000</span></span><br><span class="line"><span class="section">location</span><span class="regexp"> ^~</span> / &#123;</span><br><span class="line">    <span class="attribute">proxy_pass</span> http://127.0.0.1:51000; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> REMOTE-HOST <span class="variable">$remote_addr</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;upgrade&quot;</span>; </span><br><span class="line">    <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>; </span><br><span class="line">    <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>; </span><br><span class="line">    <span class="attribute">add_header</span> X-Cache <span class="variable">$upstream_cache_status</span>; </span><br><span class="line">    <span class="attribute">add_header</span> Strict-Transport-Security <span class="string">&quot;max-age=31536000&quot;</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="直接nginx反代"><a href="#直接nginx反代" class="headerlink" title="直接nginx反代"></a>直接nginx反代</h4><p>这里博主并未测试，下面内容仅供参考</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">            <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">            <span class="attribute">server_name</span> 域名;</span><br><span class="line"></span><br><span class="line">            <span class="attribute">ssl_certificate</span> 证书地址;</span><br><span class="line">            <span class="attribute">ssl_certificate_key</span> 密钥地址;</span><br><span class="line"></span><br><span class="line">            <span class="attribute">proxy_ssl_server_name</span> <span class="literal">on</span>; <span class="comment"># 启用SNI</span></span><br><span class="line"></span><br><span class="line">            <span class="attribute">ssl_session_timeout</span> <span class="number">24h</span>;</span><br><span class="line">            <span class="attribute">ssl_ciphers</span> <span class="string">&#x27;ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256&#x27;</span>;</span><br><span class="line">            <span class="attribute">ssl_protocols</span> TLSv1 TLSv1.<span class="number">1</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">            <span class="section">location</span> / &#123;</span><br><span class="line">                    <span class="attribute">proxy_pass</span> https://registry-1.docker.io;  <span class="comment"># Docker Hub 的官方镜像仓库</span></span><br><span class="line"></span><br><span class="line">                    <span class="attribute">proxy_set_header</span> Host registry-<span class="number">1</span>.docker.io;</span><br><span class="line">                    <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">                    <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">                    <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 关闭缓存</span></span><br><span class="line">                    <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 转发认证相关的头部</span></span><br><span class="line">                    <span class="attribute">proxy_set_header</span> Authorization <span class="variable">$http_authorization</span>;</span><br><span class="line">                    <span class="attribute">proxy_pass_header</span>  Authorization;</span><br><span class="line"></span><br><span class="line">                    <span class="comment"># 对 upstream 状态码检查，实现 error_page 错误重定向</span></span><br><span class="line">                    <span class="attribute">proxy_intercept_errors</span> <span class="literal">on</span>;</span><br><span class="line">                    <span class="comment"># error_page 指令默认只检查了第一次后端返回的状态码，开启后可以跟随多次重定向。</span></span><br><span class="line">                    <span class="attribute">recursive_error_pages</span> <span class="literal">on</span>;</span><br><span class="line">                    <span class="comment"># 根据状态码执行对应操作，以下为301、302、307状态码都会触发</span></span><br><span class="line">                    <span class="comment">#error_page 301 302 307 = @handle_redirect;</span></span><br><span class="line"></span><br><span class="line">                    <span class="attribute">error_page</span> <span class="number">429</span> = <span class="variable">@handle_too_many_requests</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">#处理重定向</span></span><br><span class="line">            <span class="section">location</span> <span class="variable">@handle_redirect</span> &#123;</span><br><span class="line">                    <span class="attribute">resolver</span> <span class="number">1.1.1.1</span>;</span><br><span class="line">                    <span class="attribute">set</span> <span class="variable">$saved_redirect_location</span> <span class="string">&#x27;<span class="variable">$upstream_http_location</span>&#x27;</span>;</span><br><span class="line">                    <span class="attribute">proxy_pass</span> <span class="variable">$saved_redirect_location</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment"># 处理429错误</span></span><br><span class="line">            <span class="section">location</span> <span class="variable">@handle_too_many_requests</span> &#123;</span><br><span class="line">                    <span class="attribute">proxy_set_header</span> Host 替换为在CloudFlare Worker设置的域名;  <span class="comment"># 替换为另一个服务器的地址</span></span><br><span class="line">                    <span class="attribute">proxy_pass</span> http://替换为在CloudFlare Worker设置的域名;</span><br><span class="line">                    <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">            &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="其他开源项目"><a href="#其他开源项目" class="headerlink" title="其他开源项目"></a>其他开源项目</h2><p><a target="_blank" rel="noopener" href="https://github.com/NoCLin/LightMirrors">https://github.com/NoCLin/LightMirrors</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/bboysoulcn/registry-mirror">https://github.com/bboysoulcn/registry-mirror</a></p>
+<h2 id="最后总结"><a href="#最后总结" class="headerlink" title="最后总结"></a>最后总结</h2><p>1，如临时使用，建议参与零门槛几个方案，方便快捷</p>
+<p>2，据说后面 pip 源可能也会受到影响，可用采用 HTTP 代理方式</p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Docker/" class="">
+              Docker
+            </a>
+          
+            <a href="/tags/cf-worker/" class="">
+              cf_worker
+            </a>
+          
+            <a href="/tags/%E5%8A%A0%E9%80%9F/" class="">
+              加速
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>myedunote</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2024/08/03/国内无法访问下载 Docker 镜像的多种解决方案/" target="_blank" title="国内无法访问下载 Docker 镜像的多种解决方案">https://myedunote.github.io/2024/08/03/国内无法访问下载 Docker 镜像的多种解决方案/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2024/08/03/%E4%B8%80%E4%B8%AALinux%E6%9C%8D%E5%8A%A1%E5%99%A8WEB%20SSH%E9%9D%A2%E6%9D%BF(webSSH&amp;webSFTP)/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">一个Linux服务器WEB SSH面板(webSSH&amp;webSFTP)</div>
+      </div>
+      
+      <!-- <div class="content">
+        
+[!WARNING]初次部署EasyNode，登录系统后务必记得修改默认账户密码 admin/admin！
+
+
+[!W
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2024/08/03/Docker%E9%83%A8%E7%BD%B2%E6%90%9C%E7%B4%A2%E5%B7%A5%E5%85%B7SearXNG/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">Docker部署搜索工具SearXNG</div>
+      </div>
+      <!-- <div class="content">
+        SearXNG 是用 Python 编写的一款开源搜索工具
+安装前准备工作SearXNG 文档地址：网页链接
+Githu
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>清，幽殇</h2>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Uexo</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:myedunote@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/myedunote"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1614647001"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%B6%E9%97%A8%E6%A7%9B"><span class="toc-text">零门槛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%83%E5%A4%96%E9%95%9C%E5%83%8F"><span class="toc-text">境外镜像</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker-Hub-%E9%95%9C%E5%83%8F%E5%8A%A0%E9%80%9F%E5%99%A8%E5%88%97%E8%A1%A8"><span class="toc-text">Docker Hub 镜像加速器列表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Yandex-%E5%AE%B9%E5%99%A8%E5%8A%A0%E9%80%9F"><span class="toc-text">Yandex 容器加速</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%8E%E9%97%A8%E6%A7%9B"><span class="toc-text">低门槛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Docker-%E4%BD%BF%E7%94%A8-HTTP-%E4%BB%A3%E7%90%86"><span class="toc-text">Docker 使用 HTTP 代理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E9%97%A8%E6%A7%9B"><span class="toc-text">高门槛</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Cloudflare-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">Cloudflare 反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%AE%80%E8%A6%81%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">简要步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EF%BC%8C%E7%99%BB%E5%BD%95%E5%88%B0-CF"><span class="toc-text">1，登录到 CF</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EF%BC%8C%E5%88%9B%E5%BB%BAWorkers"><span class="toc-text">2，创建Workers</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EF%BC%8C%E7%82%B9%E5%87%BB%E9%83%A8%E7%BD%B2%E5%8D%B3%E5%8F%AF%EF%BC%8C%E5%8F%B3%E4%B8%8A%E8%A7%92-deploy%E4%BF%9D%E5%AD%98"><span class="toc-text">3，点击部署即可，右上角 deploy保存</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%EF%BC%8C%E7%BB%91%E5%AE%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">4，绑定自定义域名</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%AF%B4%E6%98%8E"><span class="toc-text">变量说明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%87%AA%E5%BB%BA"><span class="toc-text">使用服务器自建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-text">前期准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#docker%E5%AE%89%E8%A3%85"><span class="toc-text">docker安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#docker-compose%E5%AE%89%E8%A3%85"><span class="toc-text">docker-compose安装</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">反向代理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E8%84%9A%E6%9C%AC%E9%83%A8%E7%BD%B2"><span class="toc-text">项目脚本部署</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E9%94%AE%E8%84%9A%E6%9C%AC%E6%89%A7%E8%A1%8C"><span class="toc-text">一键脚本执行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEnginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-text">配置nginx反向代理</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5nginx%E5%8F%8D%E4%BB%A3"><span class="toc-text">直接nginx反代</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE"><span class="toc-text">其他开源项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E5%90%8E%E6%80%BB%E7%BB%93"><span class="toc-text">最后总结</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Teambition%EF%BC%9A%E5%9B%BD%E9%99%85%E7%89%88%E5%88%97%E8%A1%A8%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F%E6%95%99%E7%A8%8B_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Teambition%EF%BC%9A%E5%9B%BD%E9%99%85%E7%89%88%E5%88%97%E8%A1%A8%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F%E6%95%99%E7%A8%8B_new/">Teambition：国际版列表目录程序教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/VPS%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC%E5%90%88%E9%9B%86/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/VPS%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC%E5%90%88%E9%9B%86/">VPS常用脚本合集</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Windows%E5%B9%B3%E5%8F%B0%E4%B8%8B%E4%BD%BF%E7%94%A8%20Rclone%20%E6%8C%82%E8%BD%BD%20OneDrive%20%E4%B8%BA%E6%9C%AC%E5%9C%B0%E7%A1%AC%E7%9B%98_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Windows%E5%B9%B3%E5%8F%B0%E4%B8%8B%E4%BD%BF%E7%94%A8%20Rclone%20%E6%8C%82%E8%BD%BD%20OneDrive%20%E4%B8%BA%E6%9C%AC%E5%9C%B0%E7%A1%AC%E7%9B%98_new/">indows平台下使用 Rclone 挂载 OneDrive 为本地硬盘</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/">X-UI和宝塔共存</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">Zfile搭建教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">proxychains搭建使用教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/">qBittorrent自动上传种子资源到onedrive或GoogleDrive教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">【京东订单自动评价脚本】批量一键自动评价追加图片</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
+</span>
+
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fas fa-moon" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Zerotier搭建私有根服务器及创建虚拟局域网 | Uexo</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    
+        <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    
+
+    
+        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  
+  <!-- 预加载动画 -->
+  <!-- 页面预加载动画 -->
+
+  
+    <div class="preloader_2" id="loader">
+  <div class="loader"></div>
+</div>
+
+  
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+</script>
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">Uexo</h3>
+      <h5 class="drawer-box-head_desc">寄蜉蝣于天地，渺沧海之一粟</h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/myedunote">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">Uexo</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">本地搜索</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/myedunote" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        Zerotier搭建私有根服务器及创建虚拟局域网
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-11-17 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E6%8A%80%E6%9C%AF%E6%90%AC%E7%A0%96/" class="post-detail-header_category">
+              技术搬砖
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h2 id="一、Zerotier-原理"><a href="#一、Zerotier-原理" class="headerlink" title="一、Zerotier 原理"></a>一、Zerotier 原理</h2><p><img src="https://pic.edunote.cn/i/2023/11/17/65573ed3d9fde.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/65573ed3d9fde.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665711994820.png"></p>
+<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><ol>
+<li>planet：核心角色，官方不允许自建私有，zerotier 的行星服务器，用于管理全球所有的 zerotier 客户端的地址信息，帮助建立客户端间的直接链接，以及在无法建立直接链接时，作为中继服务器转发设备间的流量。</li>
+<li>moon：官方允许自建私有，作为离客户端更近的中继服务器存在，可以使转发的效率更高。</li>
+</ol>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><ol>
+<li>客户端注册</li>
+</ol>
+<p>在内网机器上启动一个 zerotier 客户端，使用 join 加入一个网络，在控制台对客户端进行授权，此时 planet 上有如下记录：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10.0.0.1 - 150.0.0.1/15679</span><br><span class="line">10.0.0.2 - 160.0.0.1/22226</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2.尝试 p2p 连接</span><br></pre></td></tr></table></figure>
+
+
+<p>当在 <code>10.0.0.1</code> 机器上访问 <code>10.0.0.2</code>，内网机器向 planet 查询到目标地址的公网 <code>160.0.0.1</code>，端口为 22226。</p>
+<p><code>10.0.0.1</code> 尝试与 <code>160.0.0.1</code>的 22226 端口进行直接数据交互，这个过程称为 udp 打洞实现 p2p 直连。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3.planet 转发</span><br></pre></td></tr></table></figure>
+
+
+<p>由于各种网络限制，p2p 不能直连。</p>
+<p>此时通过 planet 转发，如果还配置了 moon 节点，此时会通过速度快的 moon 节点进行转发。</p>
+<p>如上图则大概率从上海的 moon 节点进行数据转发，此时网络取决于 moon 的带宽。</p>
+<h2 id="二、私有-zerotier-planet-的优势"><a href="#二、私有-zerotier-planet-的优势" class="headerlink" title="二、私有 zerotier-planet 的优势"></a>二、私有 zerotier-planet 的优势</h2><ul>
+<li>解除官方的设备连接数限制</li>
+<li>提升手机客户端连接的稳定性</li>
+</ul>
+<h2 id="三、搭建私有-planet"><a href="#三、搭建私有-planet" class="headerlink" title="三、搭建私有 planet"></a>三、搭建私有 planet</h2><p>了解了 zerotier 的概念原理，那么大概了解搭建私有 planet 的重要性。</p>
+<h3 id="1、运行控制器容器"><a href="#1、运行控制器容器" class="headerlink" title="1、运行控制器容器"></a>1、运行控制器容器</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name zt-ui \</span><br><span class="line">-v /home/docker/zt-ui/zerotier-one:/var/lib/zerotier-one \</span><br><span class="line">-v /home/docker/zt-ui/ztncui/etc:/opt/key-networks/ztncui/etc \</span><br><span class="line">-p 4000:4000 \</span><br><span class="line">-p 9993:9993 \</span><br><span class="line">-p 9993:9993/udp \</span><br><span class="line">-e MYADDR=1.1.1.1 \</span><br><span class="line">-e HTTP_PORT=4000 \</span><br><span class="line">-e HTTP_ALL_INTERFACES=<span class="built_in">yes</span> \</span><br><span class="line">-e ZTNCUI_PASSWD=admin123 \</span><br><span class="line">--restart=always \</span><br><span class="line">hausen1012/ztncui</span><br></pre></td></tr></table></figure>
+
+<p>这里需要注意的是传参需要将 <code>1.1.1.1</code> 修改为公网 ip。</p>
+<h3 id="2、生成-planet-文件"><a href="#2、生成-planet-文件" class="headerlink" title="2、生成 planet 文件"></a>2、生成 planet 文件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it zt-ui bash /tmp/patch.sh &amp;&amp; \</span><br><span class="line">docker restart zt-ui</span><br></pre></td></tr></table></figure>
+
+<p>如果 linux 内核版本太低，可能报错 <code>FATAL: kernel too old</code>，那么需要升级内核。</p>
+<p>当然，如果你觉得云服务器不太方便升级内核，那么完全可以用一台测试的虚拟机进行生成文件，文件生成后用 ftp 上传到 <code>/home/docker/zt-ui/zerotier-one</code> 目录，然后再启动容器。</p>
+<h3 id="3、测试"><a href="#3、测试" class="headerlink" title="3、测试"></a>3、测试</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it zt-ui zerotier-cli listmoons</span><br></pre></td></tr></table></figure>
+
+<p>显示如下内容则表示搭建成功</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span></span><br><span class="line"> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;00000004e3b1b4b0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;roots&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">   <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;identity&quot;</span><span class="punctuation">:</span> <span class="string">&quot;04e3b1b4b0:0:ea0c548b45efcc701c052305f06568c749a4647b9a5b111e2b372c05f7c3ed56ae1009c29cb1aa51d95057bf1b65b3a2f7b01d129437f6b72efd08f68281fb52&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;stableEndpoints&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">     <span class="string">&quot;1.1.1.1/9993&quot;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">   <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;signature&quot;</span><span class="punctuation">:</span> <span class="string">&quot;b4f539ef93e198203d9e270c155d091769408ff98489d83bcf6444d2a95112ca7369138b98d42512caa3c878f3eff2c27ecada28f549ea19e3a407e71bbeb008d51f6ba92af17e8b6e4c1b8eacbd4abc42f0f639746ea924cffb99b539f94e2b&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;timestamp&quot;</span><span class="punctuation">:</span> <span class="number">1665642068786</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;updatesMustBeSignedBy&quot;</span><span class="punctuation">:</span> <span class="string">&quot;7fcb120079801a1ddde8c1fb6657365351bca7279e8470728f4cf01fb5efc81b57cde03338b4ea76dfd39570f74f2654d8d52a22613e77ed2e4cbb46a648a42d&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;waiting&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line"> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+
+<p><code>1.1.1.1</code> 为公网 ip 则搭建 planet 成功。</p>
+<h2 id="四、创建私有网络"><a href="#四、创建私有网络" class="headerlink" title="四、创建私有网络"></a>四、创建私有网络</h2><p>访问 <code>http://公网ip:4000</code>，账号密码：admin&#x2F;admin123。</p>
+<h3 id="1、创建网络"><a href="#1、创建网络" class="headerlink" title="1、创建网络"></a>1、创建网络</h3><p><img src="https://pic.edunote.cn/i/2023/11/17/655740306fe22.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/655740306fe22.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665677264789.png"></p>
+<h4 id="2、初始化网络"><a href="#2、初始化网络" class="headerlink" title="2、初始化网络"></a>2、初始化网络</h4><p>点击 Easy setup</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/65574051b18aa.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/65574051b18aa.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665677326694.png"></p>
+<p>设置网段和子网掩码</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/6557405d31c20.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557405d31c20.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665677383128.png"></p>
+<h2 id="五、安装-zerotier-客户端"><a href="#五、安装-zerotier-客户端" class="headerlink" title="五、安装 zerotier 客户端"></a>五、安装 zerotier 客户端</h2><h3 id="docker-安装"><a href="#docker-安装" class="headerlink" title="docker 安装"></a>docker 安装</h3><p>既然已经搭建了私有的 planet，当然是使用自己的，需要先下载服务器 <code>/home/docker/zt-planet/zerotier-one</code> 目录下的 planet 文件。</p>
+<h5 id="1、启动-zerotier-客户端"><a href="#1、启动-zerotier-客户端" class="headerlink" title="1、启动 zerotier 客户端"></a>1、启动 zerotier 客户端</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name=zt-cli \</span><br><span class="line">--device=/dev/net/tun \</span><br><span class="line">--net=host \</span><br><span class="line">--cap-add=NET_ADMIN \</span><br><span class="line">--cap-add=SYS_ADMIN -d \</span><br><span class="line">-v /home/docker/zt-client/zerotier-one:/var/lib/zerotier-one \</span><br><span class="line">--restart unless-stopped \</span><br><span class="line">hausen1012/zerotier</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、替换-planet-文件"><a href="#2、替换-planet-文件" class="headerlink" title="2、替换 planet 文件"></a>2、替换 planet 文件</h5><p>将服务器下载的 planet 文件上传到客户端的 <code>/home/docker/zt-client/zerotier-one</code> 目录。</p>
+<h5 id="3、重启客户端"><a href="#3、重启客户端" class="headerlink" title="3、重启客户端"></a>3、重启客户端</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart zt-cli</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、查看-planet"><a href="#4、查看-planet" class="headerlink" title="4、查看 planet"></a>4、查看 planet</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it zt-cli zerotier-cli listpeers</span><br></pre></td></tr></table></figure>
+
+<p>可以看见 stableEndpoints 的配置是自己的公网 ip。</p>
+<h5 id="5、加入网络"><a href="#5、加入网络" class="headerlink" title="5、加入网络"></a>5、加入网络</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it zt-cli zerotier-cli <span class="built_in">join</span> 8b8b9ed58a10bd45</span><br></pre></td></tr></table></figure>
+
+<h5 id="6、授权"><a href="#6、授权" class="headerlink" title="6、授权"></a>6、授权</h5><p><img src="https://pic.edunote.cn/i/2023/11/17/6557409591b94.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557409591b94.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665677970480.png"></p>
+<p>ip 也可以自己设置，不过要在刚刚设置的网段内。</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/655740a1edf11.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/655740a1edf11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665678246335.png"></p>
+<h3 id="Linux安装"><a href="#Linux安装" class="headerlink" title="Linux安装"></a>Linux安装</h3><h5 id="1、简单快捷，只要执行以下命令一键安装即可。"><a href="#1、简单快捷，只要执行以下命令一键安装即可。" class="headerlink" title="1、简单快捷，只要执行以下命令一键安装即可。"></a>1、简单快捷，只要执行以下命令一键安装即可。</h5><p>安装完成后会自动在<code>**/var/lib/zerotier-one/**</code>下生成相关文件及目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://install.zerotier.com | sudo bash</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://pic.edunote.cn/i/2023/11/17/655741b3b18c5.webp" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/655741b3b18c5.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"></p>
+<h5 id="2、替换planet文件"><a href="#2、替换planet文件" class="headerlink" title="2、替换planet文件"></a>2、替换planet文件</h5><p>需要先下载服务器 <code>/home/docker/zt-planet/zerotier-one</code> 目录下的 planet 文件</p>
+<p>将服务器下载的 planet 文件上传到客户端的 <code>/var/lib/zerotier-one</code> 目录</p>
+<h5 id="3、添加开机自启"><a href="#3、添加开机自启" class="headerlink" title="3、添加开机自启"></a>3、添加开机自启</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> zerotier-one.service</span><br></pre></td></tr></table></figure>
+
+<h5 id="4、启动zerotier-one-service"><a href="#4、启动zerotier-one-service" class="headerlink" title="4、启动zerotier-one.service"></a>4、启动zerotier-one.service</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start zerotier-one.service</span><br></pre></td></tr></table></figure>
+
+<h5 id="5、加入网络-1"><a href="#5、加入网络-1" class="headerlink" title="5、加入网络"></a>5、加入网络</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli <span class="built_in">join</span> <span class="comment">################（networkid）</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="6、查看加入的网络的信息，比如network"><a href="#6、查看加入的网络的信息，比如network" class="headerlink" title="6、查看加入的网络的信息，比如network"></a>6、查看加入的网络的信息，比如network</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli listnetworks</span><br></pre></td></tr></table></figure>
+
+<p># 如果连接成功，并且管理页面中勾选此客户端，则会返回以下内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">200 listnetworks &lt;nwid&gt; &lt;name&gt; &lt;mac&gt; &lt;status&gt; &lt;<span class="built_in">type</span>&gt; &lt;dev&gt; &lt;ZT assigned ips&gt; </span><br><span class="line">200 listnetworks 830xxxxxxxx49 high_wozniak 4a:ce:1d:66:95:9b OK PRIVATE ztqu3hhgt3 10.147.18.122/24</span><br></pre></td></tr></table></figure>
+
+<h5 id="7、退出加入的network网段"><a href="#7、退出加入的network网段" class="headerlink" title="7、退出加入的network网段"></a>7、退出加入的network网段</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zerotier-cli leave <span class="comment">################（networkid）</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="8、卸载zerotier"><a href="#8、卸载zerotier" class="headerlink" title="8、卸载zerotier"></a>8、卸载zerotier</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum remove zerotier-one -y</span><br><span class="line"><span class="built_in">rm</span> -rf /var/lib/zerotier-one/</span><br></pre></td></tr></table></figure>
+
+<h3 id="windows-安装"><a href="#windows-安装" class="headerlink" title="windows 安装"></a>windows 安装</h3><h5 id="1、下载客户端"><a href="#1、下载客户端" class="headerlink" title="1、下载客户端"></a>1、下载客户端</h5><p><a target="_blank" rel="noopener" href="https://www.nodeseek.com/jump?to=https://www.zerotier.com/download/">下载地址</a></p>
+<h5 id="2、安装客户端"><a href="#2、安装客户端" class="headerlink" title="2、安装客户端"></a>2、安装客户端</h5><p>双击安装即可</p>
+<h5 id="3、替换-planet"><a href="#3、替换-planet" class="headerlink" title="3、替换 planet"></a>3、替换 planet</h5><p>将下载好的 planet 文件复制到 <code>C:\ProgramData\ZeroTier\One</code> 目录下，(这个目录是个隐藏目录，需要运允许查看隐藏目录才行)</p>
+<h5 id="4、重启服务"><a href="#4、重启服务" class="headerlink" title="4、重启服务"></a>4、重启服务</h5><p>如果仅仅只是重启 ui 是不行的，需要找到任务管理器 -&gt; 服务 -&gt; ZeroTierOneService，进行重启。</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/6557434c830b1.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557434c830b1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665726393553.png"></p>
+<h5 id="5、查看-planet"><a href="#5、查看-planet" class="headerlink" title="5、查看 planet"></a>5、查看 planet</h5><p><img src="https://pic.edunote.cn/i/2023/11/17/655743db1981e.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/655743db1981e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665726530197.png"></p>
+<p>可以看见 planet 地址是自己的公网。</p>
+<h5 id="6、加入网络"><a href="#6、加入网络" class="headerlink" title="6、加入网络"></a>6、加入网络</h5><p>点击右下角图标，join new network，输入刚刚创建的虚拟网络 id，我这边是 8b8b9ed58a0baa3d。</p>
+<h5 id="7、授权"><a href="#7、授权" class="headerlink" title="7、授权"></a>7、授权</h5><p>和 dokcer 安装一样的操作，不再赘述</p>
+<h3 id="Android安装"><a href="#Android安装" class="headerlink" title="Android安装"></a>Android安装</h3><p>有人制作了可以设置planet的版本：<a target="_blank" rel="noopener" href="https://github.com/kaaass/ZerotierFix">https://github.com/kaaass/ZerotierFix</a></p>
+<h4 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h4><ul>
+<li>更新 Zerotier 核心<ul>
+<li>更新 Zerotier 核心至 1.12.2</li>
+</ul>
+</li>
+<li>改进消息提醒相关的用户体验<ul>
+<li>在 APP 未获得通知权限时弹窗提示用户<ul>
+<li>此弹窗提示可以被永久性关闭</li>
+</ul>
+</li>
+<li>MIUI 机型在成功连接网络后无法弹出 Toast 提示</li>
+<li>更改通知类别名称为更具体的通知类型</li>
+<li>点击状态栏通知时无法跳转至 APP</li>
+</ul>
+</li>
+<li>允许使用通过非官方 Planet ID 生成的 Planet 文件<ul>
+<li>允许使用通过非官方 Planet ID 生成的 Planet 文件<ul>
+<li>该功能应当能修复此前 APP 不识别部分自建 Planet 项目生成的 Planet 文件的问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="六、测试"><a href="#六、测试" class="headerlink" title="六、测试"></a>六、测试</h2><p>通过上述方式将两台机器加入到网络，通过 ping 查看是否能打洞成功。其中 202 本地虚拟机，vps 是有公网 ip 的云服务器</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/6557450e2603b.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557450e2603b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665710086842.png"></p>
+<p><strong>ping 检测</strong></p>
+<p>在 10.0.0.202 机器上 ping 10.0.0.222</p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/6557451d6aa2a.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557451d6aa2a.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665727979834.png"></p>
+<p><code>listpeers</code> 查看到只有自己的私有根服务器，ping 的延迟不到 100ms 和直接 ping 公网 ip 差不多，说明打洞成功。</p>
+<p><strong>局域网 scp 检测</strong></p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/65574574edf99.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/65574574edf99.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665679296983.png"></p>
+<p><strong>speedtest 测速</strong></p>
+<p><img src="https://pic.edunote.cn/i/2023/11/17/6557458a06611.png" class="lazyload placeholder" data-srcset="https://pic.edunote.cn/i/2023/11/17/6557458a06611.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="1665740929613.png"></p>
+<p>可以看见速度能达到十几MB，而我的根服务器是腾讯云的 3Mbps 服务器，如果通过根服务器转发肯定不可能达到这个速度，说明打洞成功。</p>
+<p><strong>如果没有出现以上测试情况，Zerotier也无法保证能打通的，并且打洞成功也有可能有波动，能连接，但可能是根服务器腾讯云的 3Mbps的速度，无法点对点直连</strong></p>
+<hr>
+<p><u>参考文章：<a target="_blank" rel="noopener" href="https://www.nodeseek.com/post-37619-1">https://www.nodeseek.com/post-37619-1</a></u></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="">
+              内网穿透
+            </a>
+          
+            <a href="/tags/Zerotier/" class="">
+              Zerotier
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>myedunote</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2023/11/17/Zerotier搭建私有根服务器及创建虚拟局域网/" target="_blank" title="Zerotier搭建私有根服务器及创建虚拟局域网">https://myedunote.github.io/2023/11/17/Zerotier搭建私有根服务器及创建虚拟局域网/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2023/11/18/%E5%AD%90%E6%AF%94%E4%B8%BB%E9%A2%987.4%E7%89%88%E6%9C%AC%E7%BB%95%E8%BF%87%E6%8E%88%E6%9D%83/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">子比主题7.4版本绕过授权</div>
+      </div>
+      
+      <!-- <div class="content">
+        子比主题7.4原版下载：直接下载
+伪站搭建(以Nginx为例)需要使用宝塔面板
+1.进入**网站–添加站点**, 新建一
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2023/11/14/Baiduwp-PHP%E7%9B%B4%E9%93%BE%E8%A7%A3%E6%9E%90%E5%B7%A5%E5%85%B7%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">Baiduwp-PHP直链解析工具搭建教程</div>
+      </div>
+      <!-- <div class="content">
+        🔎 实现原理
+通过curl获取网盘文件信息，处理后显示在网页中。通过api接口以及SVIP账号的Cookie(BDUS
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>清，幽殇</h2>
+        
+        
+        
+          <p><span id="jinrishici-sentence">Uexo</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:myedunote@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/myedunote"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=1614647001"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Zerotier-%E5%8E%9F%E7%90%86"><span class="toc-text">一、Zerotier 原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%A7%81%E6%9C%89-zerotier-planet-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">二、私有 zerotier-planet 的优势</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%90%AD%E5%BB%BA%E7%A7%81%E6%9C%89-planet"><span class="toc-text">三、搭建私有 planet</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E8%BF%90%E8%A1%8C%E6%8E%A7%E5%88%B6%E5%99%A8%E5%AE%B9%E5%99%A8"><span class="toc-text">1、运行控制器容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%94%9F%E6%88%90-planet-%E6%96%87%E4%BB%B6"><span class="toc-text">2、生成 planet 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">3、测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89%E7%BD%91%E7%BB%9C"><span class="toc-text">四、创建私有网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BA%E7%BD%91%E7%BB%9C"><span class="toc-text">1、创建网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%9D%E5%A7%8B%E5%8C%96%E7%BD%91%E7%BB%9C"><span class="toc-text">2、初始化网络</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%AE%89%E8%A3%85-zerotier-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">五、安装 zerotier 客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-%E5%AE%89%E8%A3%85"><span class="toc-text">docker 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%90%AF%E5%8A%A8-zerotier-%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">1、启动 zerotier 客户端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%9B%BF%E6%8D%A2-planet-%E6%96%87%E4%BB%B6"><span class="toc-text">2、替换 planet 文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E9%87%8D%E5%90%AF%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">3、重启客户端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E6%9F%A5%E7%9C%8B-planet"><span class="toc-text">4、查看 planet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%8A%A0%E5%85%A5%E7%BD%91%E7%BB%9C"><span class="toc-text">5、加入网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E6%8E%88%E6%9D%83"><span class="toc-text">6、授权</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Linux%E5%AE%89%E8%A3%85"><span class="toc-text">Linux安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%AE%80%E5%8D%95%E5%BF%AB%E6%8D%B7%EF%BC%8C%E5%8F%AA%E8%A6%81%E6%89%A7%E8%A1%8C%E4%BB%A5%E4%B8%8B%E5%91%BD%E4%BB%A4%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E5%8D%B3%E5%8F%AF%E3%80%82"><span class="toc-text">1、简单快捷，只要执行以下命令一键安装即可。</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%9B%BF%E6%8D%A2planet%E6%96%87%E4%BB%B6"><span class="toc-text">2、替换planet文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF"><span class="toc-text">3、添加开机自启</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E5%90%AF%E5%8A%A8zerotier-one-service"><span class="toc-text">4、启动zerotier-one.service</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%8A%A0%E5%85%A5%E7%BD%91%E7%BB%9C-1"><span class="toc-text">5、加入网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E6%9F%A5%E7%9C%8B%E5%8A%A0%E5%85%A5%E7%9A%84%E7%BD%91%E7%BB%9C%E7%9A%84%E4%BF%A1%E6%81%AF%EF%BC%8C%E6%AF%94%E5%A6%82network"><span class="toc-text">6、查看加入的网络的信息，比如network</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E9%80%80%E5%87%BA%E5%8A%A0%E5%85%A5%E7%9A%84network%E7%BD%91%E6%AE%B5"><span class="toc-text">7、退出加入的network网段</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81%E5%8D%B8%E8%BD%BDzerotier"><span class="toc-text">8、卸载zerotier</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#windows-%E5%AE%89%E8%A3%85"><span class="toc-text">windows 安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E4%B8%8B%E8%BD%BD%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">1、下载客户端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%AE%89%E8%A3%85%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">2、安装客户端</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%9B%BF%E6%8D%A2-planet"><span class="toc-text">3、替换 planet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E9%87%8D%E5%90%AF%E6%9C%8D%E5%8A%A1"><span class="toc-text">4、重启服务</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E6%9F%A5%E7%9C%8B-planet"><span class="toc-text">5、查看 planet</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E5%8A%A0%E5%85%A5%E7%BD%91%E7%BB%9C"><span class="toc-text">6、加入网络</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E6%8E%88%E6%9D%83"><span class="toc-text">7、授权</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android%E5%AE%89%E8%A3%85"><span class="toc-text">Android安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97"><span class="toc-text">更新日志</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-text">六、测试</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Teambition%EF%BC%9A%E5%9B%BD%E9%99%85%E7%89%88%E5%88%97%E8%A1%A8%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F%E6%95%99%E7%A8%8B_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Teambition%EF%BC%9A%E5%9B%BD%E9%99%85%E7%89%88%E5%88%97%E8%A1%A8%E7%9B%AE%E5%BD%95%E7%A8%8B%E5%BA%8F%E6%95%99%E7%A8%8B_new/">Teambition：国际版列表目录程序教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/VPS%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC%E5%90%88%E9%9B%86/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/VPS%E5%B8%B8%E7%94%A8%E8%84%9A%E6%9C%AC%E5%90%88%E9%9B%86/">VPS常用脚本合集</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Windows%E5%B9%B3%E5%8F%B0%E4%B8%8B%E4%BD%BF%E7%94%A8%20Rclone%20%E6%8C%82%E8%BD%BD%20OneDrive%20%E4%B8%BA%E6%9C%AC%E5%9C%B0%E7%A1%AC%E7%9B%98_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Windows%E5%B9%B3%E5%8F%B0%E4%B8%8B%E4%BD%BF%E7%94%A8%20Rclone%20%E6%8C%82%E8%BD%BD%20OneDrive%20%E4%B8%BA%E6%9C%AC%E5%9C%B0%E7%A1%AC%E7%9B%98_new/">indows平台下使用 Rclone 挂载 OneDrive 为本地硬盘</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/X-UI%E5%92%8C%E5%AE%9D%E5%A1%94%E5%85%B1%E5%AD%98_new/">X-UI和宝塔共存</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/Zfile%E6%90%AD%E5%BB%BA%E6%95%99%E7%A8%8B/">Zfile搭建教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/proxychains%E6%90%AD%E5%BB%BA%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/">proxychains搭建使用教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/qBittorrent%E8%87%AA%E5%8A%A8%E4%B8%8A%E4%BC%A0%E7%A7%8D%E5%AD%90%E8%B5%84%E6%BA%90%E5%88%B0onedrive%E6%88%96GoogleDrive%E6%95%99%E7%A8%8B_new/">qBittorrent自动上传种子资源到onedrive或GoogleDrive教程</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/08/03/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-03</span>
+                
+              </div>
+              <a class="post-title" href="/2024/08/03/%E3%80%90%E4%BA%AC%E4%B8%9C%E8%AE%A2%E5%8D%95%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%84%9A%E6%9C%AC%E3%80%91%E6%89%B9%E9%87%8F%E4%B8%80%E9%94%AE%E8%87%AA%E5%8A%A8%E8%AF%84%E4%BB%B7%E8%BF%BD%E5%8A%A0%E5%9B%BE%E7%89%87/">【京东订单自动评价脚本】批量一键自动评价追加图片</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
+</span>
+
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fas fa-moon" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('false');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
